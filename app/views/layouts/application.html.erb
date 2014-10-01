@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WritingApp</title>
+  <title>Am Writing App</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>	
+
 <%= yield %>
 
+<p class="userinfo">
+		<% if current_user %>
+			Signed in as <%= link_to current_user.name, controller: "users", action: "show", id: current_user.id %>. <%= link_to "Log Out", destroy_user_session_path(@user), :method => :delete %>
+		<% else %>
+			<%= link_to "Log in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %>
+		<% end %>
+</p>
 </body>
 </html>

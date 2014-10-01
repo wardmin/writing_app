@@ -1,0 +1,33 @@
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @user.location %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @user.genre_id %>
+</p>
+
+<p>
+  <strong>Desired amount:</strong>
+  <%= @user.desired_amount %>
+</p>
+
+<p>
+  <strong>Desired interval:</strong>
+  <%= @user.desired_interval %>
+</p>
+
+<%= link_to 'My Projects', projects_path(@project) %> |
+<%= link_to 'Edit My Profile', edit_user_path(@user) %> |
+<%= link_to 'Back', user_path %>

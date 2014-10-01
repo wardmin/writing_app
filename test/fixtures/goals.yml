@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type_id: 1
+  amount: 1
+  deadline: 2014-09-29 19:58:41
+  metric_id: 1
+  status_id: 1
+
+two:
+  name: MyString
+  type_id: 1
+  amount: 1
+  deadline: 2014-09-29 19:58:41
+  metric_id: 1
+  status_id: 1

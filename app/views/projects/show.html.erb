@@ -1,0 +1,25 @@
+<h1>Project Page</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @project.type_is %>
+</p>
+
+<h3>Goals for this project</h3>
+<% @project.goals.each do |goal| %>
+	<strong>Name:</strong>	<%= goal.name %> <br>
+	<strong>Kind:</strong>	<%= goal.type_is %> <br>
+	<strong>Deadline:</strong>	<%= goal.deadline %> <br> 
+	<hr>
+<% end %>
+
+
+<%= render @goal %>
+
+<p>&nbsp;</p>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

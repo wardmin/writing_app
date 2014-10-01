@@ -1,0 +1,21 @@
+<%= form_for @goal do |f| %>
+	<% if @goal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(goal.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @goal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<h2>New Goal</h2>
+  <%= f.label :name %> <br>
+  <%= f.text_field :name %> <br>
+
+  <%= f.label :goal_type %> <br>
+  <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %> <br>
+ <%= f.hidden_field(:project_id, :value => @project.id) %>
+  <%= f.submit %>
+<% end %>
