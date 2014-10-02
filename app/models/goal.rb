@@ -9,4 +9,11 @@ class Goal < ActiveRecord::Base
 			goal_type.name
 		end
 	end
+
+	def project_name
+		
+			project = Project.find_by id: project_id
+			project.name
+		
+	end
 end

@@ -1,0 +1,24 @@
+<h1>New Entry</h1>
+
+
+<%= form_for [@project, @entry] do |f|  %>
+	<div class="field">
+	    <%= f.label :name %><br>
+	    <%= f.text_field :name %>
+	</div>
+	<div class="field">
+	    <%= f.label :intention %><br>
+	    <%= f.text_field :intention %>
+	</div>
+
+	<div class="field">
+	    <%= f.label :total_time %><br>
+	    <%= f.text_field :total_time %>
+	</div>
+	<div class="field">
+	    <%= f.label :journal %><br>
+	    <%= f.text_field :journal %>
+	</div>
+	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
+	<%= f.submit %>
+<% end %>

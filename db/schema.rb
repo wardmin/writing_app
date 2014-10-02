@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140930200146) do
     t.integer  "amount"
     t.date     "deadline"
     t.integer  "metric_id"
-    t.datetime "created_at"
+    t.datetime "createdin_at"
     t.datetime "updated_at"
     t.integer  "project_id"
   end
