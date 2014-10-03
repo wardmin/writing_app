@@ -1,8 +1,16 @@
 class GoalsController < ApplicationController
 	before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
+	def index
+		@goals = Project.find(params[:project_id]).goals
+	end
 	def show
 
+	end
+
+	def new
+		@project = Project.find(params[:project_id])
+		@goal = Goal.new
 	end
 
 	def create
@@ -13,6 +21,17 @@ class GoalsController < ApplicationController
 		else
 			render "/projects/show"
 		end
+	end
+
+	def edit	
+	end
+
+	def update
+		 if @goal.update(goal_params)
+		 	redirect_to goal_path
+		 else
+		 	render :edit
+		 end
 	end
 
 	private

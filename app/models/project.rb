@@ -8,9 +8,19 @@ class Project < ActiveRecord::Base
 
 
 	def type_is
-		if project_type
 			project_type = ProjectType.find_by id: project_type_id
 			project_type.name
+	end
+
+	def most_recent_goal
+		if !goals.empty?
+			goals.last
+		end
+	end
+
+	def total_time_spent
+		if entries
+		 entries.sum("total_time")
 		end
 	end
 end

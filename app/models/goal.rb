@@ -11,9 +11,12 @@ class Goal < ActiveRecord::Base
 	end
 
 	def project_name
-		
 			project = Project.find_by id: project_id
 			project.name
-		
+	end
+
+	def project
+		project = Project.find_by id: project_id
+		project
 	end
 end

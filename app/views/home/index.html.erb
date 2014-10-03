@@ -1,2 +1,8 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Dashboard</h1>
+
+<h3>You are currently <%= link_to @project.most_recent_goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_path(@project) %></em>". </h3>
+
+<!-- <%# button_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal.id), method: :get %> -->
+
+<%= link_to "Start Writing!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %> <br>
+

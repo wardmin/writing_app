@@ -1,11 +1,3 @@
-
-<h2>New Entry for <%= @goal.type_is %> on "<em><%= @project.name %></em>"</h2>
-
-
-<%#= #render @entry %>
-
-
-<hr>
 <%= form_for [@project, @entry] do |f|  %>
 	<div class="field">
 	    <%= f.label :name %><br>
@@ -24,6 +16,6 @@
 	    <%= f.label :journal %><br>
 	    <%= f.text_field :journal %>
 	</div>
-	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
+	<%# f.hidden_field(:goal_id, :value => @goal.id) %>
 	<%= f.submit %>
 <% end %>

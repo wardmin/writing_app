@@ -1,0 +1,11 @@
+<h1>Goal Index Page</h1>
+
+<% @goals.each do |goal| %>
+	<strong>Date:</strong>	<%= goal.created_at.strftime("%A, %b %d") %> <br>
+	<strong>Name:</strong>	<%= goal.name %> <br>
+	<strong>Kind:</strong>	<%= goal.type_is %> <br>
+	<strong>Deadline:</strong>	<%= goal.deadline %> <br> 
+
+	<%= link_to 'View Goal', goal_path(goal) %> | <%= link_to 'Edit Goal', edit_goal_path(goal) %>
+	<hr>
+<% end %>

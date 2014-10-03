@@ -1,16 +1,17 @@
+<h3>Goal: <%= @goal.type_is %> "<em><%= @goal.project_name %></em>"</h3>
 
-<h1>Goal Page for <%= @goal.project_name %></h1>
-
-<h2><%= @goal.name %></h2>
-Type: <%= @goal.type_is %> <br>
+Date Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
+Description: <%= @goal.name %> <br>
 Deadline: <%= @goal.amount %> <br>
 
-<%= link_to "Start Writing!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal.id) %> <br>
 <br>
-<% @goal.entries.each do |entry| %>
-	<%= entry.name %> <br>
-	<%= entry.total_time %> <br>
+<h3>Log Entries </h3>
+<% @goal.entries.order("created_at desc").each do |entry| %>
+	<strong>Date:</strong> <%= entry.created_at.strftime("%b %e, %l:%M %p") %> <br>
+	<strong>Name:</strong> <%= entry.name %> <br>
+	<strong>Total time:</strong> <%= entry.total_time %> <br>
+	<%= link_to 'View Entry', entry_path(entry) %> | <%= link_to 'Edit this Entry', edit_entry_path(entry) %>
 	<hr>
 <% end %>
 
-<%= link_to "Back", project_path %>
+<%= link_to "Dashboard", home_index_path %> | <%= link_to "To Project", project_path(@goal.project) %> | <%= link_to "Edit Goal", edit_goal_path %>

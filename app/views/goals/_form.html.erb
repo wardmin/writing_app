@@ -17,6 +17,6 @@
 
    <%= f.label :description %> <br>
   <%= f.text_field :name %> <br>
- <%= f.hidden_field(:project_id, :value => @project.id) %>
+ <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
   <%= f.submit %>
 <% end %>
