@@ -14,20 +14,19 @@
 </p>
 
 <p>
-  <strong>Genre:</strong>
-  <%= @user.genre_id %>
+  <strong>Specialty:</strong>
+  <%= @user.type_is %>
 </p>
 
 <p>
-  <strong>Desired amount:</strong>
-  <%= @user.desired_amount %>
+  I want to write <strong> <%= @user.desired_amount %> </strong> times per <strong> <%= @user.desired_interval %></strong>.
 </p>
 
-<p>
-  <strong>Desired interval:</strong>
-  <%= @user.desired_interval %>
-</p>
-
+<% if @user.am_writing? == true %>
+  <p>I am writing!</p>
+<% else %>
+  <p>I need to write more.</p>
+<% end%>
 <%= link_to 'My Projects', projects_path(@project) %> |
 <%= link_to 'Edit My Profile', edit_user_path(@user) %> |
 <%= link_to 'Back', user_path %>
