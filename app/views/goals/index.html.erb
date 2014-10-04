@@ -1,4 +1,5 @@
 <h1>Goal Index Page</h1>
+<p><%= link_to "Make a New Goal", new_project_goal_path(@project) %> </p>
 
 <% @goals.each do |goal| %>
 	<strong>Date:</strong>	<%= goal.created_at.strftime("%A, %b %d") %> <br>

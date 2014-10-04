@@ -27,3 +27,5 @@
 	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
 	<%= f.submit %>
 <% end %>
+
+<p><%= link_to "Back to Goal", goal_path(@goal) %> | <%= link_to "To Project", project_path(@project) %></p>

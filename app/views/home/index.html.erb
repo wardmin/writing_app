@@ -1,6 +1,6 @@
 <h1>Dashboard</h1>
 
-<h3>You are currently <%= link_to @project.most_recent_goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_path(@project) %></em>". </h3>
+<h3>You are currently <%= link_to @project.most_recent_goal.type_is.downcase, goal_path(@project.most_recent_goal) %> "<em><%= link_to @project.name, project_path(@project) %></em>". </h3>
 
 <!-- <%# button_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal.id), method: :get %> -->
 

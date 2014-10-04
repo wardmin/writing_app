@@ -1,7 +1,39 @@
 <h3>Edit Entry from <%= @entry.created_at.strftime("%A, %b %d") %></h3> 
 <p><strong> >>> <%= @entry.goal.type_is %> "<em><%= @entry.project.name %></em>"</strong></p>
+<style type="text/css">
+	.clock {
+		width: 350px;
+	}
 
+</style>
+<div class="clock"></div>
+
+<span class="stop">STOP</span> | <span class="start">START</span> | <span class="end">END</span>
 <%= render 'form' %>
 
 <br>
 <%= link_to 'Back to Goal', goal_path(@entry.goal.id) %> | <%= link_to  %>
+<script>
+$(document).ready(function() {
+	var clock = $('.clock').FlipClock({
+		autoStart: true
+});
+	clock.start();
+	$('.stop').on('click', function() {
+		clock.stop();
+	});
+	$('.start').on('click', function(){
+		clock.start();
+	});
+	$('.clock').fadeTo(10000, 0.1, function(){
+
+	});
+	$('.end').on('click', function() {
+		var time = clock.getTime();
+		$('#entry_total_time').attr('value', time);
+	})
+});
+
+
+
+</script>

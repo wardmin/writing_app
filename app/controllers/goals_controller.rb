@@ -3,6 +3,7 @@ class GoalsController < ApplicationController
 
 	def index
 		@goals = Project.find(params[:project_id]).goals
+		@project = Project.find(params[:project_id])
 	end
 	def show
 
