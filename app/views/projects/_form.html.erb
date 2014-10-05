@@ -20,6 +20,15 @@
     <%= f.select :project_type_id, options_from_collection_for_select(ProjectType.all, :id, :name, 1) %>
 
   </div>
+
+  <div class="field">
+      <%= f.label :description %> <br>
+      <%= f.text_field :description %> <br>
+  </div>
+  <div class="field">
+      <%= f.label :deadline %> <br>
+      <%= f.date_field :deadline %> <br>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

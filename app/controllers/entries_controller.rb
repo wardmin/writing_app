@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
 		#goa = @entry.goal_id
 		@goal = Goal.find(@entry.goal_id)
 		if @entry.save
-			redirect_to goal_path(@goal)
+			redirect_to edit_entry_path(@entry)
 		else
 			render "/projects/show"
 		end
@@ -47,6 +47,6 @@ class EntriesController < ApplicationController
 		 @entry = Entry.find(params[:id])
 	end
 	def entry_params
-		params.require(:entry).permit(:name, :intention, :total_time, :goal_id, :journal, :amount_done, :time_started)
+		params.require(:entry).permit(:name, :intention, :duration, :goal_id, :journal, :amount_done, :time_started)
 	end
 end

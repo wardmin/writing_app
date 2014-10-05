@@ -2,30 +2,83 @@
 <h2>New Entry for <%= @goal.type_is %> on "<em><%= @project.name %></em>"</h2>
 
 
-<%#= #render @entry %>
+<style type="text/css">
+	.clock {
+		/* width: 350px; */
+	}
+	#entry_duration {
+		display: none;
+	}
 
+</style>
 
-<hr>
 <%= form_for [@project, @entry] do |f|  %>
-	<div class="field">
-	    <%= f.label :name %><br>
-	    <%= f.text_field :name %>
-	</div>
-	<div class="field">
-	    <%= f.label :intention %><br>
-	    <%= f.text_field :intention %>
+
+	<div class="duration">
+	    <%= f.label :duration %><br>
+	    <%= f.text_field :duration %>
 	</div>
 
-	<div class="field">
-	    <%= f.label :total_time %><br>
-	    <%= f.text_field :total_time %>
-	</div>
-	<div class="field">
-	    <%= f.label :journal %><br>
-	    <%= f.text_field :journal %>
-	</div>
+	<div class="clock"></div>
+
+<span class="pause"><button name="playpause" type="button">Pause</button></span> |
 	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
 	<%= f.submit %>
 <% end %>
 
-<p><%= link_to "Back to Goal", goal_path(@goal) %> | <%= link_to "To Project", project_path(@project) %></p>
+<p> <%= link_to "Cancel", project_path(@project) %></p>
+
+
+<script>
+$(document).ready(function() {
+	var clock = $('.clock').FlipClock({
+		autoStart: true,
+		clearExcessDigits: true
+	});
+	$('.clock').click(function(event){
+		event.preventDefault();
+		// Stops the clock from resetting on click.
+	});
+
+	//  Play / Pause Button toggle functionality.
+	function pause(){
+		$('.pause').one('click', function(){
+			$("button[name|='playpause']").text('Resume');
+			$('.clock').fadeTo('slow', 0.9 );
+			clock.stop(function(){
+				startAgain();
+			});
+		});
+	}
+	function startAgain(){
+		$('.pause').one('click', function(){
+			$("button[name|='playpause']").text('Pause');
+			$('.clock').fadeTo(5000, 0.05 );
+			clock.start(function(){
+				pause();
+			});
+		});
+	}
+	$('.pause').on('click', pause() );
+	
+	// Clock fade toggle functionality. 
+	$('.clock')
+		.fadeTo(10000, 0.05)
+		.mouseenter(function() {
+			$(this).fadeTo('slow', 0.9 );
+		})
+		.mouseleave(function() {
+			$(this).fadeTo(5000, 0.05 );
+		});
+	// function clockFadeOut(){
+	// 	$('.clock').mouseover(), clockFadeIn() );
+	
+
+	// Save final time to form on completion.
+	$('input').last().on('click', function() {
+		var time = clock.getTime();
+		$('#entry_duration').attr('value', time);
+	})
+});
+
+</script>

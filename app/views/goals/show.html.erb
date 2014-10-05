@@ -1,17 +1,26 @@
-<h3>Goal: <%= @goal.type_is %> "<em><%= @goal.project_name %></em>"</h3>
+<h1>"<em><%= link_to @goal.project_name, project_goals_path(@goal.project) %></em>"</h1>
 
-Date Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
-Description: <%= @goal.name %> <br>
-Deadline: <%= @goal.amount %> <br>
+<h3> > <%= @goal.type_is %> History </h3>
+<ul>
+	<li>Date Started: <%= @goal.created_at.strftime("%A, %b %d") %></li> 
+	<li>Description: <%= @goal.name %></li>
+		<% if @goal.deadline %>
+			<ul>
+			<li>Deadline: <%= @goal.deadline.strftime("%A, %b %d") %></li>
+				<% if time_left(@goal.deadline) >= 0 %>
+					<li>You have <%= time_left(@goal.deadline) %> days left.</li>
+				<% else %>
+					<li><strong>Your deadline is past due!</strong></li>
+				<% end %>
+			</ul>
+		<% end %>
 
-<br>
-<h3>Log Entries </h3>
-<% @goal.entries.order("created_at desc").each do |entry| %>
-	<strong>Date:</strong> <%= entry.created_at.strftime("%b %e, %l:%M %p") %> <br>
-	<strong>Name:</strong> <%= entry.name %> <br>
-	<strong>Total time:</strong> <%= entry.total_time %> <br>
-	<%= link_to 'View Entry', entry_path(entry) %> | <%= link_to 'Edit this Entry', edit_entry_path(entry) %>
-	<hr>
-<% end %>
-
-<%= link_to "Dashboard", home_index_path %> | <%= link_to "To Project", project_path(@goal.project) %> | <%= link_to "Edit Goal", edit_goal_path %>
+		<h4>Writing Entries </h4>
+			<ul>
+				<% @goal.entries.order("created_at desc").each do |entry| %>
+				
+					<li><em>Date:</em> <%= link_to entry.created_at.strftime("%b %e, %l:%M %p"), entry_path(entry) %> | <em>Duration:</em> <%= ChronicDuration.output(entry.duration.to_i) %> (<%= link_to 'Edit', edit_entry_path(entry) %>) </li>
+				<% end %>
+			</ul>
+</ul>
+<%= link_to "Dashboard", home_index_path %> | <%= link_to "To Project", project_goals_path(@goal) %> | <%= link_to "Edit Goal", edit_goal_path %>

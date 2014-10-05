@@ -11,12 +11,18 @@
     </div>
   <% end %>
 <h2>New Goal</h2>
- 
-  <%= f.label :goal_type %> <br>
-  <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %> <br>
-
-   <%= f.label :description %> <br>
-  <%= f.text_field :name %> <br>
+ <div class="field">
+    <%= f.label :goal_type %> <br>
+    <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %> <br>
+  </div>
+  <div class="field">
+    <%= f.label :description %> <br>
+    <%= f.text_field :name %> <br>
+  </div>
+  <div class="field">
+    <%= f.label :deadline %> <br>
+    <%= f.date_field :deadline%> <br>
+  </div>
  <%= f.hidden_field(:project_id, :value => @project.id) %>
   <%= f.submit %>
 <% end %>

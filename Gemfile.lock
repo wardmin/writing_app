@@ -37,6 +37,8 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    chronic_duration (0.10.6)
+      numerizer (~> 0.1.1)
     cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -90,6 +92,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.2)
     multi_json (1.10.1)
+    numerizer (0.1.1)
     orm_adapter (0.5.0)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -121,6 +124,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    redcarpet (3.1.2)
     rspec-core (3.1.5)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -194,6 +198,7 @@ DEPENDENCIES
   aasm
   better_errors
   binding_of_caller
+  chronic_duration
   cocoon
   coffee-rails (~> 4.0.0)
   devise
@@ -204,6 +209,7 @@ DEPENDENCIES
   mailcatcher
   pry-rails
   rails (= 4.1.5)
+  redcarpet
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

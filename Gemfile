@@ -25,6 +25,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 # Gem for state changes on Projects and Goals
 gem 'aasm'
+gem 'chronic_duration'
+# Gem for markdown support
+gem 'redcarpet'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do

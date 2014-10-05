@@ -3,7 +3,7 @@
 one:
   name: MyString
   intention: MyString
-  total_time: 9.99
+  duration: 9.99
   journal: MyText
   amount_done: 1
   time_started: 2014-09-29 20:02:17
@@ -11,7 +11,7 @@ one:
 two:
   name: MyString
   intention: MyString
-  total_time: 9.99
+  duration: 9.99
   journal: MyText
   amount_done: 1
   time_started: 2014-09-29 20:02:17

@@ -1,21 +1,50 @@
 <%= form_for [@project, @entry] do |f|  %>
-	<div class="field">
-	    <%= f.label :name %><br>
-	    <%= f.text_field :name %>
-	</div>
-	<div class="field">
-	    <%= f.label :intention %><br>
-	    <%= f.text_field :intention %>
-	</div>
+<button name="options" type="button">Show Options</button>
+	<div class="options">
+		<div class="field">
+		    <%= f.label :intention %><br>
+		    <%= f.text_field :intention %>
+		</div>
+		<div class="field">
+		    <%= f.label :description %><br>
+		    <%= f.text_field :name %>
+		</div>
 
-	<div class="field">
-	    <%= f.label :total_time %><br>
-	    <%= f.text_field :total_time %>
+		<div class="field">
+		    <%= f.label :duration %><br>
+		    <%= f.text_field :duration %>
+		</div>
 	</div>
 	<div class="field">
 	    <%= f.label :journal %><br>
-	    <%= f.text_field :journal %>
+	    <%= f.text_area(:journal, cols: 40, rows: 10) %>
 	</div>
 	<%# f.hidden_field(:goal_id, :value => @goal.id) %>
-	<%= f.submit %>
+	<%= f.submit "Done" %>
+
 <% end %>
+
+<script>
+	function hideOptions() {
+		$('button').one('click', function() {
+			$(this).text('Show Options');
+			$('.options').hide();
+			showOptions();
+		});
+	}
+	function showOptions() {
+		$('button').one('click', function() {
+			$(this).text('Hide Options');
+			$('.options').show();
+			hideOptions();
+		});
+	}
+	$('.options').hide();
+	showOptions();
+
+	// $(function() {
+	// 	var totalTime = $('#entry_duration').attr('value');
+	// 	var formattedTime = moment.duration(totalTime, 'seconds').asMinutes();
+	// 	$('#entry_duration').attr('value', formattedTime);
+	// });
+</script>

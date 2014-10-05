@@ -1,5 +1,14 @@
 <h1>Listing projects</h1>
 
+<% if @current_user.entries.empty? %> 
+  <% else %>
+    <div class="stats">
+      <h3>Stats</h3>
+        <p>You've spent <%= distance_of_time_in_words(current_user.total_time_writing) %> writing</em></p>
+    </div>
+<% end %>
+
+
 <table>
   <thead>
     <tr>
@@ -25,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+
+
+<%= link_to 'Dashboard', home_index_path %> | <%= link_to 'New Project', new_project_path %>

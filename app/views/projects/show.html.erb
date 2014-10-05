@@ -1,9 +1,18 @@
-<h1>"<em><%= @project.name %></em>" Project Page </h1>
-<p>
-  <strong>Type:</strong>
-  <%= @project.type_is %>
-</p>
+<h1>"<em><%= @project.name %></em>"</h1>
+<h3>Project Dashboard</h3>
+  <strong>Type:</strong> <%= @project.type_is %> <br>
+  <% if @project.deadline %>
+ 	 <strong>Deadline:</strong> <%= @project.deadline.strftime("%A, %b %d")%> <br>
+ 	 <% if time_left(@project.deadline) >= 0 %>
+		You have <%= time_left(@project.deadline) %> days left to finish this project. <br>
+	<% else %>
+		<strong>Your deadline is past due!</strong> <br>
+	<% end %>
+<% end %>
+<h4><%= link_to "Project History", project_goals_path(@project) %></h4>
 
+
+<p>&nbsp;</p>
 
 <% if @project.most_recent_goal == nil %>
 	<p>How far along are you in your writing? <br> This app uses goals to track your writing progress. </p>
@@ -14,18 +23,16 @@
 
 
 	<% if @project.entries.empty? %>
-		&nbsp;
+		
 	<% else %>
 		<div class="stats">
 			<h3>Stats</h3>
-				<p>You've spent <%= @project.total_time_spent %> hours in total on "<em><%= @project.name %></em>"</p>
+				<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on "<em><%= @project.name %></em>"</p>
 		</div>
-		<h4><%= link_to "Project Goal History", project_goals_path(@project) %></h4>
-		<%= link_to "Make a New Goal", new_project_goal_path(@project) %>
+		
 	<% end %>
 
 
-
 <p>&nbsp;</p>
-<%= link_to 'Edit This Project', edit_project_path(@project) %> |
+<%= link_to 'Dashboard', home_index_path %> | <%= link_to 'Edit This Project', edit_project_path(@project) %> |
 <%= link_to 'All my Projects', projects_path %>

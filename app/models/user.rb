@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 	end
 
 	def am_writing?
-			times_written = entries.where(created_at: (Time.now.midnight - desired_interval.to_i.day)..Time.now.midnight).length
+			times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
 			
 			if times_written >= desired_amount
 				writing = true
@@ -22,5 +22,10 @@ class User < ActiveRecord::Base
 				writing = false
 			end
 		writing
+	end
+	def total_time_writing
+		if entries
+		 entries.sum("duration")
+		end
 	end
 end

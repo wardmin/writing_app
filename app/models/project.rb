@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
 
 	def total_time_spent
 		if entries
-		 entries.sum("total_time")
+		 entries.sum("duration")
 		end
 	end
 end
