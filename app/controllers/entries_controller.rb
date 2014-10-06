@@ -27,7 +27,16 @@ class EntriesController < ApplicationController
 	end
 
 	def update
+			Rails.logger.info "In update action"
+
+			if params[:entry][:duration].present?
+				Rails.logger.info "Params duration not nil"
+
+				params[:entry][:duration] = ChronicDuration::parse(params[:entry][:duration])
+				Rails.logger.info "Params is #{params}"
+			end
 		respond_to do |format|
+	
 			if @entry.update(entry_params)
 				format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
 				format.json { render :show, status: :ok, location: @project }

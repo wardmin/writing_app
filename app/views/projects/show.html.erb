@@ -14,11 +14,11 @@
 
 <p>&nbsp;</p>
 
-<% if @project.most_recent_goal == nil %>
+<% if @project.most_recent_entry == nil %>
 	<p>How far along are you in your writing? <br> This app uses goals to track your writing progress. </p>
 	<%= link_to "Let's make some goals", new_project_goal_path(@project) %>
 <% else %>
-	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.goals.last.id) %> <br>
+	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.most_recent_goal.id) %> <br>
 <% end %>
 
 
@@ -35,4 +35,4 @@
 
 <p>&nbsp;</p>
 <%= link_to 'Dashboard', home_index_path %> | <%= link_to 'Edit This Project', edit_project_path(@project) %> |
-<%= link_to 'All my Projects', projects_path %>
+<%= link_to 'My Projects', projects_path %>

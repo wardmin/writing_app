@@ -6,12 +6,12 @@
 Description: <%= @entry.name %> <br>
 Intention: <%= @entry.intention %> <br>
 <% if @entry.duration %>
-	<strong>Total time:</strong> <%= distance_of_time_in_words(@entry.duration) %><br>
+	<strong>Total time:</strong> <%= @entry.duration %><br>
 	<% else %>
 	Total Time: No time recorded<br>
 <% end %>
 Journal: <%= markdown(@entry.journal) %><br>
 
-Time Started: <%= @entry.created_at.strftime("%b %e, %l:%M %p") %><br>
+Time Started: <%= @entry.made_on %><br>
 
-<p><%= link_to 'To Project', project_goals_path(@entry.goal) %> | <%= link_to 'To Goal', goal_path(@entry.goal_id) %> | <%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>
+<p><%= link_to 'To Project', project_goals_path(@entry.project) %> | <%= link_to 'To Goal', goal_path(@entry.goal_id) %> | <%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>

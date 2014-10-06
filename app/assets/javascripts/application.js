@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require flipclock
 //= require moment
+//= require jquery.sparkline
 //= require_tree .

@@ -1,13 +1,16 @@
 <h1>"<em><%= @project.name %></em>"</h1>
 <h3>Project History</h3>
-<em>goal#index</em><br>
-<p><%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.goals.last.id) %></p> 
-
+<em>goal#index</em><br> 
+Deadline: <%= @project.deadline.strftime("%A, %b %d") %>
 <% if @project.entries.empty? %>
 	<% else %>
 		<div class="stats">
 			<h3>Stats</h3>
 				<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on this project.</p>
+				<p>
+
+Your hours over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
+</p>
 		</div>
 	<% end %>
 
@@ -15,14 +18,14 @@
 <p><%= link_to "New Goal", new_project_goal_path(@project) %> </p>
 <ul>
 	<% @goals.each do |goal| %>
-		<li><strong><%= link_to goal.type_is, goal_path(goal) %> </strong>	(<%= link_to 'Edit', edit_goal_path(goal) %>)</li> 
+		<li><strong><%= link_to goal.type_is, goal_path(goal) %> </strong>	| <%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></li> 
 		<ul>
-			<li><em>Date Started:</em> <%= goal.created_at.strftime("%A, %b %d") %></li>
+			<li><em>Date Started:</em> <%= goal.made_on %></li>
 			<li><em>Deadline:</em>	<%= goal.deadline %></li>
 				<% if goal.entries %>
 					<ul>
 						<% goal.entries.each do |entry| %>
-							<li>Date: <%= entry.created_at %> | Duration: <%= ChronicDuration.output(entry.duration.to_i) %> (<%= link_to 'Edit', edit_entry_path(entry) %>)</li>
+							<li> <%= entry.made_on %> | <%= entry.duration %> | journal: &#<%= entry.journal? %> (<%= link_to 'Edit', edit_entry_path(entry) %>)</li>
 						<% end %>
 					</ul>
 				<% end %>

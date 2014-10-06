@@ -12,7 +12,7 @@
 
 		<div class="field">
 		    <%= f.label :duration %><br>
-		    <%= f.text_field :duration %>
+		    <%= f.text_field :duration, value: @entry.duration %>
 		</div>
 	</div>
 	<div class="field">
@@ -23,6 +23,8 @@
 	<%= f.submit "Done" %>
 
 <% end %>
+
+<%= link_to 'Delete this entry', @entry, method: :delete, data: { confirm: 'Are you sure?' } %>
 
 <script>
 	function hideOptions() {

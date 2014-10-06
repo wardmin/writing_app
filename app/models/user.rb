@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 	has_many :projects
 	has_many :entries, through: :projects
+	has_many :goals, through: :projects
 
 	def type_is
 		if genre_id
@@ -27,5 +28,18 @@ class User < ActiveRecord::Base
 		if entries
 		 entries.sum("duration")
 		end
+	end
+	def most_recent_goal
+		if !projects.empty?
+			most_recent_entry = entries.order('created_at').last
+			most_recent_goal = goals.order('created_at').last
+
+			if most_recent_entry.created_at > most_recent_goal.created_at
+				latest_goal = most_recent_entry.goal
+			else
+				latest_goal = most_recent_goal
+			end
+		end
+		latest_goal
 	end
 end

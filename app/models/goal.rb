@@ -19,4 +19,14 @@ class Goal < ActiveRecord::Base
 		project = Project.find_by id: project_id
 		project
 	end
+
+	def total_time_spent
+		if entries
+		 entries.sum("duration")
+		end
+	end
+
+	def made_on
+		created_at.localtime.strftime("%b %e, %l:%M %p")
+	end
 end
