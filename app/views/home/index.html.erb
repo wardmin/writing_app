@@ -18,6 +18,8 @@
 		<%= image_tag("sad-emoji.png", width: '50') %>
 		<p><%= link_to "You haven't been writing.", edit_user_path(current_user) %></p>
 	<% end %>
+<p>Your time over the last 7 days: <span class="inlinesparkline"><%= current_user.spark_line %></span>
+
 <% end %>
 
 

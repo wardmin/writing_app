@@ -7,9 +7,7 @@ Deadline: <%= @project.deadline.strftime("%A, %b %d") %>
 		<div class="stats">
 			<h3>Stats</h3>
 				<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on this project.</p>
-				<p>
-
-Your hours over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
+				<p>Your hours over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
 </p>
 		</div>
 	<% end %>

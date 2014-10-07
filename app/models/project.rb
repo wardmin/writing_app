@@ -42,7 +42,7 @@ class Project < ActiveRecord::Base
 		last_week = entries.order('created_at').last(7)
 		array = []
 		last_week.map do |entry|
-			array << entry.duration.to_i
+			array << ChronicDuration.parse(entry.duration)
 		end
 		array.join(', ')
 	end

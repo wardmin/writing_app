@@ -29,4 +29,13 @@ class Goal < ActiveRecord::Base
 	def made_on
 		created_at.localtime.strftime("%b %e, %l:%M %p")
 	end
+
+	def spark_line
+		last_week = entries.order('created_at').last(7)
+		array = []
+		last_week.map do |entry|
+			array << ChronicDuration.parse(entry.duration)
+		end
+		array.join(', ')
+	end
 end

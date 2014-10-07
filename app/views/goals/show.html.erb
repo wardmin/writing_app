@@ -22,6 +22,8 @@
 		<div class="stats">
 			<h3>Stats</h3>
 				<p>You've spent <%= distance_of_time_in_words(@goal.total_time_spent) %> <%= @goal.type_is %>.</p>
+				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
+</p> 
 		</div>
 	<% end %>
 

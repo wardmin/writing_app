@@ -42,4 +42,12 @@ class User < ActiveRecord::Base
 		end
 		latest_goal
 	end
+	def spark_line
+		last_week = entries.order('created_at').last(7)
+		array = []
+		last_week.map do |entry|
+			array << ChronicDuration.parse(entry.duration)
+		end
+		array.join(', ')
+	end
 end
