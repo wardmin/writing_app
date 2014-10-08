@@ -1,6 +1,14 @@
-
-<h2>New Entry for <%= @goal.type_is %> on "<em><%= @project.name %></em>"</h2>
-
+<article>
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'All Projects', projects_path %>
+	  <%= link_to 'Project Overview', project_path(@goal.project) %>
+	  <%= link_to 'Project Details', project_goals_path(@goal.project) %>
+	  <%= link_to 'Goal Details', goal_path(@goal) %>
+	</div>
+<h1>"<em><%= @project.name %></em>"</h1>
+<h3><%= @goal.type_is.capitalize %></h3>
+<h4>New Entry</h4>
 
 <style type="text/css">
 	.clock {
@@ -23,10 +31,10 @@
 
 <span class="pause"><button name="playpause" type="button">Pause</button></span> |
 	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
-	<%= f.submit  data: { confirm: 'Are you done writing?' } %>
+	<%= f.submit  data: { confirm: 'Are you done writing?' } %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project) %></div>
 <% end %>
 
-<p> <%= link_to "Cancel", project_path(@project) %></p>
+ 
 
 
 <script>

@@ -23,11 +23,18 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Gem for state changes on Projects and Goals
+# State changes on Projects and Goals - Not yet used.
 gem 'aasm'
+# Converting time into seconds. 
 gem 'chronic_duration'
-# Gem for markdown support
+# Markdown support
 gem 'redcarpet'
+# Log in and confirmation email functionality.
+gem 'devise'
+# Front-end Framework from ThoughtBot.
+gem 'bourbon'
+gem 'neat'
+gem 'bitters'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
@@ -41,7 +48,9 @@ group :development, :test do
 	gem 'mailcatcher'
 end
 
-gem 'devise'
+
+
+# Not being used. 
 gem 'cocoon'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bitters-nav
 //= require flipclock
 //= require moment
 //= require jquery.sparkline

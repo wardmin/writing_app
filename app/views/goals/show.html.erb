@@ -1,6 +1,14 @@
-<h1>"<em><%= link_to @goal.project_name, project_goals_path(@goal.project) %></em>"</h1>
+<article>
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'All Projects', projects_path %>
+	  <%= link_to 'Project Overview', project_path(@goal.project) %>
+	  <%= link_to 'Project Details', project_goals_path(@goal.project) %>
+	</div>
 
-<h3> > <%= @goal.type_is %> History </h3>
+<h1>"<em><%= @goal.project_name %></em>"</h1>
+
+<h3> <%= @goal.type_is.capitalize %> </h3>
 <ul>
 	<li>Date Started: <%= @goal.created_at.strftime("%A, %b %d") %></li> 
 	<li>Description: <%= @goal.name %></li>
@@ -15,17 +23,7 @@
 			</ul>
 		<% end %>
 </ul>
-	<p><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %> </p>
-
-	<% if @goal.entries.empty? %>
-	<% else %>
-		<div class="stats">
-			<h3>Stats</h3>
-				<p>You've spent <%= distance_of_time_in_words(@goal.total_time_spent) %> <%= @goal.type_is %>.</p>
-				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
-</p> 
-		</div>
-	<% end %>
+	<p><div class="write-button"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></div> </p>
 
 	<h4>Writing Entries </h4>
 		<ul>
@@ -35,4 +33,14 @@
 					 (<%= link_to 'Edit', edit_entry_path(entry) %>) </li>
 			<% end %>
 		</ul>
-<%= link_to "Dashboard", home_index_path %> | <%= link_to "To Project", project_goals_path(@goal.project) %> | <%= link_to "Edit Goal", edit_goal_path %>
+</article>
+	<section class="stats">
+	<% if @goal.entries.empty? %>
+	<% else %>
+		<div>
+			<h3>Stats</h3>
+				<p>You've spent <%= distance_of_time_in_words(@goal.total_time_spent) %> <%= @goal.type_is %>.</p>
+				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span></p> 
+		</div>
+	<% end %>
+	</section>

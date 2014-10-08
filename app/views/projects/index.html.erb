@@ -1,39 +1,39 @@
-<h1>Listing projects</h1>
+<article>
+  <div class="breadcrumb">
+    <%= link_to 'Dashboard', home_index_path %>
+  </div>
 
-<% if @current_user.entries.empty? %> 
-  <% else %>
-    <div class="stats">
-      <h3>Stats</h3>
-        <p>You've spent <%= distance_of_time_in_words(current_user.total_time_writing) %> writing</em></p>
-    </div>
-<% end %>
+  <h1>Listing projects</h1>
 
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
+  <table class="table-minimal">
+    <thead>
       <tr>
-        <td><%= project.name %></td>
-        <td><%= project.type_is %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+          <tr>
+            <td><%= project.name %></td>
+            <td><%= project.type_is %></td>
+            <td><span class="cute"><%= link_to 'Show', project %></span><span class="cute"><%= link_to 'Edit', edit_project_path(project) %></span></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>  
+  <div class="button"><%= link_to 'New Project', new_project_path %></div>
+</article>
 
-<br>
 
+<section class="stats">
+  <% if @current_user.entries.empty? %> 
+    <% else %>
+      <div>
+        <h3>Stats</h3>
+          <p>You've spent <%= distance_of_time_in_words(current_user.total_time_writing) %> writing</em></p>
+      </div>
+  <% end %>
+</section>
 
-
-<%= link_to 'Dashboard', home_index_path %> | <%= link_to 'New Project', new_project_path %>

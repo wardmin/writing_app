@@ -1,3 +1,9 @@
+<article>
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'All Projects', projects_path %>
+	</div>
+
 <h1>"<em><%= @project.name %></em>"</h1>
 <h3>Project Dashboard</h3>
   <strong>Type:</strong> <%= @project.type_is %> <br>
@@ -18,14 +24,13 @@
 	<p>How far along are you in your writing? <br> This app uses goals to track your writing progress. </p>
 	<%= link_to "Let's make some goals", new_project_goal_path(@project) %>
 <% else %>
-	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.most_recent_goal.id) %> <br>
+	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <div class="write-button"><%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.most_recent_goal.id) %> </div> <br>
 <% end %>
-
-
+</article>
+<section class="stats">
 	<% if @project.entries.empty? %>
-		
 	<% else %>
-		<div class="stats">
+		<div>
 			<h3>Stats</h3>
 				<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on "<em><%= @project.name %></em>"</p>
 				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
@@ -35,6 +40,8 @@
 	<% end %>
 
 
-<p>&nbsp;</p>
-<%= link_to 'Dashboard', home_index_path %> | <%= link_to 'Edit This Project', edit_project_path(@project) %> |
+
+ | <%= link_to 'Edit This Project', edit_project_path(@project) %> |
 <%= link_to 'My Projects', projects_path %>
+
+</section>

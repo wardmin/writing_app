@@ -2,10 +2,10 @@
 
 <h3>You are currently <%= link_to @goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>". </h3>
 
-<!-- <%# button_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal.id), method: :get %> -->
 
+<div class="write-button">
 <%= link_to "Start Writing!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %> <br>
-
+</div>
 <p>&nbsp;</p>
 <%= link_to 'My Projects', projects_path %>
 
