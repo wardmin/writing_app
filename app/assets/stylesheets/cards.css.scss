@@ -11,6 +11,7 @@
   $card-image-background: #DBD199;
   $card-image-hover-background: lighten($card-image-background, 5);
   $card-stats-color: lighten($base-accent-color, 10);
+  $card-img: image-url('https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png');
 
   @include clearfix;
 
@@ -29,8 +30,11 @@
   }
 
   .card-image {
+    @extend .card-header;
     overflow: hidden;
     max-height: 150px;
+    background-image: $card-img;
+    cursor: default;
 
     img {
       width: 100%;
@@ -38,6 +42,18 @@
       background: $card-image-background;
       border-top-left-radius: $base-border-radius;
       border-top-right-radius: $base-border-radius;
+    }
+
+    h3 {
+      font-size: 1.7em;
+      border: none;
+      color: $blue;
+      padding: 0.2em 0 0.3em 0;
+
+      a {
+        padding: 0;
+
+      }
     }
   }
 
@@ -111,7 +127,23 @@
       }
     }
   }
+  .edit-button {
+    @extend .card-stats;
+    // overflow: visible;
+    // border-top: 1px solid transparentize($base-font-color, .8);
+    padding: 1em 0 0;
+    float: right;
 
+
+    ul li {
+     // padding: 0;
+      
+    }
+  }
+  
+  &.project {
+    border: 2px solid $project-border;
+  }
   &:hover {
     background-color: $card-hover-background;
     

@@ -3,3 +3,8 @@ html, body {
 	padding: 0;
 	width: 100%;
 }
+
+.main-title {
+	@extend h1;
+	padding-bottom: 0.4em;
+}

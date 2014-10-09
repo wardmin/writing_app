@@ -74,6 +74,11 @@
     &:after {
       border-left-color: $breadcrumb-background;
     }
+    &.current-selection{
+      background-color: $blue;
+      color: white;
+      cursor: default;
+    }
 
     @include media($medium-screen) {
       font-size: 1em;

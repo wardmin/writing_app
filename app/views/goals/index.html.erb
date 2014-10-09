@@ -1,118 +1,90 @@
 <article class="article">
 	<div class="breadcrumb">
 	  <%= link_to 'Dashboard', home_index_path %>
-	  <%= link_to 'All Projects', projects_path %>
+	  <%= link_to 'My Projects', projects_path %>
+	   <%= link_to 'Project', project_goals_path(@project), class: "current-selection" %>
 	</div>
 
-	<h1>"<em><%= @project.name %></em>"</h1>
-	<h3>Project History</h3>
+	<h1 class="main-title">Project Details</h1>
+	
+	<div class="card project">
+    	<div class="card-image">
+        	<h3 class="card-image title"><%= @project.name %></h3> 
+        </div>
 
+        <div class="card-header">
+            <%= @project.type_is.capitalize %>
+        </div>
 
-<strong>Type:</strong> <%= @project.type_is %> <br>
-  		<% if @project.deadline %>
- 	 		<strong>Deadline:</strong> <%= @project.deadline.strftime("%A, %b %d")%> <br>
+        <div class="card-copy">
+            <% if @project.deadline %>
+              <p>Deadline: <%= @project.deadline.strftime("%A, %b %d") %> </p>
+            <% end %>
+        
+
  	 		<% if time_left(@project.deadline) >= 0 %>
 				You have <%= time_left(@project.deadline) %> days left to finish this project. <br>
 			<% else %>
 				<strong>Your deadline is past due!</strong> <br>
 			<% end %>
-		<% end %>
+		</div>
 
-	<div class="button"><%= link_to "New Goal", new_project_goal_path(@project) %> </div>
-
-
-
-
-
-  <div class="card">
-    <div class="card-image">
-      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt="">
-    </div>
-    <div class="card-header">
-      	Brain Storming 
-    </div>
-    <div class="card-copy">
-      <p>Deadline:  </p>
-    </div>
-    <div class="card-stats">
-      <ul>
-        <li>98<span>Hours Spent</span></li>
-        <li>298<span>Entries</span></li>
-        <li>9<span>Days Left</span></li>
-      </ul>
-    </div>
-  </div>
-
-
-
-
-  	
-
-	  <table class="table-minimal">
-	    <thead>
-	      <th>Goal</th>
-	      <th>Date Started</th>
-	      <th>Deadline</th>
-	      <th>Status</th>
-	    </thead>
-
-		<tbody>
+		<div class="card-stats">
+	        <ul>
+	          <li><%= ChronicDuration.output(@project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
+	          <li><%= @project.goals.length %><span>Goals</span></li>
+	          	
+	          	<% if @project.deadline %>
+	            	<li><%= time_left(@project.deadline) %><span>Days Left</span></li>
+	          	<% end %>
+	        </ul>
+    	</div>
+	  
+		<div class="inner-project">
 			<% @goals.each do |goal| %>
-				<tr class="goal-post">
-					<td><strong><%= link_to goal.type_is.capitalize, goal_path(goal) %> </strong>	</td>
-					<td> <%= goal.made_on %></td>
-					<td><%= goal.deadline %></td>
-					<td> <%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal), class: "button" %></td> 
-				</tr>
-						<% if goal.entries %>
-							<tr  class="trigger" >
-								<td colspan="4">Entries</td>
-							</tr>
-
-							<tr class="accordion">
-						        <td>Date</td>
-						        <td>Duration</td>
-						        <td>Journal</td>
-						        <td>Status</td>
-						    </tr>
-								<% goal.entries.each do |entry| %>
-								<tr class="accordion">
-									<td> <%= entry.made_on %> </td>
-									<td> <%= entry.duration %> </td>
-									<td> &#<%= entry.journal? %> </td>
-									<td><span class"cute"><%= link_to 'Edit', edit_entry_path(entry) %></span></td>
-								</tr>
-								<% end %>
+					<div class="card">
+			    		<div class="card-image">
+			      			<h3 class="card-image title"><%= link_to goal.type_is.capitalize, goal_path(goal), class: "card-image title" %></h3> 
+			    		</div>
+	
+			    		<div class="card-header">
 							
-						<% end %>
-				
+						</div>
+	
+			   			<div class="card-copy">
+			   				<% if goal.deadline %>
+								<p>Deadline: <%= goal.deadline.strftime("%A, %b %d") %> </p>
+							<% end %>
+			    		</div>
+	
+			    		<div class="card-stats">
+			      			<ul>
+			        			<li><%= ChronicDuration.output(goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
+			        			<% if goal.entries %>
+			        				<li><%= goal.entries.length %><span>Entries</span></li>
+			        			<% end %>
+			        			<% if goal.deadline %>
+			       					<li><%= time_left(goal.deadline) %><span>Days Left</span></li>
+			       				<% end %>
+			      			</ul>
+			      			<ul class="edit-button">
+        						<li><span class="edit"><%= link_to 'Edit', edit_project_path(@project) %></span></li>
+          						<li ><span class="edit"><%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></span></li>
+        					</ul>
+			    		</div>
+			  		</div>
 			<% end %>
-		</tbody>
-	</table>
-
-	<script>
-		$(function() {
-			clicker();
-			function hide(){
-				$('.accordion > td').hide();
-			}
-			function clicker() {
-
-				$('.trigger').bind('click', function(e){
-					jQuery(this).nextUntil('.goal-post').slideToggle('fast');
-			});
-			}
-		});
+		</div>
 
 
-	// $('.js-accordion-trigger').bind('click', function(e){
-	//   jQuery(this).parent().find('.submenu').slideToggle('fast'); 
-	//  // apply the toggle to the ul
-	//   jQuery(this).parent().toggleClass('is-expanded');
-	//   e.preventDefault();
-	// });
+	<div class="card-stats">
+        <ul class="edit-button">
+        	<li><span class="edit"><%= link_to "New Goal", new_project_goal_path(@project) %></span></li>
+          	<li ><span class="edit"><%= link_to 'Edit', edit_project_path(@project) %></span></li>
+        </ul>
+    </div>
+</div>
 
-	</script>
 </article>
 
 <section class="stats">
