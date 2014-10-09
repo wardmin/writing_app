@@ -17,4 +17,5 @@
 //= require flipclock
 //= require moment
 //= require jquery.sparkline
+//= require home
 //= require_tree .

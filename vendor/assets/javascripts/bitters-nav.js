@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('page:load, ready', function() {
   var menu = $('#navigation-menu');
   var menuToggle = $('#js-mobile-menu');
   var signUp = $('.sign-up');

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-  	  	if !current_user.projects.empty?
+  	  	if current_user.projects.present?
         	@project = current_user.most_recent_goal.project
           if @project.goals != nil
             @goal = current_user.most_recent_goal

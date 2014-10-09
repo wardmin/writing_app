@@ -1,25 +1,26 @@
-<h1>Dashboard</h1>
+<article class="article">
+	<h1>Dashboard</h1>
 
-<h3>You are currently <%= link_to @goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>". </h3>
+	<h3>You are currently <%= link_to @goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>". </h3>
 
 
-<div class="write-button">
-<%= link_to "Start Writing!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %> <br>
-</div>
-<p>&nbsp;</p>
-<%= link_to 'My Projects', projects_path %>
+	<div class="write-button">
+		<%= link_to "Start Writing!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %> <br>
+	</div>
+	
+	<%= link_to 'My Projects', projects_path %>
 
-<p>&nbsp;</p>
-<% if current_user.entries %>
-	<% if current_user.am_writing? == true %>
-		<p><%= link_to "You've been writing!", edit_user_path(current_user) %></p>
-		<%= image_tag("happy-emoji.png", width: '50') %> <br>
-	<% else %>
-		<%= image_tag("sad-emoji.png", width: '50') %>
-		<p><%= link_to "You haven't been writing.", edit_user_path(current_user) %></p>
+	
+	<% if current_user.entries %>
+		<% if current_user.am_writing? == true %>
+			<p><%= link_to "You've been writing!", edit_user_path(current_user) %></p>
+			<%= image_tag("happy-emoji.png", width: '50') %> <br>
+		<% else %>
+			<%= image_tag("sad-emoji.png", width: '50') %>
+			<p><%= link_to "You haven't been writing.", edit_user_path(current_user) %></p>
+		<% end %>
+	<p>Your time over the last 7 days: <span class="inlinesparkline"><%= current_user.spark_line %></span>
+
 	<% end %>
-<p>Your time over the last 7 days: <span class="inlinesparkline"><%= current_user.spark_line %></span>
-
-<% end %>
-
+</article>
 

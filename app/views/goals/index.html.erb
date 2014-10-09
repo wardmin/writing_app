@@ -1,33 +1,118 @@
-<article>
+<article class="article">
 	<div class="breadcrumb">
 	  <%= link_to 'Dashboard', home_index_path %>
 	  <%= link_to 'All Projects', projects_path %>
-	  <%= link_to 'Project Overview', project_path(@project) %>
 	</div>
 
-<h1>"<em><%= @project.name %></em>"</h1>
-<h3>Project History</h3>
+	<h1>"<em><%= @project.name %></em>"</h1>
+	<h3>Project History</h3>
 
 
-
-<div class="button"><%= link_to "New Goal", new_project_goal_path(@project) %> </div>
-	<ul>
-		<% @goals.each do |goal| %>
-			<li><strong><%= link_to goal.type_is, goal_path(goal) %> </strong>	| <%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></li> 
-			<ul>
-				<li><em>Date Started:</em> <%= goal.made_on %></li>
-				<li><em>Deadline:</em>	<%= goal.deadline %></li>
-					<% if goal.entries %>
-						<ul>
-							<% goal.entries.each do |entry| %>
-								<li> <%= entry.made_on %> | <%= entry.duration %> | journal: &#<%= entry.journal? %> (<%= link_to 'Edit', edit_entry_path(entry) %>)</li>
-							<% end %>
-						</ul>
-					<% end %>
-			</ul>
+<strong>Type:</strong> <%= @project.type_is %> <br>
+  		<% if @project.deadline %>
+ 	 		<strong>Deadline:</strong> <%= @project.deadline.strftime("%A, %b %d")%> <br>
+ 	 		<% if time_left(@project.deadline) >= 0 %>
+				You have <%= time_left(@project.deadline) %> days left to finish this project. <br>
+			<% else %>
+				<strong>Your deadline is past due!</strong> <br>
+			<% end %>
 		<% end %>
-	</ul>
 
+	<div class="button"><%= link_to "New Goal", new_project_goal_path(@project) %> </div>
+
+
+
+
+
+  <div class="card">
+    <div class="card-image">
+      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png" alt="">
+    </div>
+    <div class="card-header">
+      	Brain Storming 
+    </div>
+    <div class="card-copy">
+      <p>Deadline:  </p>
+    </div>
+    <div class="card-stats">
+      <ul>
+        <li>98<span>Hours Spent</span></li>
+        <li>298<span>Entries</span></li>
+        <li>9<span>Days Left</span></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+  	
+
+	  <table class="table-minimal">
+	    <thead>
+	      <th>Goal</th>
+	      <th>Date Started</th>
+	      <th>Deadline</th>
+	      <th>Status</th>
+	    </thead>
+
+		<tbody>
+			<% @goals.each do |goal| %>
+				<tr class="goal-post">
+					<td><strong><%= link_to goal.type_is.capitalize, goal_path(goal) %> </strong>	</td>
+					<td> <%= goal.made_on %></td>
+					<td><%= goal.deadline %></td>
+					<td> <%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal), class: "button" %></td> 
+				</tr>
+						<% if goal.entries %>
+							<tr  class="trigger" >
+								<td colspan="4">Entries</td>
+							</tr>
+
+							<tr class="accordion">
+						        <td>Date</td>
+						        <td>Duration</td>
+						        <td>Journal</td>
+						        <td>Status</td>
+						    </tr>
+								<% goal.entries.each do |entry| %>
+								<tr class="accordion">
+									<td> <%= entry.made_on %> </td>
+									<td> <%= entry.duration %> </td>
+									<td> &#<%= entry.journal? %> </td>
+									<td><span class"cute"><%= link_to 'Edit', edit_entry_path(entry) %></span></td>
+								</tr>
+								<% end %>
+							
+						<% end %>
+				
+			<% end %>
+		</tbody>
+	</table>
+
+	<script>
+		$(function() {
+			clicker();
+			function hide(){
+				$('.accordion > td').hide();
+			}
+			function clicker() {
+
+				$('.trigger').bind('click', function(e){
+					jQuery(this).nextUntil('.goal-post').slideToggle('fast');
+			});
+			}
+		});
+
+
+	// $('.js-accordion-trigger').bind('click', function(e){
+	//   jQuery(this).parent().find('.submenu').slideToggle('fast'); 
+	//  // apply the toggle to the ul
+	//   jQuery(this).parent().toggleClass('is-expanded');
+	//   e.preventDefault();
+	// });
+
+	</script>
 </article>
 
 <section class="stats">
