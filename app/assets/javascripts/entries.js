@@ -1,13 +1,15 @@
 $(document).on('page:load ready', function() {
 	var clock = $('.clock').FlipClock({
 		autoStart: true,
-		clearExcessDigits: true
+		clearExcessDigits: true,
+
 	});
 
 	$('.clock').click(function(event){
 		event.preventDefault();
 		// Stops the clock from resetting on click.
 	});
+
 
 	//  Play / Pause Button toggle functionality.
 	function pause(){
@@ -18,6 +20,7 @@ $(document).on('page:load ready', function() {
 			clock.stop(function(){
 				startAgain();
 			});
+
 		});
 	}
 

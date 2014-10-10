@@ -2127,7 +2127,7 @@ var FlipClock;
 	 
 	FlipClock.HourlyCounterFace = FlipClock.Face.extend({
 			
-		// clearExcessDigits: true,
+		clearExcessDigits: true,
 
 		/**
 		 * Constructor

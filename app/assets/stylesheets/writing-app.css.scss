@@ -101,3 +101,16 @@
 .alert {
 	@extend %flash-alert;
 }
+.clock {
+			width: 100%; 
+			@include media($large-screen){
+			padding-left: 20em;
+			}
+		}
+.duration {
+			display: none;
+		}
+.timer-buttons {
+	font-size: .7em;
+	text-align: center;
+}

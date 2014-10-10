@@ -6,38 +6,56 @@
 	  <%= link_to 'Goal', goal_path(@goal) %>
 	  <a href="#" class="current-selection">New Entry</a>
 	</div>
-<h1>"<em><%= @project.name %></em>"</h1>
-<h3><%= @goal.type_is.capitalize %></h3>
-<h4>New Entry</h4>
 
-<style type="text/css">
-	.clock {
-		/* width: 350px; */
-	}
-	.duration {
-		display: none;
-	}
+	<h1 class="main-title">New Entry</h1>
+	
+	<div class="card project">
+    	<div class="card-image">
+        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+        </div>
+        <div class="inner-project">
+			<div class="card">
+				<div class="card-image goal">
+						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
 
-</style>
+				</div>
 
-<%= form_for [@project, @entry] do |f|  %>
+				<div class="card-header">
+					<div class="timer-buttons"><div class="clock"></div></div>
 
-	<div class="duration">
-	    <%= f.label :duration %><br>
-	    <%= f.text_field :duration %>
+					<%= form_for [@project, @entry] do |f|  %>
+
+		<div class="duration">
+		    <%= f.label :duration %><br>
+		    <%= f.text_field :duration %>
+		</div>
+
+		<p>&nbsp;</p>
+		
+		
+
+		<div class="timer-buttons"><span class="pause"><button name="playpause" type="button">Pause</button></span> |
+					<%= f.hidden_field(:goal_id, :value => @goal.id) %>
+					<%= f.submit  data: { confirm: 'Are you done writing?' } %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project) %></div>
+				<% end %></div>
+
+				</div>
+			</div>
+		</div>
 	</div>
-<p>&nbsp;</p>
-	<div class="clock"></div>
-
-<span class="pause"><button name="playpause" type="button">Pause</button></span> |
-	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
-	<%= f.submit  data: { confirm: 'Are you done writing?' } %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project) %></div>
-<% end %>
-
- 
 
 
-<script>
+	
 
+	<script>
+	$(function() {
+		var zeroG = $('li.flip-clock-active .up .inn');
+		var zero = zeroG[1];
 
-</script>
+		while (zero == 0) {
+
+		}
+	});
+
+	</script>
+</article>
