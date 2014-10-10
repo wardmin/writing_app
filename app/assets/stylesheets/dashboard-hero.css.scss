@@ -1,0 +1,102 @@
+.hero {
+  $hero-background-top: darken($base-accent-color, 90); 
+  $hero-background-bottom: adjust-hue($hero-background-top, -70);
+  $hero-color: white;
+  $gradient-angle: 10deg;
+  $hero-image: 'http://i.imgur.com/GxfixsKl.jpg';
+
+  @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  padding: 1.3em 1em;
+  margin-top: 1em;
+
+  @include media($large-screen)  {
+    padding: 3.5em;
+  }
+  .hero-logo img {
+    height: 3em;
+    margin-bottom: 2.5em;
+  }
+
+  .hero-inner {
+    @include outer-container;
+    @include clearfix;
+    padding: 1.3em;
+    margin: auto;
+    text-align: center;
+    color: $hero-color;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: .5em;
+    
+
+    button {
+      @include button(simple, $base-background-color);
+      font-size: $base-font-size;
+      outline: none;
+    }
+
+    .write-now {
+      float: none;
+    }
+
+    .hero-copy {
+      text-align: center;
+      
+      
+      h1 {
+        font-size: 1.8em;
+        margin-bottom: .5em;
+
+        @include media($large-screen) {
+          font-size: 2em;
+        }
+      }
+
+      p {
+        font-family: $helvetica;
+        margin: auto;
+        margin-bottom: 3em; 
+        font-weight: 500;
+        line-height: 1.4em;
+
+        @include media($large-screen) {
+          font-size: 1.1em;
+          max-width: 40%;
+        }
+      }
+      a {
+          text-decoration: underline;
+          color: white;
+        }
+    }
+  }
+}
+.dashboard-projects {
+      @include button(simple, $base-background-color);
+      margin-top: 3em;
+      margin-bottom: 1em;
+      font-size: .8em;
+
+    }
+
+.hero-not {
+  $hero-image: 'http://i.imgur.com/9Fxqn9ol.jpg';
+  $hero-background-top: darken($base-accent-color, 90); 
+  $hero-background-bottom: adjust-hue($hero-background-top, -70);
+  $hero-color: white;
+  $gradient-angle: 10deg;
+  @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+  @extend .hero;
+
+}
+
+.dashboard-links {
+  text-align: center;
+
+  @include media($large-screen)  {
+    margin-bottom: 2em;
+  }
+}

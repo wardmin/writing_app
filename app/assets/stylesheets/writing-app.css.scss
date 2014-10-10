@@ -17,18 +17,38 @@
 
 .edit {
         @include button(simple, $base-background-color);
-        padding-top: 0.5em;
+        //padding-top: 0.5em;
         //margin-right: 0.5em;
-        display: inline-block;
-        margin-bottom: .3em;
-        outline: none;
+        //display: inline-block;
+        // margin-bottom: .3em;
+       // outline: none;
         // float: right;
+
 
         @include media($medium-screen) {
           width: auto;
           margin-bottom: 0;
         }
     }
+.write-now {
+	@include button(pill, tint($blue, 30%));
+	margin-top: 3px;
+	float: right;
+
+	a {
+		color: white;
+	}
+}
+
+.small-write {
+	font-size: .82em;
+	padding-right: 4px;
+}
+
+.project-button {
+	@include button(simple, $base-background-color);
+	margin-bottom: 9px;
+}
 
 .main {
 	
@@ -36,7 +56,7 @@
 
 .inner-project {
 	padding: 0.3em;
-	background: tint($project-border, 60%);
+	background: tint($project-border, 30%);
 	border: 3px solid white;
 	border-radius: 5px;
 }
@@ -51,6 +71,10 @@
 		@include span-columns(8);
 	
 	}
+}
+
+.home {
+	
 }
 
 // menu - nav bar extensions.

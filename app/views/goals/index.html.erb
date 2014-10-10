@@ -23,7 +23,7 @@
         
 
  	 		<% if time_left(@project.deadline) >= 0 %>
-				You have <%= time_left(@project.deadline) %> days left to finish this project. <br>
+				You have <strong><%= time_left(@project.deadline) %></strong> days left to finish this project. <br>
 			<% else %>
 				<strong>Your deadline is past due!</strong> <br>
 			<% end %>
@@ -33,18 +33,25 @@
 	        <ul>
 	          <li><%= ChronicDuration.output(@project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
 	          <li><%= @project.goals.length %><span>Goals</span></li>
-	          	
-	          	<% if @project.deadline %>
-	            	<li><%= time_left(@project.deadline) %><span>Days Left</span></li>
-	          	<% end %>
+	          	<% if @project.entries %>
+                <li><%= @project.entries.length %><span>Entries</span></li>
+              <% end %>
 	        </ul>
     	</div>
+    	<div class="card-stats">
+	        <ul class="edit-button">
+	        	
+	          	<li ><span class="edit"><%= link_to 'Edit', edit_project_path(@project) %></span></li>
+
+	          	<li><span class="edit"><%= link_to "New Goal", new_project_goal_path(@project) %></span></li>
+	        </ul>
+	    </div>
 	  
 		<div class="inner-project">
 			<% @goals.each do |goal| %>
 					<div class="card">
-			    		<div class="card-image">
-			      			<h3 class="card-image title"><%= link_to goal.type_is.capitalize, goal_path(goal), class: "card-image title" %></h3> 
+			    		<div class="card-image goal">
+			      			<h6 class="goal">Goal: <%= link_to goal.type_is.capitalize, goal_path(goal) %></h6> 
 			    		</div>
 	
 			    		<div class="card-header">
@@ -68,36 +75,24 @@
 			       				<% end %>
 			      			</ul>
 			      			<ul class="edit-button">
-        						<li><span class="edit"><%= link_to 'Edit', edit_project_path(@project) %></span></li>
-          						<li ><span class="edit"><%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></span></li>
+        						<li><span class="edit"><%= link_to 'View', goal_path(goal) %></span></li>
+          						<li ><span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></span></li>
         					</ul>
 			    		</div>
 			  		</div>
 			<% end %>
 		</div>
+	
+	<p>&nbsp;</p>
 
-
-	<div class="card-stats">
-        <ul class="edit-button">
-        	<li><span class="edit"><%= link_to "New Goal", new_project_goal_path(@project) %></span></li>
-          	<li ><span class="edit"><%= link_to 'Edit', edit_project_path(@project) %></span></li>
-        </ul>
-    </div>
+	
 </div>
 
 </article>
 
 <section class="stats">
-	<h3>Stats</h3>
-	<em>goal#index</em><br> 
-	Deadline: <%= @project.deadline.strftime("%A, %b %d") %>
-	<% if @project.entries.empty? %>
-		<% else %>
-			<div>
-				
-					<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on this project.</p>
-					<p>Your hours over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
-	</p>
-			</div>
-		<% end %>
+	<div class="quotes">
+		<h3>&ldquo;There is no greater agony than bearing an untold story inside you.&rdquo; </h3>
+		<p>&ndash; Maya Angelou</p>
+	</div>
 </section>

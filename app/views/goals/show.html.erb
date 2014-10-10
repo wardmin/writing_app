@@ -8,61 +8,78 @@
 
 	<h1 class="main-title">Goal Details</h1>
 
-	<div class="card">
-		<div class="card-image">
-				<h3 class="card-image title"><%= @goal.type_is.capitalize %></h3> <%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal), class: "goal-button" %>
+	<div class="card project">
+    	<div class="card-image">
+        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+        </div>
+        <div class="inner-project">
+			<div class="card">
+				<div class="card-image goal">
+						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
 
-		</div>
+				</div>
 
-		<div class="card-header">
-			<% if @goal.deadline %>
-				<p>Deadline: <%= @goal.deadline.strftime("%A, %b %d") %> </p>
-			<% end %>
-			
-		</div>
+				<div class="card-header">
 
-		<div class="card-copy">
-		Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
-		Description: <%= @goal.name %>
-		</div>
-
-		<div class="card-stats">
-				<ul>
-				<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
-				<% if @goal.entries %>
-					<li><%= @goal.entries.length %><span>Entries</span></li>
-				<% end %>
-				<!-- Deadline logic -->
-				<% if @goal.deadline %>
-					<% if time_left(@goal.deadline) > 0 %>
-						<li><%= time_left(@goal.deadline) %><span>Days Left</span></li>
-					<% elsif time_left(@goal.deadline) == 0 %>
-						<li>Goal<span>Due Today!</span></li>
-					<% elsif time_left(@goal.deadline) < 0 %>
-						<li><%= time_left(@goal.deadline) * -1 %><span>Days Overdue!</span></li>
+					<% if @goal.deadline %>
+						<p>Deadline: <%= @goal.deadline.strftime("%A, %b %d") %> </p>
 					<% end %>
-				<% end %>
-				</ul>
-		</div>
-	</div>
+					
+				</div>
 
-	<h4>Writing Entries </h4>
-		<ul>
-			<% @goal.entries.order("created_at desc").each do |entry| %>
-			
-				<li><em>Date:</em> <%= link_to entry.created_at.strftime("%b %e, %l:%M %p"), entry_path(entry) %> | <em><%= entry.duration %></em> | journal: &#<%= entry.journal? %>
-					 (<%= link_to 'Edit', edit_entry_path(entry) %>) </li>
-			<% end %>
-		</ul>
+				<div class="card-copy">
+				Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
+				Description: <%= @goal.name %> <br>
+				Your last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
+				</div>
+
+				<div class="card-stats">
+						<ul>
+						<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
+						<% if @goal.entries %>
+							<li><%= @goal.entries.length %><span>Entries</span></li>
+						<% end %>
+						<!-- Deadline logic -->
+						<% if @goal.deadline %>
+							<% if time_left(@goal.deadline) > 0 %>
+								<li><%= time_left(@goal.deadline) %><span>Days Left</span></li>
+							<% elsif time_left(@goal.deadline) == 0 %>
+								<li>Goal<span>Due Today!</span></li>
+							<% elsif time_left(@goal.deadline) < 0 %>
+								<li><%= time_left(@goal.deadline) * -1 %>d<span>Overdue!</span></li>
+							<% end %>
+						<% end %>
+						</ul>
+				</div>
+
+				<div class="small-write">
+					<span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></span>
+					<div class="goal-edit"><span class="edit"><%= link_to 'Edit', edit_project_path(@goal.project) %></span></div>
+				</div>
+				<div class="entries">
+					<h5>Writing Entries </h5>
+						<ul>
+							<% @goal.entries.order("created_at desc").each do |entry| %>
+								<div class="entry">
+									<span class="edit"><%= link_to 'View', entry_path(entry) %></span> 
+									<li> <%= link_to entry.created_at.strftime("%b %e"), entry_path(entry) %> &nbsp;<em>&nbsp; <%= entry.duration_long %></em> <br>
+										<% if entry.journal %>
+											<p><%= entry.journal.truncate(90) %></p>
+										<% end %>
+										
+									</li>
+									</div>
+							<% end %>
+						</ul>
+				</div>
+				
+			</div>
+	</div>
 </article>
 
 <section class="stats">
-	<% if @goal.entries.empty? %>
-	<% else %>
-		<div>
-			<h3>Stats</h3>
-				<p>You've spent <%= distance_of_time_in_words(@goal.total_time_spent) %> <%= @goal.type_is %>.</p>
-				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span></p> 
+		<div class="quotes">
+			<h3>“There is nothing to writing. All you do is sit down at a typewriter and bleed.” </h3>
+			<p>&ndash; Ernest Hemingway</p>
 		</div>
-	<% end %>
-	</section>
+</section>

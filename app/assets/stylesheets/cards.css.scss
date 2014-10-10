@@ -18,7 +18,7 @@
   @include transition (all 0.2s ease-in-out);
   background-color: $card-background;
   border-radius: $base-border-radius;
-  border: $card-border;
+  border: 2px solid white;
   margin-bottom: $base-spacing;
   cursor: pointer;
   box-shadow: 0 2px 4px darken($base-background-color, 10);
@@ -33,7 +33,7 @@
     @extend .card-header;
     overflow: hidden;
     max-height: 150px;
-    background-image: $card-img;
+    background-color: tint($dark-gray, 30%);
     cursor: default;
 
     img {
@@ -44,6 +44,11 @@
       border-top-right-radius: $base-border-radius;
     }
 
+    &.goal {
+      background-color: $light-gray;
+      color: tint($dark-gray, 50%);
+    }
+
     h3 {
       font-size: 1.7em;
       border: none;
@@ -52,6 +57,25 @@
 
       a {
         padding: 0;
+
+
+      }
+      &.title  {
+        color: tint($light-gray, 30%);
+
+        a {
+          color: tint($light-gray, 30%);
+        }
+      }
+
+      &.goal {
+          background-color: $light-gray;
+          border: none;
+
+          h6 {
+           border: none;
+
+          }
 
       }
     }
@@ -84,11 +108,14 @@
 
   .card-header {
     @include transition (all 0.2s ease-in-out);
-    background-color: $card-header-background;
     border-bottom: $card-border;
     border-radius: $base-border-radius $base-border-radius 0 0;
     font-weight: bold;
     padding: $base-spacing/3 $gutter/2;
+
+    // &.goal {
+    //   background-color: $card-header-background;
+    // }
   }
 
   .card-copy {
@@ -109,7 +136,7 @@
       float: left;
       border-right: 1px solid transparentize($base-font-color, .8);
       line-height: 1.1em;
-      padding: 0 .7em 0 .7em;
+      padding: 0 .5em 0 .5em;
 
       &:first-child {
         padding-left: 0;
@@ -128,39 +155,82 @@
     }
   }
   .edit-button {
-    @extend .card-stats;
+    //@extend .card-stats;
     // overflow: visible;
-    // border-top: 1px solid transparentize($base-font-color, .8);
+    border-right: none;
     padding: 1em 0 0;
     float: right;
+    border: none;
 
 
     ul li {
-     // padding: 0;
-      
+       border-right: none;
     }
   }
   
   &.project {
     border: 2px solid $project-border;
+
   }
-  &:hover {
-    background-color: $card-hover-background;
+  // &:hover {
+  //   background-color: $card-hover-background;
+
+  //   .card-image {
+  //     background: $dark-gray;
+  //   }
     
-    .card-image img {
-      background: $card-image-hover-background;
-    }
+  //   .card-image img {
+  //     background: $card-image-hover-background;
+  //   }
   
-    .card-header {
-      background-color: $card-hover-background;
-    }
+  //   .card-header {
+  //     background-color: $card-hover-background;
+  //   }
+  // }
+
+  // &:active {
+  //   background-color: $card-background;
+
+  //   .card-header {
+  //     background-color: $card-background;
+  //   }
+  // }
+}
+
+.project-background {
+  background-color: $dark-gray;
+}
+
+.entries {
+  border-radius: 5px;
+  padding: .7em .5em .7em .5em;
+  font-size: .8em;
+  //border: 1px solid $dark-gray;
+
+  h5 {
+    color: shade($light-gray, 30%);
+    padding-top: 2.5em;
+    padding-bottom: 1em;
   }
 
-  &:active {
-    background-color: $card-background;
-
-    .card-header {
-      background-color: $card-background;
-    }
+  p {
+    font-size: .9em;
+    padding-left: .7em;
+    border-left: 2px solid $light-gray;
   }
+  .entry {
+    border-bottom: 1px solid shade($light-gray, 20%);
+    //margin-bottom: .3em;
+    padding-bottom: .8em;
+    padding-top: .4em;
+  }
+  .edit {
+    float: right;
+  }
+}
+
+.goal-edit {
+  float: left;
+  font-size: .8em;
+  padding-left: 5px;
 }

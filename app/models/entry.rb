@@ -28,6 +28,10 @@ class Entry < ActiveRecord::Base
 		created_at.localtime.strftime("%b %e, %l:%M %p")
 	end
 
+	def duration_long
+		ChronicDuration.output(read_attribute(:duration), format: :long, :units => 2)
+	end
+
 	# def before_save
 	# 	duaration = ChronicDuration::parse(duration_before_type_cast) if attribute_present?("duration")
 	# end

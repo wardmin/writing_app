@@ -11,7 +11,8 @@
 
   @include inline-block;
   text-align: left;
-  margin-bottom: $base-spacing;
+  padding-top: 0.4em;
+  // margin-bottom: $base-spacing;
 
   a {
     @include inline-block;

@@ -6,6 +6,8 @@
 
   <h1 class="main-title">My Projects</h1>
 
+  <div class="project-button"><%= link_to 'New Project', new_project_path %></div>
+
       <% @projects.each do |project| %>
 
         <div class="card project">
@@ -27,7 +29,7 @@
             <ul>
               <li><%= ChronicDuration.output(project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
               <% if project.entries %>
-                <li><%= project.entries.length %><span>Entries</span></li>
+                <li><%= project.goals.length %><span>Goals</span></li>
               <% end %>
               <% if project.deadline %>
                 <li><%= time_left(project.deadline) %><span>Days Left</span></li>
@@ -35,24 +37,21 @@
             </ul>
 
             <ul class="edit-button">
-              <li ><span class="edit"><%= link_to 'Edit', edit_project_path(project) %></span></li>
+              <li ><span class="edit"><%= link_to 'View', project_goals_path(project) %></span></li>
             </ul>
           </div>
         </div>
       <% end %>
  
-  <div class="button"><%= link_to 'New Project', new_project_path %></div>
+  
 
 </article>
 
 
 <section class="stats">
-  <% if @current_user.entries.empty? %> 
-    <% else %>
-      <div>
-        <h3>Stats</h3>
-          <p>You've spent <%= distance_of_time_in_words(current_user.total_time_writing) %> writing</em></p>
-      </div>
-  <% end %>
+  <div class="quotes">
+      <h3>“If there's a book that you want to read, but it hasn't been written yet, then you must write it.”</h3>
+      <p>&ndash; Toni Morrison</p>
+  </div>
 </section>
 
