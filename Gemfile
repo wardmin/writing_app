@@ -36,6 +36,9 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 
+# In-place form editing
+gem 'best_in_place'
+
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
 	gem 'spring' 
@@ -46,6 +49,7 @@ group :development, :test do
 	gem 'factory_girl'
 	gem 'faker'
 	gem 'mailcatcher'
+	gem 'quiet_assets'
 end
 
 

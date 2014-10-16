@@ -15,15 +15,20 @@ class User < ActiveRecord::Base
 	end
 
 	def am_writing?
+		if !entries.empty?
 			times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
 			
-			if times_written >= desired_amount
-				writing = true
-			else
-				writing = false
-			end
+				if times_written >= desired_amount
+					writing = true
+				else
+					writing = false
+				end
+		else
+			writing = true
+		end
 		writing
 	end
+
 	def total_time_writing
 		if entries
 		 entries.sum("duration")
@@ -31,14 +36,17 @@ class User < ActiveRecord::Base
 	end
 	def most_recent_goal
 		if !projects.empty?
-			most_recent_entry = entries.order('created_at').last
-			most_recent_goal = goals.order('created_at').last
+			if !entries.empty?
+				most_recent_entry = entries.order('created_at').last
+				most_recent_goal = goals.order('created_at').last
 
-			if most_recent_entry.created_at > most_recent_goal.created_at
-				latest_goal = most_recent_entry.goal
-			else
-				latest_goal = most_recent_goal
+				if most_recent_entry.created_at > most_recent_goal.created_at
+					latest_goal = most_recent_entry.goal
+				else
+					latest_goal = most_recent_goal
+				end
 			end
+			latest_goal = goals.order('created_at').last
 		end
 		latest_goal
 	end

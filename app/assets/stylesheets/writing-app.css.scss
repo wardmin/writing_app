@@ -84,14 +84,10 @@
 	margin-left: 1em;
 }
 
-
-
 .stats {
 	  @include media($large-screen) {
 		@include span-columns(4);
-	
 	}
-
 }
 
 .notice {
@@ -103,8 +99,9 @@
 }
 .clock {
 			width: 100%; 
+			
 			@include media($large-screen){
-			padding-left: 20em;
+				padding-left: 20em;
 			}
 		}
 .duration {
@@ -113,4 +110,11 @@
 .timer-buttons {
 	font-size: .7em;
 	text-align: center;
+}
+
+fieldset {
+	 @include media($large-screen) {
+		@include span-columns(8);
+	
+	}
 }

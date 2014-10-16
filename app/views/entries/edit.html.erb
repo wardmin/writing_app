@@ -1,8 +1,8 @@
 <h3>Edit Entry from <%= @entry.created_at.strftime("%A, %b %d") %></h3> 
 <p><strong> >>> <%= @entry.goal.type_is %> "<em><%= @entry.project.name %></em>"</strong></p>
+<fieldset>
+	<%= render 'form' %>
+</fieldset>
 
-<%= render 'form' %>
-
-<br>
 <%= link_to 'Back to Goal', goal_path(@entry.goal.id) %> | <%= link_to 'To Project', project_path(@entry.project) %>
 

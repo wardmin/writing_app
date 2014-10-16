@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141005192125) do
+ActiveRecord::Schema.define(version: 20141016165917) do
 
   create_table "entries", force: true do |t|
     t.string   "name"
@@ -42,12 +42,14 @@ ActiveRecord::Schema.define(version: 20141005192125) do
   create_table "goals", force: true do |t|
     t.string   "name"
     t.integer  "goal_type_id"
-    t.integer  "amount"
     t.date     "deadline"
     t.integer  "metric_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "project_id"
+    t.integer  "metric_target"
+    t.string   "metric_name"
+    t.integer  "amount_done"
   end
 
   add_index "goals", ["project_id"], name: "index_goals_on_project_id"
@@ -98,6 +100,7 @@ ActiveRecord::Schema.define(version: 20141005192125) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.integer  "desired_interval"
+    t.boolean  "track_hours"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

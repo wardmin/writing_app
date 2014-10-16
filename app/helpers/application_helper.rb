@@ -22,6 +22,10 @@ module ApplicationHelper
 	    markdown.render(text).html_safe
   end
   def time_left(deadline)
-  	(deadline - Date.today).to_i
+  	if deadline
+  		(deadline - Date.today).to_i
+  	elsif deadline == nil
+  		return 0
+  	end
   end
 end

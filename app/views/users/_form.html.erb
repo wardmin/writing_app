@@ -12,24 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email %>
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :location %><br>
+    <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :genre_id %><br>
+    <%= f.label :genre_id %>
     <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :writing_goal %><br>
-    I want to write <%= f.number_field :desired_amount %> times per <%= f.select :desired_interval, options_for_select([['day', 1], ['week', 7], ['month', 30]], 7) %>.
+    <%= f.label :writing_goal %>
+    I want to write <%= f.number_field :desired_amount %> times per <%= f.select :desired_interval, options_for_select([['day', 1], ['week', 7], ['month', 30]], 7) %>
   </div>
   <div class="actions">
     <%= f.submit %>

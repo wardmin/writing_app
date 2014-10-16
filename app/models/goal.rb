@@ -30,6 +30,17 @@ class Goal < ActiveRecord::Base
 		created_at.localtime.strftime("%b %e, %l:%M %p")
 	end
 
+	def metric_type_is
+		if metric_id
+			if metric_id == 5
+				metric_type = metric_name
+			else
+				metric_type = Metric.find_by id: metric_id
+				metric_type.name
+			end
+		end
+	end
+
 	def spark_line
 		last_week = entries.order('created_at').last(7)
 		array = []

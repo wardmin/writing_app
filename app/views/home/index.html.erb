@@ -35,7 +35,7 @@
 				<p><%= link_to "You've been writing!", edit_user_path(current_user) %></p>
 				<%= image_tag("happy-emoji.png", width: '50') %> <br>
 			<% else %>
-				<%= image_tag("sad-emoji.png", width: '50') %>
+				<br> <%= image_tag("sad-emoji.png", width: '50') %> <br>
 				<p><%= link_to "You haven't been writing.", edit_user_path(current_user) %></p>
 			<% end %>
 		<% end %>

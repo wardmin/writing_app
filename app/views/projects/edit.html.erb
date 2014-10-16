@@ -1,5 +1,12 @@
+<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'My Projects', projects_path %>
+	   <%= link_to 'Project', project_goals_path(@project), class: "current-selection" %>
+</div>
+
+
 <h1>Editing project</h1>
-
-<%= render 'form' %>
-
+<fieldset>
+	<%= render 'form' %>
+</fieldset>
 <%= link_to 'Back', project_goals_path(@project) %>
