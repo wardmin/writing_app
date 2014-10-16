@@ -27,13 +27,13 @@
   <div class="field"> 
        
         <%= f.label :metrics %>
-        I want to track <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 1) %> on this goal.
+        I want to track <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 6) %> on this goal.
 
         <%= f.label :target %>
         <%= f.number_field :metric_target %>
   
       </div>
-  <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
+  <%= f.hidden_field(:project_id, :value => @project.id) %>
 
   <%= f.submit %>
 

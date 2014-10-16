@@ -3,8 +3,8 @@
 <h3>Entry from <%= @entry.created_at.strftime("%A, %b %d") %></h3> 
 <p><strong>>>> <%= @entry.goal.type_is %> "<em><%= @entry.project.name %></em>"</strong></p>
 
-Description: <%= @entry.name %> <br>
-Intention: <%= @entry.intention %> <br>
+ <%= @entry.amount_done %> <%= @entry.goal.metric_type_is %> written<br>
+
 <% if @entry.duration %>
 	<strong>Total time:</strong> <%= @entry.duration %><br>
 	<% else %>

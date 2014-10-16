@@ -11,11 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016165917) do
+ActiveRecord::Schema.define(version: 20141016180332) do
 
   create_table "entries", force: true do |t|
-    t.string   "name"
-    t.string   "intention"
     t.text     "journal"
     t.integer  "amount_done"
     t.datetime "time_started"
