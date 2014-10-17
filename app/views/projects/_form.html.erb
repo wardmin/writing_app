@@ -12,13 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-  
-    <%= f.select :project_type_id, options_from_collection_for_select(ProjectType.all, :id, :name, 1) %>
+    <%= f.label :project_type %>
+    <%= f.select :project_type_id, options_from_collection_for_select(ProjectType.all, :id, :name) %>
+  </div>
 
+  <div class="field">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+  </div>
+  <div class="field">
+      <%= f.label :deadline %>
+      <%= f.date_field :deadline %>
   </div>
   <div class="actions">
     <%= f.submit %>

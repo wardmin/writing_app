@@ -1,29 +1,47 @@
-<h1>"<em><%= @project.name %></em>" Project Page </h1>
-<p>
-  <strong>Type:</strong>
-  <%= @project.type_is %>
-</p>
+<article class="article">
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'All Projects', projects_path %>
+	</div>
 
-
-<% if @project.most_recent_goal == nil %>
-	<%= "Let's make some goals" %>
-	<%= render 'goals/goal' %>
-<% else %>
-	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <%= link_to "Continue!", new_project_entry_path(@project.id, :goal_id => @project.goals.last.id) %> <br>
+<h1>"<em><%= @project.name %></em>"</h1>
+<h3>Project Dashboard</h3>
+  <strong>Type:</strong> <%= @project.type_is %> <br>
+  <% if @project.deadline %>
+ 	 <strong>Deadline:</strong> <%= @project.deadline.strftime("%A, %b %d")%> <br>
+ 	 <% if time_left(@project.deadline) >= 0 %>
+		You have <%= time_left(@project.deadline) %> days left to finish this project. <br>
+	<% else %>
+		<strong>Your deadline is past due!</strong> <br>
+	<% end %>
 <% end %>
-
-<div class="stats">
-	<h3>Stats</h3>
-You've spent <%= @project.total_time_spent %> hours in total on "<em><%= @project.name %></em>"
-</div>
-<h4><%= link_to "Project Goal History", project_goals_path(@project) %></h4>
-
-<%= link_to "Make a New Goal", new_project_goal_path(@project) %>
-
-
-
+<h4><%= link_to "Project History", project_goals_path(@project) %></h4>
 
 
 <p>&nbsp;</p>
-<%= link_to 'Edit This Project', edit_project_path(@project) %> |
-<%= link_to 'All my Projects', projects_path %>
+
+<% if @project.most_recent_entry == nil %>
+	<p>How far along are you in your writing? <br> This app uses goals to track your writing progress. </p>
+	<%= link_to "Let's make some goals", new_project_goal_path(@project) %>
+<% else %>
+	<strong>Most Recent Goal:</strong> <%= @project.most_recent_goal.type_is %> >>> <div class="write-button"><%= link_to "Write Now!", new_project_entry_path(@project.id, :goal_id => @project.most_recent_goal.id) %> </div> <br>
+<% end %>
+</article>
+<section class="stats">
+	<% if @project.entries.empty? %>
+	<% else %>
+		<div>
+			<h3>Stats</h3>
+				<p>You've spent <%= distance_of_time_in_words(@project.total_time_spent) %> on "<em><%= @project.name %></em>"</p>
+				<p>Your time over the last 7 days: <span class="inlinesparkline"><%= @project.spark_line %></span>
+</p>
+		</div>
+		
+	<% end %>
+
+
+
+ | <%= link_to 'Edit This Project', edit_project_path(@project) %> |
+<%= link_to 'My Projects', projects_path %>
+
+</section>

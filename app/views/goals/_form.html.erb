@@ -10,13 +10,35 @@
       </ul>
     </div>
   <% end %>
-<h2>New Goal</h2>
- 
-  <%= f.label :goal_type %> <br>
-  <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %> <br>
+  
+  <div class="field">
+      <%= f.label :goal_type %> 
+      <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :description %> 
+    <%= f.text_field :name %> 
+  </div>
+  <div class="field">
+    <%= f.label :deadline %> 
+    <%= f.date_field :deadline%> 
+  </div>
 
-   <%= f.label :description %> <br>
-  <%= f.text_field :name %> <br>
- <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
+  <div class="field"> 
+       
+        <%= f.label :metrics %>
+        I want to track <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 6) %> on this goal.
+
+        <%= f.label :target %>
+        <%= f.number_field :metric_target %>
+  
+      </div>
+      <% if @project == nil %>
+        <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
+      <% else %>
+        <%= f.hidden_field(:project_id, :value => @project.id) %>
+      <% end %>
+
   <%= f.submit %>
+
 <% end %>

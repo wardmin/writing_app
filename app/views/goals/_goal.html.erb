@@ -1,3 +1,6 @@
+
+Delete this template please. 
+
 <%= form_for [@project, @goal] do |f| %>
 	<% if @goal.errors.any? %>
     <div id="error_explanation">
@@ -10,13 +13,25 @@
       </ul>
     </div>
   <% end %>
-<h2>New Goal</h2>
- 
-  <%= f.label :goal_type %> <br>
-  <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %> <br>
-
-   <%= f.label :description %> <br>
-  <%= f.text_field :name %> <br>
- <%= f.hidden_field(:project_id, :value => @project.id) %>
-  <%= f.submit %>
+  
+      <div class="field">
+        <%= f.label :goal_type %>
+        <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %>
+      </div>
+      <div class="field">
+        <%= f.label :description %> 
+        <%= f.text_field :name %> 
+      </div>
+      <div class="field">
+        <%= f.label :amount %>
+        <%= f.number_field :amount %>
+        <%= f.label :metric %>
+        <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 1) %>
+      </div>
+      <div class="field">
+        <%= f.label :deadline %> 
+        <%= f.date_field :deadline%>
+      </div>
+      <%= f.hidden_field(:project_id, :value => @project.id) %>
+      <%= f.submit %>
 <% end %>

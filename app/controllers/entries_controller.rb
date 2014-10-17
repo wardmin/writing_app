@@ -6,7 +6,7 @@ class EntriesController < ApplicationController
 		#goa = @entry.goal_id
 		@goal = Goal.find(@entry.goal_id)
 		if @entry.save
-			redirect_to goal_path(@goal)
+			redirect_to edit_entry_path(@entry)
 		else
 			render "/projects/show"
 		end
@@ -27,7 +27,16 @@ class EntriesController < ApplicationController
 	end
 
 	def update
+			Rails.logger.info "In update action"
+
+			if params[:entry][:duration].present?
+				Rails.logger.info "Params duration not nil"
+
+				params[:entry][:duration] = ChronicDuration::parse(params[:entry][:duration])
+				Rails.logger.info "Params is #{params}"
+			end
 		respond_to do |format|
+	
 			if @entry.update(entry_params)
 				format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
 				format.json { render :show, status: :ok, location: @project }
@@ -47,6 +56,6 @@ class EntriesController < ApplicationController
 		 @entry = Entry.find(params[:id])
 	end
 	def entry_params
-		params.require(:entry).permit(:name, :intention, :total_time, :goal_id, :journal, :amount_done, :time_started)
+		params.require(:entry).permit(:name, :intention, :duration, :goal_id, :journal, :amount_done, :time_started)
 	end
 end

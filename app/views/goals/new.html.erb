@@ -1,4 +1,11 @@
+
+
 <h1>Project: "<em><%= @project.name %></em>"</h1>
 
-
-	<%= render @goal %>
+<fieldset>
+	<%= render 'form' %>
+</fieldset>
+	
+<p>
+	<%= link_to "Back to Project", project_goals_path(@project) %>
+</p>

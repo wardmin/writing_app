@@ -1,8 +1,44 @@
-<h1>Dashboard</h1>
+<article class="home">
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path, class: "current-selection" %>
+	</div>
+	
 
-<h3>You are currently <%= link_to @project.most_recent_goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_path(@project) %></em>". </h3>
 
-<!-- <%# button_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal.id), method: :get %> -->
+	<% if current_user.entries %>
+		<% if current_user.am_writing? == true %>
+			<div class="hero">
+		<% else %>
+			<div class="hero-not">
+		<% end %>
 
-<%= link_to "Start Writing!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %> <br>
+	<% end %>
+		<div class="hero-inner">
+			<div class="hero-copy">
+				<h1>Your Dashboard</h1>
+				<p>You are currently <%= link_to @goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>".</p>	
+			</div>
+	    
+	    	<div class="write-now">
+		<%= link_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %>
+			</div> <br>
+
+		</div>
+	</div>
+
+	
+	<div class="dashboard-links">
+		<%= link_to 'My Projects', projects_path, class: "dashboard-projects" %>
+		
+		<% if current_user.entries %>
+			<% if current_user.am_writing? == true %>
+				<p><%= link_to "You've been writing!", edit_user_path(current_user) %></p>
+				<%= image_tag("happy-emoji.png", width: '50') %> <br>
+			<% else %>
+				<br> <%= image_tag("sad-emoji.png", width: '50') %> <br>
+				<p><%= link_to "You haven't been writing.", edit_user_path(current_user) %></p>
+			<% end %>
+		<% end %>
+	</div>
+</article>
 

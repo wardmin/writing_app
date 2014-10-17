@@ -1,0 +1,23 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.main-title {
+	@extend h3;
+	padding-bottom: 0.25em;
+}
+
+.quotes {
+	padding: 1em 1em;
+
+	h3 {
+		font-family: $georgia;
+		font-style: italic;
+	}
+
+	p {
+		font-family: $georgia
+	}
+}

@@ -30,13 +30,24 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    best_in_place (0.2.3)
+      rails (>= 3.0.0)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitters (0.10.1)
+      bourbon (>= 3.2)
+      sass (>= 3.2)
+      thor
+    bourbon (3.2.3)
+      sass (~> 3.2)
+      thor
     builder (3.2.2)
+    chronic_duration (0.10.6)
+      numerizer (~> 0.1.1)
     cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -90,6 +101,10 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.2)
     multi_json (1.10.1)
+    neat (1.5.1)
+      bourbon (>= 3.1)
+      sass (~> 3.2.19)
+    numerizer (0.1.1)
     orm_adapter (0.5.0)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -98,6 +113,8 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -121,6 +138,7 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    redcarpet (3.1.2)
     rspec-core (3.1.5)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -192,8 +210,12 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  best_in_place
   better_errors
   binding_of_caller
+  bitters
+  bourbon
+  chronic_duration
   cocoon
   coffee-rails (~> 4.0.0)
   devise
@@ -202,8 +224,11 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mailcatcher
+  neat
   pry-rails
+  quiet_assets
   rails (= 4.1.5)
+  redcarpet
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

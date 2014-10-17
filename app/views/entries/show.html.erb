@@ -3,11 +3,15 @@
 <h3>Entry from <%= @entry.created_at.strftime("%A, %b %d") %></h3> 
 <p><strong>>>> <%= @entry.goal.type_is %> "<em><%= @entry.project.name %></em>"</strong></p>
 
-Name: <%= @entry.name %> <br>
-Intention: <%= @entry.intention %> <br>
-Total Time: <%= @entry.total_time %><br>
-Journal: <%= @entry.journal %><br>
-Amount Done: <%= @entry.amount_done %><br>
-Time Started: <%= @entry.created_at.strftime("%b %e, %l:%M %p") %><br>
+ <%= @entry.amount_done %> <%= @entry.goal.metric_type_is %> written<br>
 
-<p><%= link_to 'To Project', project_path(@entry.project) %> | <%= link_to 'To Goal', goal_path(@entry.goal_id) %> | <%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>
+<% if @entry.duration %>
+	<strong>Total time:</strong> <%= @entry.duration %><br>
+	<% else %>
+	Total Time: No time recorded<br>
+<% end %>
+Journal: <%= markdown(@entry.journal) %><br>
+
+Time Started: <%= @entry.made_on %><br>
+
+<p><%= link_to 'To Project', project_goals_path(@entry.project) %> | <%= link_to 'To Goal', goal_path(@entry.goal_id) %> | <%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>

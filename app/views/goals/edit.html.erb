@@ -1,3 +1,30 @@
-<h2>Edit Goal</h2>
+<article class="article">
 
-<%= render 'form' %>
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'My Projects', projects_path %>
+	  <%= link_to 'Project', project_goals_path(@goal.project) %>
+	  <%= link_to 'Goal', goal_path(@goal), class: "current-selection" %>
+	</div>
+	<h2>Edit Goal </h2>
+	<div class="card project">
+	    	<div class="card-image">
+	        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+	        </div>
+
+	        <div class="inner-project">
+				<div class="card">
+					<div class="card-image goal">
+							<h6 class="goal">Edit: <%= @goal.type_is.capitalize %></h6> 
+					</div>
+					<fieldset>
+						<%= render 'form' %>
+					</fieldset>
+					<%= link_to 'Back', goal_path(@goal), class: "edit" %>
+				</div>
+			</div>
+
+	</div>
+</article>
+
+

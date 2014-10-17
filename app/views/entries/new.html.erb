@@ -1,29 +1,61 @@
-
-<h2>New Entry for <%= @goal.type_is %> on "<em><%= @project.name %></em>"</h2>
-
-
-<%#= #render @entry %>
-
-
-<hr>
-<%= form_for [@project, @entry] do |f|  %>
-	<div class="field">
-	    <%= f.label :name %><br>
-	    <%= f.text_field :name %>
-	</div>
-	<div class="field">
-	    <%= f.label :intention %><br>
-	    <%= f.text_field :intention %>
+<article>
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'My Projects', projects_path %>
+	  <%= link_to 'Project', project_goals_path(@goal.project) %>
+	  <%= link_to 'Goal', goal_path(@goal) %>
+	  <a href="#" class="current-selection">New Entry</a>
 	</div>
 
-	<div class="field">
-	    <%= f.label :total_time %><br>
-	    <%= f.text_field :total_time %>
+	<h1 class="main-title">New Entry</h1>
+	
+	<div class="card project">
+    	<div class="card-image">
+        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+        </div>
+        <div class="inner-project">
+			<div class="card">
+				<div class="card-image goal">
+						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
+
+				</div>
+
+				<div class="card-header">
+				<div class="clock"></div>
+
+					<%= form_for [@project, @entry] do |f|  %>
+
+		<div class="duration">
+		    <%= f.label :duration %><br>
+		    <%= f.text_field :duration %>
+		</div>
+
+		<p>&nbsp;</p>
+		
+		
+
+		<div class="timer-buttons"><span class="pause"><button name="playpause" type="button">Pause</button></span> |
+					<%= f.hidden_field(:goal_id, :value => @goal.id) %>
+					<%= f.submit  data: { confirm: 'Are you done writing?' } %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project) %></div>
+				<% end %></div>
+
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="field">
-	    <%= f.label :journal %><br>
-	    <%= f.text_field :journal %>
-	</div>
-	<%= f.hidden_field(:goal_id, :value => @goal.id) %>
-	<%= f.submit %>
-<% end %>
+
+
+	
+
+	<script>
+	$(function() {
+		var zeroG = $('li.flip-clock-active .up .inn');
+		var zero = zeroG[1];
+
+		while (zero == 0) {
+
+		}
+	});
+
+	</script>
+</article>
