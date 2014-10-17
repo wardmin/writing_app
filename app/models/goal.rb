@@ -29,9 +29,13 @@ class Goal < ActiveRecord::Base
 	def progress
 		if entries
 			done_so_far = entries.sum("amount_done")
-			progress = (done_so_far.to_f / metric_target.to_f) * 100
+			unless done_so_far == 0
+				progress = ((done_so_far.to_f / metric_target.to_f) * 100).floor
+			end
+		else
+			progress = 0
 		end
-		progress.floor
+		progress
 	end
 
 	def made_on

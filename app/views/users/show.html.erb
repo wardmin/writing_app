@@ -19,7 +19,8 @@
 </p>
 
 <p>
-  I want to write <strong> <%= @user.desired_amount %> </strong> times per <strong> <%= @user.desired_interval %></strong>.
+  I want to write <strong> <%= @user.desired_amount %> </strong>
+  <%= @user.hours_or_times %> per <strong> <%= @user.desired_interval %></strong>.
 </p>
 
 <% if @user.am_writing? == true %>
@@ -27,6 +28,8 @@
 <% else %>
   <p>I need to write more.</p>
 <% end%>
+
+<p>You have spent <%= @user.total_time_writing_this_week %> writing this week. </p>
 <%= link_to 'My Projects', projects_path(@project) %> |
 <%= link_to 'Edit My Profile', edit_user_path(@user) %> |
 <%= link_to 'Back', user_path %>

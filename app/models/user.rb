@@ -16,17 +16,46 @@ class User < ActiveRecord::Base
 
 	def am_writing?
 		if !entries.empty?
-			times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
-			
+			if track_hours == true
+				seconds_written = entries.where(created_at: (Time.now.end_of_day - desired_interval.day)..Time.now.end_of_day).sum("duration")
+					if seconds_written < 3600 
+						hours_written = 0
+					else 
+						hours_written = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
+					end
+
+					if hours_written >= desired_amount
+						writing = true
+					else
+						writing = false
+					end
+			else
+				times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
+				
 				if times_written >= desired_amount
 					writing = true
 				else
 					writing = false
 				end
+			end
 		else
 			writing = true
 		end
 		writing
+	end
+
+	def total_time_writing_this_week
+		if !entries.empty?
+			seconds_written = entries.where(created_at: (Time.now.end_of_day - 1.week)..Time.now.end_of_day).sum("duration")
+
+			if seconds_written < 3600 
+				hours_written = "less than 1 hour"
+			else 
+				amount = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
+				hours_written = "#{amount} hours"
+			end
+		end
+		hours_written
 	end
 
 	def total_time_writing
@@ -34,6 +63,15 @@ class User < ActiveRecord::Base
 		 entries.sum("duration")
 		end
 	end
+
+	def hours_or_times
+		if track_hours == true
+			metric = "hours"
+		else
+			metric = "times"
+		end
+	end
+
 	def most_recent_goal
 		if !projects.empty?
 			if !entries.empty?
