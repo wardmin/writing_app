@@ -64,3 +64,8 @@ $(document).on('page:load ready', function() {
 		$('#entry_duration').attr('value', time);
 	})
 });
+
+$(document).on('page:load ready', function() {
+	$('.calendar-entry').parent().css( "background-color", "tomato" );
+	$('.prev-month, .next-month').css( "background-color", "lavender");
+});

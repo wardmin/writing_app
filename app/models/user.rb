@@ -44,6 +44,20 @@ class User < ActiveRecord::Base
 		writing
 	end
 
+	def desired_timeframe
+		if desired_interval
+			if desired_interval == 1
+				return "day"
+			elsif desired_interval == 7
+				return "week"
+			elsif desired_interval == 30
+				return "month"
+			end
+		else
+			return "undetermined"
+		end		
+	end
+
 	def total_time_writing_this_week
 		if !entries.empty?
 			seconds_written = entries.where(created_at: (Time.now.end_of_day - 1.week)..Time.now.end_of_day).sum("duration")
@@ -88,6 +102,7 @@ class User < ActiveRecord::Base
 		end
 		latest_goal
 	end
+
 	def spark_line
 		last_week = entries.order('created_at').last(7)
 		array = []

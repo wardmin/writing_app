@@ -64,6 +64,17 @@
 				</div>
 				<div class="entries">
 					<h5>Writing Entries </h5>
+
+					<div class="button-group">
+						  <label>
+						    <input type="radio" name="button-group" value="item" checked>
+						    <span class="button-group-item">List</span>
+						  </label>
+						  <label>
+						    <input type="radio" name="button-group" value="other-item">
+						    <span class="button-group-item">Calendar</span>
+						  </label>
+					</div>
 						<ul>
 							<% @goal.entries.order("created_at desc").each do |entry| %>
 								<div class="entry">
@@ -79,6 +90,17 @@
 						</ul>
 				</div>
 				
+				<%= month_calendar events: @goal.entries do |date, entries| %>
+					<%= date.strftime("%e") %>
+
+				  	<% entries.each do |entry| %>
+					    <div class="calendar-entry">
+					      <%= link_to "e", entry_path(entry) %>
+					    </div>
+					<% end %>
+				<% end %>
+					
+
 			</div>
 	</div>
 </article>
