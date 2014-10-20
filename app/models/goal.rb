@@ -2,6 +2,7 @@ class Goal < ActiveRecord::Base
 	has_many :entries
 	belongs_to :projects
 	belongs_to :goal_type
+	include AASM
 
 	def type_is
 		if goal_type
@@ -18,6 +19,12 @@ class Goal < ActiveRecord::Base
 	def project
 		project = Project.find_by id: project_id
 		project
+	end
+
+	def user_id
+		project = Project.find_by id: project_id
+		user_id = project.user_id
+		user_id
 	end
 
 	def total_time_spent
@@ -61,4 +68,37 @@ class Goal < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
+
+	aasm do
+		state :active, :initial => true
+		state :complete
+		state :overdue
+		state :pause
+		state :archive
+
+		event :deadline_passed do
+			transitions :from => :active, :to => :overdue
+		end
+
+		event :deadline_future do
+			transitions :from => :overdue, :to => :active
+		end
+
+		def deadline_passed
+			if deadline
+				if deadline < Date.today
+					return true
+				end
+			end
+		end
+
+		def deadline_future
+			if aasm_state = "overdue"
+				if deadline > Date.today
+					transitions :from => :overdue, :to => :active
+				end
+			end
+		end
+	end
+
 end

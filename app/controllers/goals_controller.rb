@@ -4,6 +4,9 @@ class GoalsController < ApplicationController
 	def index
 		@goals = Project.find(params[:project_id]).goals
 		@project = Project.find(params[:project_id])
+			if @project.user_id != current_user.id 
+	        	redirect_to home_index_path
+	      	end
 	end
 	def show
 
@@ -42,5 +45,8 @@ class GoalsController < ApplicationController
 
 	def set_goal
       @goal = Goal.find(params[:id])
+       if @goal.user_id != current_user.id 
+        redirect_to home_index_path
+      end
     end
 end

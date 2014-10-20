@@ -111,4 +111,11 @@ class User < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
+
+	def deadlines
+		if !projects.empty?
+			upcoming = projects.where(deadline: Date.today..7.days.from_now)
+			upcoming
+		end
+	end
 end

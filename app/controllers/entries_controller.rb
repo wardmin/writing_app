@@ -3,7 +3,6 @@ class EntriesController < ApplicationController
 
 	def create
 		@entry = Entry.new(entry_params)
-		#goa = @entry.goal_id
 		@goal = Goal.find(@entry.goal_id)
 		if @entry.save
 			redirect_to edit_entry_path(@entry)
@@ -54,6 +53,9 @@ class EntriesController < ApplicationController
 	private
 	def set_entry
 		 @entry = Entry.find(params[:id])
+		 if @entry.project.user_id != current_user.id 
+        	redirect_to home_index_path
+      	end
 	end
 	def entry_params
 		params.require(:entry).permit(:name, :intention, :duration, :goal_id, :journal, :amount_done, :time_started)

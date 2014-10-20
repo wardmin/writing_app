@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016180332) do
+ActiveRecord::Schema.define(version: 20141017205130) do
 
   create_table "entries", force: true do |t|
     t.text     "journal"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.integer  "metric_target"
     t.string   "metric_name"
     t.integer  "amount_done"
+    t.string   "aasm_state"
   end
 
   add_index "goals", ["project_id"], name: "index_goals_on_project_id"
@@ -72,6 +73,7 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.integer  "user_id"
     t.string   "description"
     t.date     "deadline"
+    t.string   "aasm_state"
   end
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"

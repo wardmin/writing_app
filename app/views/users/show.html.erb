@@ -29,6 +29,22 @@
   <p>I need to write more.</p>
 <% end%>
 
+<h4>Upcoming Deadlines</h4>
+
+<h6>Projects</h6>
+
+  <% if @user.projects %>
+    <ul>
+      <% @user.deadlines.each do |project| %>
+
+        <li><%= project.name  %> | <%= project.deadline %></li>
+      <% end %>
+    </ul>
+
+     
+  <% end %>
+
+
 <p>You have spent <%= @user.total_time_writing_this_week %> writing this week. </p>
 <%= link_to 'My Projects', projects_path(@project) %> |
 <%= link_to 'Edit My Profile', edit_user_path(@user) %> |

@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
 	belongs_to :project_type
 	accepts_nested_attributes_for :goals
 	accepts_nested_attributes_for :entries
+	include AASM
 
 
 	def type_is
@@ -45,5 +46,53 @@ class Project < ActiveRecord::Base
 			array << ChronicDuration.parse(entry.duration)
 		end
 		array.join(', ')
+	end
+
+	aasm do
+		state :active, :initial => true
+		state :complete
+		state :overdue
+		state :pause
+		state :archive
+
+		event :deadline_passed do
+			transitions :from => :active, :to => :overdue
+		end
+
+		event :deadline_future do
+			transitions :from => [:overdue, :archive, :active], :to => :active
+		end
+
+		def deadline_passed
+			if deadline
+				if deadline < Date.today
+					if aasm_state = "overdue"
+					end
+				elsif
+					transitions :from => :active, :to => :overdue
+				end
+			end
+		end
+
+		def deadline_future
+			if deadline
+				if deadline > Date.today
+					if aasm_state = "active"
+					end
+				elsif
+					transitions :from => [:overdue, :archive, :active], :to => :active
+				end
+			end
+		end
+	end
+
+	def deadline_check
+		if deadline
+			if deadline < Date.today
+				deadline_passed
+			elsif deadline > Date.today
+				deadline_future
+			end
+		end
 	end
 end

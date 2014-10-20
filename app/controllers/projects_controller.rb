@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @project.deadline_check
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -70,6 +71,9 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+      if @project.user_id != current_user.id 
+        redirect_to home_index_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
