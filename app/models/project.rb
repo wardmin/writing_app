@@ -50,47 +50,26 @@ class Project < ActiveRecord::Base
 
 	aasm do
 		state :active, :initial => true
-		state :complete
-		state :overdue
+		# state :overdue
 		state :pause
+		state :complete
 		state :archive
 
-		event :deadline_passed do
-			transitions :from => :active, :to => :overdue
-		end
+		# event :deadline_passed do
+		# 	transitions :from => [:overdue, :active], :to => :overdue
+		# end
 
-		event :deadline_future do
-			transitions :from => [:overdue, :archive, :active], :to => :active
-		end
+		# event :deadline_future do
+		# 	transitions :from => [:overdue, :archive, :active], :to => :active
+		# end
 
-		def deadline_passed
-			if deadline
-				if deadline < Date.today
-					if aasm_state = "overdue"
-					end
-				elsif
-					transitions :from => :active, :to => :overdue
-				end
-			end
-		end
-
-		def deadline_future
-			if deadline
-				if deadline > Date.today
-					if aasm_state = "active"
-					end
-				elsif
-					transitions :from => [:overdue, :archive, :active], :to => :active
-				end
-			end
-		end
 	end
 
 	def deadline_check
 		if deadline
-			if deadline < Date.today
+			if deadline > Date.today
 				deadline_passed
-			elsif deadline > Date.today
+			elsif deadline < Date.today
 				deadline_future
 			end
 		end

@@ -77,26 +77,20 @@ class Goal < ActiveRecord::Base
 		state :archive
 
 		event :deadline_passed do
-			transitions :from => :active, :to => :overdue
+			transitions :from => [:overdue, :active], :to => :overdue
 		end
 
 		event :deadline_future do
-			transitions :from => :overdue, :to => :active
+			transitions :from => [:overdue, :archive, :active], :to => :active
 		end
+	end
 
-		def deadline_passed
-			if deadline
-				if deadline < Date.today
-					return true
-				end
-			end
-		end
-
-		def deadline_future
-			if aasm_state = "overdue"
-				if deadline > Date.today
-					transitions :from => :overdue, :to => :active
-				end
+	def deadline_check
+		if deadline
+			if deadline > Date.today
+				deadline_passed
+			elsif deadline < Date.today
+				deadline_future
 			end
 		end
 	end

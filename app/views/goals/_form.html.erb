@@ -23,6 +23,11 @@
     <%= f.label :deadline %> 
     <%= f.date_field :deadline%> 
   </div>
+<% aasm_states_array = @goal.aasm.states.map(&:name) %>
+  <div class="field">
+   <%= f.label :status %>
+   <%= f.select :aasm_state,  options_for_select(aasm_states_array) %>
+  </div>
 
   <div class="field"> 
        

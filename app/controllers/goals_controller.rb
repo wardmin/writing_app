@@ -31,6 +31,7 @@ class GoalsController < ApplicationController
 	end
 
 	def update
+		# @goal.deadline_check
 		 if @goal.update(goal_params)
 		 	redirect_to goal_path
 		 else
