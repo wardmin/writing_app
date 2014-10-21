@@ -71,28 +71,27 @@ class Goal < ActiveRecord::Base
 
 	aasm do
 		state :active, :initial => true
-		state :complete
-		state :overdue
-		state :pause
-		state :archive
+		state :paused
+		state :completed
+		state :archived
 
-		event :deadline_passed do
-			transitions :from => [:overdue, :active], :to => :overdue
-		end
+		# event :deadline_passed do
+		# 	transitions :from => [:overdue, :active], :to => :overdue
+		# end
 
-		event :deadline_future do
-			transitions :from => [:overdue, :archive, :active], :to => :active
-		end
+		# event :deadline_future do
+		# 	transitions :from => [:overdue, :archive, :active], :to => :active
+		# end
 	end
 
-	def deadline_check
-		if deadline
-			if deadline > Date.today
-				deadline_passed
-			elsif deadline < Date.today
-				deadline_future
-			end
-		end
-	end
+	# def deadline_check
+	# 	if deadline
+	# 		if deadline > Date.today
+	# 			deadline_passed
+	# 		elsif deadline < Date.today
+	# 			deadline_future
+	# 		end
+	# 	end
+	# end
 
 end

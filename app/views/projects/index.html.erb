@@ -8,7 +8,7 @@
 
   <div class="project-button"><%= link_to 'New Project', new_project_path %></div>
 
-      <% @projects.each do |project| %>
+      <% @projects.active.each do |project| %>
 
         <div class="card project">
           <div class="card-image">
@@ -41,8 +41,9 @@
             </ul>
           </div>
         </div>
+        
       <% end %>
- 
+ <%= link_to 'Archived Projects', projects_archive_path %>
   
 
 </article>

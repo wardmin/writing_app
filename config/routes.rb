@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   get 'home/index'
-
+  get 'projects/archive'
   devise_for :users
   resources :projects, shallow: true do
     resources :goals
     resources :entries 
   end
   resources :users, only: [:show, :edit, :update]
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
