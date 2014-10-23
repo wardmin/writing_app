@@ -1,7 +1,7 @@
 <%= form_for [@project, @goal] do |f| %>
 	<% if @goal.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(goal.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <h2><%= pluralize(@goal.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
       <% @goal.errors.full_messages.each do |msg| %>
@@ -23,27 +23,43 @@
     <%= f.label :deadline %> 
     <%= f.date_field :deadline%> 
   </div>
-<% aasm_states_array = @goal.aasm.states(:permissible => true).map(&:name) %>
+<%# aasm_states_array = @goal.aasm.states.map(&:name) %>
   <div class="field">
-   <%= f.label :status %>
-   <%= f.select :aasm_state,  options_for_select(aasm_states_array) %>
+   <%# f.label :status %>
+   <%# f.select :aasm_state,  options_for_select(aasm_states_array) %>
   </div>
 
-  <div class="field"> 
+<div class="metric-check">
+   <%= label_tag(:metric_check, "I want to track metrics") %> <%= check_box_tag(:metric_check) %>
+  
+  
+  
+  <div class="field-hide"> 
        
         <%= f.label :metrics %>
-        I want to track <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 6) %> on this goal.
-
-        <%= f.label :target %>
+        I want to write
         <%= f.number_field :metric_target %>
+
+        <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 6) %> on this goal.
+
+       
   
-      </div>
+  </div>
       <% if @project == nil %>
         <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
       <% else %>
         <%= f.hidden_field(:project_id, :value => @project.id) %>
       <% end %>
+  </div>
 
   <%= f.submit %>
 
 <% end %>
+
+<style>
+  
+</style>
+<script>
+
+
+</script>

@@ -40,7 +40,7 @@ gem 'bitters'
 gem 'best_in_place'
 
 # Calendar generator
-gem "simple_calendar", "~> 1.1.0"
+gem 'simple_calendar', '~> 1.1.0'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do

@@ -9,4 +9,6 @@
 <fieldset>
 	<%= render 'form' %>
 </fieldset>
-<%= link_to 'Back', project_goals_path(@project) %>
+<%= link_to 'Back', project_goals_path(@project) %> | <%= link_to 'Delete this Project', @project, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+

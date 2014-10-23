@@ -20,7 +20,7 @@
 					<fieldset>
 						<%= render 'form' %>
 					</fieldset>
-					<%= link_to 'Back', goal_path(@goal), class: "edit" %>
+					<%= link_to 'Back', goal_path(@goal), class: "edit" %> | <%= link_to 'Delete this goal', @goal, method: :delete, data: { confirm: 'Are you sure?' } %>
 				</div>
 			</div>
 

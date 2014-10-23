@@ -1,11 +1,11 @@
 <p>
   <strong>Name:</strong>
-  <%= @user.name %>
+ <%= best_in_place @user, :name %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %>
+  <%= @user.email %> <%= best_in_place @user, :email, :type => :input %>
 </p>
 
 <p>

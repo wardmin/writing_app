@@ -21,7 +21,7 @@ class GoalsController < ApplicationController
 		@goal = Goal.new(goal_params)
 		@project = @goal.project_id
 		if @goal.save
-			redirect_to project_path(@project)
+			redirect_to goal_path(@goal)
 		else
 			render "/projects/show"
 		end
@@ -33,10 +33,17 @@ class GoalsController < ApplicationController
 	def update
 		# @goal.deadline_check
 		 if @goal.update(goal_params)
+		 	flash[:success] = "Goal was successfully updated!"
 		 	redirect_to goal_path
 		 else
 		 	render :edit
 		 end
+	end
+
+
+	def destroy
+		@goal.destroy 
+		redirect_to project_goals_path(@goal.project), :flash => { :notice => "Goal successfully deleted." }
 	end
 
 	private

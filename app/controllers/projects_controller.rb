@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to project_goals_path(@project), :flash => { success: 'Project was successfully created.'} }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -48,10 +48,10 @@ class ProjectsController < ApplicationController
      # @project.deadline_check
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to projects_path, notice: 'Project was successfully updated.' }
+        format.html { redirect_to projects_path, :flash => { success: 'Project was successfully updated.'} }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        format.html { render :edit, :flash => { error: 'The project was not able to be saved.'} }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

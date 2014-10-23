@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   	devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-	has_many :projects
-	has_many :entries, through: :projects
-	has_many :goals, through: :projects
+	has_many :projects, :dependent => :destroy
+	has_many :entries, through: :projects, :dependent => :destroy
+	has_many :goals, through: :projects, :dependent => :destroy
 
 	def type_is
 		if genre_id

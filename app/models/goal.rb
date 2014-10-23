@@ -1,8 +1,8 @@
 class Goal < ActiveRecord::Base
-	has_many :entries
+	has_many :entries, :dependent => :destroy
 	belongs_to :projects
 	belongs_to :goal_type
-	include AASM
+	# include AASM
 
 	def type_is
 		if goal_type
@@ -40,6 +40,9 @@ class Goal < ActiveRecord::Base
 				progress = ((done_so_far.to_f / metric_target.to_f) * 100).floor
 			end
 		else
+			progress = 1
+		end
+		if progress == nil
 			progress = 0
 		end
 		progress
@@ -69,20 +72,20 @@ class Goal < ActiveRecord::Base
 		array.join(', ')
 	end
 
-	aasm do
-		state :active, :initial => true
-		state :paused
-		state :completed
-		state :archived
+	# aasm do
+	# 	state :active, :initial => true
+	# 	state :paused
+	# 	state :completed
+	# 	state :archived
 
-		# event :deadline_passed do
-		# 	transitions :from => [:overdue, :active], :to => :overdue
-		# end
+	# 	# event :deadline_passed do
+	# 	# 	transitions :from => [:overdue, :active], :to => :overdue
+	# 	# end
 
-		# event :deadline_future do
-		# 	transitions :from => [:overdue, :archive, :active], :to => :active
-		# end
-	end
+	# 	# event :deadline_future do
+	# 	# 	transitions :from => [:overdue, :archive, :active], :to => :active
+	# 	# end
+	# end
 
 	# def deadline_check
 	# 	if deadline

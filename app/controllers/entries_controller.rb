@@ -26,18 +26,18 @@ class EntriesController < ApplicationController
 	end
 
 	def update
-			Rails.logger.info "In update action"
+			# Rails.logger.info "In update action"
 
 			if params[:entry][:duration].present?
-				Rails.logger.info "Params duration not nil"
+				# Rails.logger.info "Params duration not nil"
 
 				params[:entry][:duration] = ChronicDuration::parse(params[:entry][:duration])
-				Rails.logger.info "Params is #{params}"
+				# Rails.logger.info "Params for time => #{params}"
 			end
 		respond_to do |format|
 	
 			if @entry.update(entry_params)
-				format.html { redirect_to @entry, notice: 'Entry was successfully updated.' }
+				format.html { redirect_to @entry, :flash => { success: 'Entry was successfully updated.' } }
 				format.json { render :show, status: :ok, location: @project }
 			else
 				format.html { render :edit }
@@ -47,7 +47,7 @@ class EntriesController < ApplicationController
 
 	def destroy
 		@entry.destroy 
-		redirect_to goal_url(@entry.goal), :flash => { :success => "Project destroyed." }
+		redirect_to goal_url(@entry.goal), :flash => { :notice => "Project destroyed." }
 	end
 
 	private

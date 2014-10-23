@@ -1,5 +1,5 @@
 <%= form_for [@project, @entry] do |f|  %>
-<!-- <button name="options" type="button">Show Options</button> -->
+
 	<div class="options">
 		<div class="field">
 		    <%= f.label :amount_of, "Amount of #{@entry.goal.metric_type_is} written" %> 
@@ -17,29 +17,8 @@
 	    <%= f.label :journal %>
 	    <%= f.text_area(:journal, cols: 40, rows: 10) %>
 	</div>
-	<%# f.hidden_field(:goal_id, :value => @goal.id) %>
-	<%= f.submit "Done" %>
+	<%= f.submit "Done"%>
 
 <% end %>
 
 <%= link_to 'Delete this entry', @entry, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-<script>
-	// function hideOptions() {
-	// 	$('button').one('click', function() {
-	// 		$(this).text('Show Options');
-	// 		$('.options').hide();
-	// 		showOptions();
-	// 	});
-	// }
-	// function showOptions() {
-	// 	$('button').one('click', function() {
-	// 		$(this).text('Hide Options');
-	// 		$('.options').show();
-	// 		hideOptions();
-	// 	});
-	// }
-	// $('.options').hide();
-	// showOptions();
-
-</script>

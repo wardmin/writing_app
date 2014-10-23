@@ -91,12 +91,21 @@
 }
 
 .notice {
-	@extend %flash-notice;
+	@extend %flash-alert;
 }
 
 .alert {
 	@extend %flash-alert;
 }
+
+.error {
+	@extend %flash-error;
+}
+
+.success {
+	@extend %flash-success;
+}
+
 .clock {
 			width: 100%; 
 			
@@ -117,4 +126,25 @@ fieldset {
 		@include span-columns(8);
 	
 	}
+}
+
+.user-field-hide {
+	
+	.user-writing-settings {
+		display: inline;
+
+		input {
+			width: 3em;
+			display: inline;
+		}
+
+		select {
+			display: inline;
+		}
+
+		label {
+			display: inline;
+		}
+	}
+
 }

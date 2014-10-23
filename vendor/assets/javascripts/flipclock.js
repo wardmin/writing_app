@@ -1372,6 +1372,23 @@ var FlipClock;
 			
 			return obj;
 		},
+
+		getWriteTracker: function() {
+			var obj = this.digitize([
+				this.getHours(true),
+				this.getMinutes(true),
+			]);
+			
+			return obj;
+		},
+
+		getSecondly: function() {
+			var obj = this.digitize([
+				this.getSeconds()
+			]);
+			
+			return obj;
+		},
 		
 		/**
 		 * Gets an hourly breakdown
