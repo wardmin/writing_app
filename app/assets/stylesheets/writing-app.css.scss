@@ -162,12 +162,12 @@ fieldset {
 		select {
 			display: inline;
 		}
-
-		// label {
-		// 	display: inline;
-		// }
+			#goal_metric_name {
+				
+					width: 10em;
+				
+			}
 	}
-
 }
 .metric-check {
 	display: inline;
@@ -215,3 +215,4 @@ fieldset {
 	margin-left: 1em;
 	display: none;
 }
+

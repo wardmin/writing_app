@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-	before_action :set_goal, only: [:show, :edit, :update, :destroy, :calendar]
+	before_action :set_goal, only: [:show, :edit, :update, :destroy, :calendar, :list]
 
 	def index
 		@goals = Project.find(params[:project_id]).goals
@@ -15,6 +15,11 @@ class GoalsController < ApplicationController
 		# end
 	end
 	def calendar
+		respond_to do |format|
+			format.js
+		end
+	end
+	def list
 		respond_to do |format|
 			format.js
 		end

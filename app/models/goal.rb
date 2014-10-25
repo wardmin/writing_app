@@ -87,7 +87,9 @@ class Goal < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
-
+	# def metric_target_delimiter
+ 	#  	ApplicationController.helpers.number_with_delimiter(read_attribute(:metric_target))
+	# end
 	# aasm do
 	# 	state :active, :initial => true
 	# 	state :paused

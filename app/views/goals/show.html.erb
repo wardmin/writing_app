@@ -75,23 +75,21 @@
 				<div class="entries">
 					<h5>Writing Entries </h5>
 
-					<%= link_to "Calendar", calendar_goal_path, :remote => true, class: "calendar-link" %>
 
-						<div id="entries-view">
-						
-						</div>
-					<div class="button-group">
+						<div class="button-group">
 						  <label>
 						    <input type="radio" name="button-group" value="list" checked>
-						    <span class="list">List</span>
+						    <span class="button-group-item"><%= link_to "List", list_goal_path, :remote => true %></span>
 						  </label>
 						  <label>
 						    <input type="radio" name="button-group" value="other-item">
-						    <span class="button-group-item">Calendar</span>
+						    <span class="button-group-item"><%= link_to "Calendar", calendar_goal_path, :remote => true %></span>
 						  </label>
-					</div>
-					<%= render 'calendar' %>
-					<%= render 'entries_list' %>
+						</div>
+						<div id="entries-view">
+							<%= render 'entries_list' %>
+						</div>
+					
 				</div>
 				
 			
