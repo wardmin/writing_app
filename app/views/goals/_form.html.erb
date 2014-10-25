@@ -11,9 +11,16 @@
     </div>
   <% end %>
   
-  <div class="field">
-      <%= f.label :goal_type %> 
-      <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name) %>
+  
+    <div class="field">
+        <%= f.label :goal_type %> 
+
+        <div class="draft-number">
+            <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, "#{@goal.goal_type_id}") %>
+            <span id="conditional-draft-number">
+                draft number <%= f.number_field :draft_number %>
+            </span>
+        </div>
   </div>
   <div class="field">
     <%= f.label :description %> 
@@ -29,37 +36,40 @@
    <%# f.select :aasm_state,  options_for_select(aasm_states_array) %>
   </div>
 
-<div class="metric-check">
-   <%= label_tag(:metric_check, "I want to track metrics") %> <%= check_box_tag(:metric_check) %>
-  
-  
-  
-  <div class="field-hide"> 
-       
-        <%= f.label :metrics %>
-        I want to write
-        <%= f.number_field :metric_target %>
 
-        <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 6) %> on this goal.
-
-       
+<% if @goal.metric_id == nil || @goal.metric_id == 6 %>
+      <div class="metric-check">
+      <%= check_box_tag(:metric_check) %> <%= label_tag(:metric_check, "I want to track metrics") %> 
   
-  </div>
-      <% if @project == nil %>
-        <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
-      <% else %>
-        <%= f.hidden_field(:project_id, :value => @project.id) %>
-      <% end %>
-  </div>
+          <div class="goal-field-hide"> 
+            <%= f.label :metrics %> <br>
+              <div class="goal-settings">
+                  I want to write
+                  <%= f.number_field :metric_target %>
+
+                  <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, "#{@goal.metric_id}") %> on this goal.
+              </div>
+          </div>
+      </div>
+  <% else %>
+      <div class="goal-field"> 
+            <%= f.label :metrics %>
+              <div class="goal-settings">
+                  I will write
+                  <%= f.number_field :metric_target %>
+
+                  <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, "#{@goal.metric_id}") %> to achieve this goal.
+              </div>
+      </div>
+  <% end %>
+  
+  <% if @project == nil %>
+      <%= f.hidden_field(:project_id, :value => @goal.project.id) %>
+    <% else %>
+      <%= f.hidden_field(:project_id, :value => @project.id) %>
+  <% end %>
+ 
 
   <%= f.submit %>
 
 <% end %>
-
-<style>
-  
-</style>
-<script>
-
-
-</script>

@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   get 'projects/archive'
   devise_for :users
   resources :projects, shallow: true do
-    resources :goals
-    resources :entries 
+    resources :goals do
+      member do
+        get :calendar
+      end
+    end
+    resources :entries
   end
   resources :users, only: [:show, :edit, :update]
   

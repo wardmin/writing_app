@@ -21,6 +21,7 @@ class EntriesController < ApplicationController
 	def show
 	end
 
+
 	def edit
 		@goal = Goal.find(@entry.goal_id)
 	end

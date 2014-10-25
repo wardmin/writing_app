@@ -17,14 +17,14 @@
   </div>
   <div class="field">
     <%= f.label :project_type %>
-    <%= f.select :project_type_id, options_from_collection_for_select(ProjectType.all, :id, :name) %>
+    <%= f.select :project_type_id, options_from_collection_for_select(ProjectType.all, :id, :name, "#{@project.project_type_id}") %>
   </div>
 
 
   <div class="field">
-   <% aasm_states_array = [['Active', 'active' ], ['Archived', 'archived']] %>
-   <%= f.label :status %>
-   <%= f.select :aasm_state,  options_for_select(aasm_states_array) %>
+   <%# aasm_states_array = [['Active', 'active' ], ['Archived', 'archived']] %>
+   <%# f.label :status %>
+   <%# f.select :aasm_state,  options_for_select(aasm_states_array) %>
   </div>
 
   <div class="field">

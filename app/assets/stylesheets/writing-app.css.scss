@@ -148,3 +148,70 @@ fieldset {
 	}
 
 }
+.goal-field-hide,
+.goal-field {
+	
+	.goal-settings {
+		display: inline;
+
+		input {
+			width: 5em;
+			display: inline;
+		}
+
+		select {
+			display: inline;
+		}
+
+		// label {
+		// 	display: inline;
+		// }
+	}
+
+}
+.metric-check {
+	display: inline;
+
+	input {
+		display: inline;
+	}
+	label {
+		display: inline;
+	}
+
+	select {
+			display: inline;
+		}
+}
+
+.goal-type-draft-number {
+	display: inline;
+
+	input {
+		display: inline;
+		width: 3em;
+	}
+	
+	select {
+			display: inline;
+		}
+}
+.draft-number{
+	display: inline;
+
+		input {
+			display: inline;
+			width: 4em;
+		}
+
+		label {
+			display: inline;
+		}
+		select {
+			display: inline;
+		}
+	}
+#conditional-draft-number {
+	margin-left: 1em;
+	display: none;
+}

@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-	before_action :set_goal, only: [:show, :edit, :update, :destroy]
+	before_action :set_goal, only: [:show, :edit, :update, :destroy, :calendar]
 
 	def index
 		@goals = Project.find(params[:project_id]).goals
@@ -9,9 +9,16 @@ class GoalsController < ApplicationController
 	      	end
 	end
 	def show
-
+		# respond_to do |format|
+		# 	format.html
+		# 	format.js 
+		# end
 	end
-
+	def calendar
+		respond_to do |format|
+			format.js
+		end
+	end
 	def new
 		@project = Project.find(params[:project_id])
 		@goal = Goal.new
@@ -48,7 +55,7 @@ class GoalsController < ApplicationController
 
 	private
 	def goal_params
-		params.require(:goal).permit(:name, :goal_type_id, :amount_done, :deadline, :metric_id, :metric_target, :metric_name, :project_id)
+		params.require(:goal).permit(:name, :goal_type_id, :amount_done, :deadline, :metric_id, :metric_target, :metric_name, :project_id, :draft_number)
 	end
 
 	def set_goal

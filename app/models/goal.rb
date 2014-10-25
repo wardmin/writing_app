@@ -6,8 +6,13 @@ class Goal < ActiveRecord::Base
 
 	def type_is
 		if goal_type
-			goal_type = GoalType.find_by id: goal_type_id
-			goal_type.name
+			if goal_type_id == 6 
+				type_is = "writing #{draft_number.ordinalize} draft"
+			else
+				goal_type = GoalType.find_by id: goal_type_id
+				type_is = goal_type.name
+			end
+			type_is
 		end
 	end
 
@@ -44,8 +49,19 @@ class Goal < ActiveRecord::Base
 		end
 		if progress == nil
 			progress = 0
+		elsif progress >= 101
+			progress = 101
 		end
 		progress
+	end
+
+	def metrics_progress
+		if entries
+			done_so_far = entries.sum("amount_done")
+		else
+			done_so_far = 1
+		end
+		done_so_far
 	end
 
 	def made_on
