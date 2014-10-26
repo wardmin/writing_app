@@ -1,12 +1,18 @@
 class Goal < ActiveRecord::Base
-	has_many :entries
+	has_many :entries, :dependent => :destroy
 	belongs_to :projects
 	belongs_to :goal_type
+	# include AASM
 
 	def type_is
 		if goal_type
-			goal_type = GoalType.find_by id: goal_type_id
-			goal_type.name
+			if goal_type_id == 4 
+				type_is = "writing #{draft_number.ordinalize} draft"
+			else
+				goal_type = GoalType.find_by id: goal_type_id
+				type_is = goal_type.name
+			end
+			type_is
 		end
 	end
 
@@ -18,6 +24,12 @@ class Goal < ActiveRecord::Base
 	def project
 		project = Project.find_by id: project_id
 		project
+	end
+
+	def user_id
+		project = Project.find_by id: project_id
+		user_id = project.user_id
+		user_id
 	end
 
 	def total_time_spent
@@ -33,9 +45,23 @@ class Goal < ActiveRecord::Base
 				progress = ((done_so_far.to_f / metric_target.to_f) * 100).floor
 			end
 		else
+			progress = 1
+		end
+		if progress == nil
 			progress = 0
+		elsif progress >= 101
+			progress = 101
 		end
 		progress
+	end
+
+	def metrics_progress
+		if entries
+			done_so_far = entries.sum("amount_done")
+		else
+			done_so_far = 1
+		end
+		done_so_far
 	end
 
 	def made_on
@@ -61,4 +87,32 @@ class Goal < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
+	# def metric_target_delimiter
+ 	#  	ApplicationController.helpers.number_with_delimiter(read_attribute(:metric_target))
+	# end
+	# aasm do
+	# 	state :active, :initial => true
+	# 	state :paused
+	# 	state :completed
+	# 	state :archived
+
+	# 	# event :deadline_passed do
+	# 	# 	transitions :from => [:overdue, :active], :to => :overdue
+	# 	# end
+
+	# 	# event :deadline_future do
+	# 	# 	transitions :from => [:overdue, :archive, :active], :to => :active
+	# 	# end
+	# end
+
+	# def deadline_check
+	# 	if deadline
+	# 		if deadline > Date.today
+	# 			deadline_passed
+	# 		elsif deadline < Date.today
+	# 			deadline_future
+	# 		end
+	# 	end
+	# end
+
 end

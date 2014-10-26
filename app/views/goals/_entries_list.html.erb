@@ -1,0 +1,12 @@
+<ul>
+	<% @goal.entries.order("created_at desc").each do |entry| %>
+		<div class="entry">
+			<span class="edit"><%= link_to 'View', entry_path(entry) %></span> 
+			<li> <%= link_to entry.created_at.strftime("%b %e"), entry_path(entry) %> &nbsp;<em>&nbsp; <%= entry.duration_long %></em> <br>
+				<% if entry.journal %>
+					<p><%= entry.journal.truncate(90) %></p>
+				<% end %>
+			</li>
+			</div>
+	<% end %>
+</ul>

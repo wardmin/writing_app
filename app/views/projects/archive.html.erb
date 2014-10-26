@@ -1,0 +1,49 @@
+<article class="article">
+  <div class="breadcrumb">
+    <%= link_to 'Dashboard', home_index_path %>
+    <%= link_to 'My Projects', projects_path, class: "current-selection" %>
+  </div>
+
+  <h1 class="main-title">Archived Projects</h1>
+
+  <div class="project-button"><%= link_to 'New Project', new_project_path %></div>
+
+      <% @projects.each do |project| %>
+		<% if project.active? %>
+		<% else %>
+	        <div class="card project">
+	          <div class="card-image">
+	              <h3 class="card-image title"><%= link_to project.name, project_goals_path(project) %></h3> 
+	          </div>
+
+	          <div class="card-header">
+	            <%= project.type_is.capitalize %>
+	          </div>
+
+	          <div class="card-copy">
+	            <% if project.deadline %>
+	              <p>Deadline: <%= project.deadline.strftime("%A, %b %d") %> </p>
+	            <% end %>
+	            <% if project.aasm_state %>
+	              <p>Status: <%= project.aasm_state %> </p>
+	            <% end %>
+	          </div>
+
+	          <div class="card-stats">
+	            <ul>
+	              <li><%= ChronicDuration.output(project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
+	              <% if project.entries %>
+	                <li><%= project.goals.length %><span>Goals</span></li>
+	              <% end %>
+	              <% if project.deadline %>
+	                <li><%= time_left(project.deadline) %><span>Days Left</span></li>
+	              <% end %>
+	            </ul>
+
+	            <ul class="edit-button">
+	              <li ><span class="edit"><%= link_to 'View', project_goals_path(project) %></span></li>
+	            </ul>
+	          </div>
+	        </div>
+        <% end %>
+      <% end %>

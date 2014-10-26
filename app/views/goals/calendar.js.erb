@@ -1,0 +1,3 @@
+$('#entries-view').html("<%= escape_javascript(render :partial => 'calendar', :goal => @goal) %>");
+ $('.calendar-entry').parent().css( "background-color", "tomato" );
+ $('.prev-month, .next-month').css( "background-color", "lavender");

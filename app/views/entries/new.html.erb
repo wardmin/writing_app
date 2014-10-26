@@ -21,7 +21,9 @@
 				</div>
 
 				<div class="card-header">
-				<div class="clock"></div>
+				
+
+				<div class="clock"></div><div class="secondhand"></div>
 
 					<%= form_for [@project, @entry] do |f|  %>
 
@@ -36,7 +38,7 @@
 
 		<div class="timer-buttons"><span class="pause"><button name="playpause" type="button">Pause</button></span> |
 					<%= f.hidden_field(:goal_id, :value => @goal.id) %>
-					<%= f.submit  data: { confirm: 'Are you done writing?' } %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project) %></div>
+					<%= f.submit  data: { confirm: 'Are you done writing?' }, class: "timer" %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project), data: { confirm: 'Are you sure?' } %></div>
 				<% end %></div>
 
 				</div>
@@ -44,18 +46,4 @@
 		</div>
 	</div>
 
-
-	
-
-	<script>
-	$(function() {
-		var zeroG = $('li.flip-clock-active .up .inn');
-		var zero = zeroG[1];
-
-		while (zero == 0) {
-
-		}
-	});
-
-	</script>
 </article>

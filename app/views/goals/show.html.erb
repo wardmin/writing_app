@@ -35,27 +35,37 @@
 
 				<div class="card-stats">
 						<ul>
-						<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
-						<% if @goal.entries %>
-							<li><%= @goal.entries.length %><span>Entries</span></li>
-						<% end %>
-						<!-- Deadline logic -->
-						<% if @goal.deadline %>
-							<% if time_left(@goal.deadline) > 0 %>
-								<li><%= time_left(@goal.deadline) %><span>Days Left</span></li>
-							<% elsif time_left(@goal.deadline) == 0 %>
-								<li>Goal<span>Due Today!</span></li>
-							<% elsif time_left(@goal.deadline) < 0 %>
-								<li><%= time_left(@goal.deadline) * -1 %>d<span>Overdue!</span></li>
+							<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
+							<% if @goal.entries %>
+								<li><%= @goal.entries.length %><span>Entries</span></li>
 							<% end %>
-						<% end %>
+							<!-- Deadline logic -->
+							<% if @goal.deadline %>
+								<% if time_left(@goal.deadline) > 0 %>
+									<li><%= time_left(@goal.deadline) %><span>Days Left</span></li>
+								<% elsif time_left(@goal.deadline) == 0 %>
+									<li>Goal<span>Due Today!</span></li>
+								<% elsif time_left(@goal.deadline) < 0 %>
+									<li><%= time_left(@goal.deadline) * -1 %>d<span>Overdue!</span></li>
+								<% end %>
+							<% end %>
 						</ul>
-
+ 					<% if @goal.metric_id == nil || @goal.metric_id == 6 %>
+ 					<% else %>
 						<div class="progress-bar-indication">
   							<span class="meter" style="width: <%= @goal.progress %>%">
     							<p><%= @goal.progress %>%</p>
   							</span>
+  							<span class="legend">
+  								<% if @goal.progress >= 100 %>
+  									Goal Target of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> met!
+  								<% else %>
+  									<%= number_with_delimiter(@goal.metrics_progress) %> of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> written...
+								<% end %>
+
+  							</span>
 						</div>
+					<% end %>
 				</div>
 
 				<div class="small-write">
@@ -64,21 +74,26 @@
 				</div>
 				<div class="entries">
 					<h5>Writing Entries </h5>
-						<ul>
-							<% @goal.entries.order("created_at desc").each do |entry| %>
-								<div class="entry">
-									<span class="edit"><%= link_to 'View', entry_path(entry) %></span> 
-									<li> <%= link_to entry.created_at.strftime("%b %e"), entry_path(entry) %> &nbsp;<em>&nbsp; <%= entry.duration_long %></em> <br>
-										<% if entry.journal %>
-											<p><%= entry.journal.truncate(90) %></p>
-										<% end %>
-										
-									</li>
-									</div>
-							<% end %>
-						</ul>
+
+
+						<div class="button-group">
+						  <label>
+						    <input type="radio" name="button-group" value="list" checked>
+						    <span class="button-group-item"><%= link_to "List", list_goal_path, :remote => true %></span>
+						  </label>
+						  <label>
+						    <input type="radio" name="button-group" value="other-item">
+						    <span class="button-group-item"><%= link_to "Calendar", calendar_goal_path, :remote => true %></span>
+						  </label>
+						</div>
+						<div id="entries-view">
+							<%= render 'entries_list' %>
+						</div>
+					
 				</div>
 				
+			
+
 			</div>
 	</div>
 </article>

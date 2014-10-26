@@ -1,0 +1,9 @@
+<%= month_calendar events: @goal.entries do |date, entries| %>
+	<%= date.strftime("%e") %>
+
+  	<% entries.each do |entry| %>
+	    <div class="calendar-entry">
+	      <%= link_to "e", entry_path(entry) %>
+	    </div>
+	<% end %>
+<% end %>

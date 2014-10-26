@@ -91,12 +91,21 @@
 }
 
 .notice {
-	@extend %flash-notice;
+	@extend %flash-alert;
 }
 
 .alert {
 	@extend %flash-alert;
 }
+
+.error {
+	@extend %flash-error;
+}
+
+.success {
+	@extend %flash-success;
+}
+
 .clock {
 			width: 100%; 
 			
@@ -117,4 +126,104 @@ fieldset {
 		@include span-columns(8);
 	
 	}
+}
+
+.user-field-hide {
+	
+	.user-writing-settings {
+		display: inline;
+
+		input {
+			width: 3em;
+			display: inline;
+		}
+
+		select {
+			display: inline;
+		}
+
+		label {
+			display: inline;
+		}
+	}
+
+}
+.goal-field-hide,
+.goal-field {
+	
+	.goal-settings {
+		display: inline;
+
+		input {
+			width: 5em;
+			display: inline;
+		}
+
+		select {
+			display: inline;
+		}
+			#goal_metric_name {
+				
+					width: 10em;
+				
+			}
+	}
+}
+.metric-check {
+	display: inline;
+
+	input {
+		display: inline;
+	}
+	label {
+		display: inline;
+	}
+
+	select {
+			display: inline;
+		}
+}
+
+.goal-type-draft-number {
+	display: inline;
+
+	input {
+		display: inline;
+		width: 3em;
+	}
+	
+	select {
+			display: inline;
+		}
+}
+.draft-number{
+	display: inline;
+
+		input {
+			display: inline;
+			width: 4em;
+		}
+
+		label {
+			display: inline;
+		}
+		select {
+			display: inline;
+		}
+	}
+#conditional-draft-number {
+	margin-left: 1em;
+	display: none;
+}
+
+.tagsinput {
+	border-radius: $form-border-radius;
+	margin-bottom: 1.2em;
+
+
+  	// &:focus {
+	  //   border-color: $form-border-color-focus;
+	  //   // box-shadow: $form-box-shadow-focus;
+    
+  // }
 }

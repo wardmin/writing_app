@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016180332) do
+ActiveRecord::Schema.define(version: 20141026045460) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "entries", force: true do |t|
     t.text     "journal"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.integer  "duration"
   end
 
-  add_index "entries", ["goal_id"], name: "index_entries_on_goal_id"
+  add_index "entries", ["goal_id"], name: "index_entries_on_goal_id", using: :btree
 
   create_table "genres", force: true do |t|
     t.string   "name"
@@ -48,9 +51,11 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.integer  "metric_target"
     t.string   "metric_name"
     t.integer  "amount_done"
+    t.string   "aasm_state"
+    t.integer  "draft_number"
   end
 
-  add_index "goals", ["project_id"], name: "index_goals_on_project_id"
+  add_index "goals", ["project_id"], name: "index_goals_on_project_id", using: :btree
 
   create_table "metrics", force: true do |t|
     t.string   "name"
@@ -72,9 +77,30 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.integer  "user_id"
     t.string   "description"
     t.date     "deadline"
+    t.string   "aasm_state"
   end
 
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -101,7 +127,7 @@ ActiveRecord::Schema.define(version: 20141016180332) do
     t.boolean  "track_hours"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -1,6 +1,7 @@
 class Entry < ActiveRecord::Base
 	belongs_to :goal
-	# attr_accessor :duration
+	extend SimpleCalendar
+	has_calendar :attribute => :created_at
 
 	def project
 		if self.goal_id
@@ -32,11 +33,4 @@ class Entry < ActiveRecord::Base
 		ChronicDuration.output(read_attribute(:duration), format: :long, :units => 2)
 	end
 
-	# def before_save
-	# 	duaration = ChronicDuration::parse(duration_before_type_cast) if attribute_present?("duration")
-	# end
-
-	# def duration
-	# 	ChronicDuration.output(read_attribute(:duration), :format => :long)
-	# end
 end

@@ -3,9 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   	devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
-	has_many :projects
-	has_many :entries, through: :projects
-	has_many :goals, through: :projects
+	has_many :projects, :dependent => :destroy
+	has_many :entries, through: :projects, :dependent => :destroy
+	has_many :goals, through: :projects, :dependent => :destroy
+	acts_as_taggable
 
 	def type_is
 		if genre_id
@@ -16,32 +17,48 @@ class User < ActiveRecord::Base
 
 	def am_writing?
 		if !entries.empty?
-			if track_hours == true
-				seconds_written = entries.where(created_at: (Time.now.end_of_day - desired_interval.day)..Time.now.end_of_day).sum("duration")
-					if seconds_written < 3600 
-						hours_written = 0
-					else 
-						hours_written = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
-					end
+			if !desired_interval.nil?
+				if track_hours == true
+						seconds_written = entries.where(created_at: (Time.now.end_of_day - desired_interval.day)..Time.now.end_of_day).sum("duration")
+							if seconds_written < 3600 
+								hours_written = 0
+							else 
+								hours_written = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
+							end
 
-					if hours_written >= desired_amount
+							if hours_written >= desired_amount
+								writing = true
+							else
+								writing = false
+							end
+				else
+					times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
+					
+					if times_written >= desired_amount
 						writing = true
 					else
 						writing = false
 					end
-			else
-				times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
-				
-				if times_written >= desired_amount
-					writing = true
-				else
-					writing = false
 				end
 			end
 		else
 			writing = true
 		end
 		writing
+	end
+
+	def desired_timeframe
+		if desired_interval
+			if desired_interval == 1
+				return "day"
+			elsif desired_interval == 7
+				return "week"
+			elsif desired_interval == 30
+				return "month"
+			end
+		else
+			return "undetermined"
+		end		
 	end
 
 	def total_time_writing_this_week
@@ -88,6 +105,7 @@ class User < ActiveRecord::Base
 		end
 		latest_goal
 	end
+
 	def spark_line
 		last_week = entries.order('created_at').last(7)
 		array = []
@@ -95,5 +113,12 @@ class User < ActiveRecord::Base
 			array << ChronicDuration.parse(entry.duration)
 		end
 		array.join(', ')
+	end
+
+	def deadlines
+		if !projects.empty?
+			upcoming = projects.where(deadline: Date.today..7.days.from_now)
+			upcoming
+		end
 	end
 end

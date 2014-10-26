@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to project_goals_path(@project), :flash => { success: 'Project was successfully created.'} }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -45,12 +45,13 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+     # @project.deadline_check
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html { redirect_to projects_path, :flash => { success: 'Project was successfully updated.'} }
         format.json { render :show, status: :ok, location: @project }
       else
-        format.html { render :edit }
+        format.html { render :edit, :flash => { error: 'The project was not able to be saved.'} }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -66,14 +67,25 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def archive
+     @projects = if current_user
+        current_user.projects.archived.all
+      else
+        redirect_to home_index_path
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
+      if @project.user_id != current_user.id 
+        redirect_to home_index_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :project_type_id, :description, :deadline)
+      params.require(:project).permit(:name, :project_type_id, :description, :deadline, :aasm_state)
     end
 end

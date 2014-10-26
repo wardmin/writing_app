@@ -24,12 +24,14 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :genre_id %>
-    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
+    <%= f.label :tag_list, "What kind of writer are you?" %>
+    <%= f.text_field :tag_list %>
   </div>
-  <div class="field">
+  <div class="user-field-hide">
     <%= f.label :writing_goal %>
-    I want to write <%= f.number_field :desired_amount %> <%= f.select :track_hours, options_for_select([['times', false], ['hours', true]]) %> per <%= f.select :desired_interval, options_for_select([['day', 1], ['week', 7], ['month', 30]], 7) %>
+    <div class="user-writing-settings">
+    I want to write <%= f.number_field :desired_amount %> <%= f.select :track_hours, options_for_select([['times', false], ['hours', true]], "#{@user.track_hours}") %> per <%= f.select :desired_interval, options_for_select([['day', 1], ['week', 7], ['month', 30]], "#{@user.desired_interval}")  %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>

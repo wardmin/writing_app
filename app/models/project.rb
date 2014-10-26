@@ -1,10 +1,11 @@
 class Project < ActiveRecord::Base
-	has_many :goals
-	has_many :entries, through: :goals
+	has_many :goals, :dependent => :destroy
+	has_many :entries, through: :goals, :dependent => :destroy
 	belongs_to :user
 	belongs_to :project_type
 	accepts_nested_attributes_for :goals
 	accepts_nested_attributes_for :entries
+	include AASM
 
 
 	def type_is
@@ -46,4 +47,30 @@ class Project < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
+
+	aasm do
+		state :active, :initial => true
+		state :paused
+		state :completed
+		state :archived
+
+		# event :deadline_passed do
+		# 	transitions :from => [:overdue, :active], :to => :overdue
+		# end
+
+		# event :deadline_future do
+		# 	transitions :from => [:overdue, :archive, :active], :to => :active
+		# end
+
+	end
+
+	# def deadline_check
+	# 	if deadline
+	# 		if deadline > Date.today
+	# 			deadline_passed
+	# 		elsif deadline < Date.today
+	# 			deadline_future
+	# 		end
+	# 	end
+	# end
 end
