@@ -6,7 +6,7 @@ class Goal < ActiveRecord::Base
 
 	def type_is
 		if goal_type
-			if goal_type_id == 6 
+			if goal_type_id == 4 
 				type_is = "writing #{draft_number.ordinalize} draft"
 			else
 				goal_type = GoalType.find_by id: goal_type_id

@@ -17,26 +17,28 @@ class User < ActiveRecord::Base
 
 	def am_writing?
 		if !entries.empty?
-			if track_hours == true
-				seconds_written = entries.where(created_at: (Time.now.end_of_day - desired_interval.day)..Time.now.end_of_day).sum("duration")
-					if seconds_written < 3600 
-						hours_written = 0
-					else 
-						hours_written = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
-					end
+			if !desired_interval.nil?
+				if track_hours == true
+						seconds_written = entries.where(created_at: (Time.now.end_of_day - desired_interval.day)..Time.now.end_of_day).sum("duration")
+							if seconds_written < 3600 
+								hours_written = 0
+							else 
+								hours_written = ChronicDuration.output(seconds_written, :limit_to_hours => true, :format => :short).to_i
+							end
 
-					if hours_written >= desired_amount
+							if hours_written >= desired_amount
+								writing = true
+							else
+								writing = false
+							end
+				else
+					times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
+					
+					if times_written >= desired_amount
 						writing = true
 					else
 						writing = false
 					end
-			else
-				times_written = entries.where(created_at: (Time.now.midnight - desired_interval.day)..Time.now.midnight).length
-				
-				if times_written >= desired_amount
-					writing = true
-				else
-					writing = false
 				end
 			end
 		else

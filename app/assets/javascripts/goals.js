@@ -16,16 +16,16 @@
 $(document).on('page:load ready', function() {
     // on page load.
     // displaying conditional draft number field.
-    if ( $('#goal_goal_type_id').val() == 6) {
+    if ( $('#goal_goal_type_id').val() == 4) { //changed
         $('#conditional-draft-number').show();     
     }
 
     // checking check box depending on drop down set to none / 6
     // and showing the metric name field depending on value.
-    if ( $('#goal_metric_id').val() == 6 ) {
+    if ( $('#goal_metric_id').val() == 5 ) { // changed
         $('#metric_check').prop('checked', false);
         $('.goal-field-hide').hide();
-    } else if ( $('#goal_metric_id').val() != 5 )  {
+    } else if ( $('#goal_metric_id').val() != 4 )  { // changed
         $('#goal_metric_name').hide();
         $('#metric_check').prop('checked', true);
     } else {
@@ -40,12 +40,12 @@ $(document).on('page:load ready', function() {
         $('#metric_check').off();
         $('#metric_check').one('click', function() {
             $('.goal-field-hide').show();
-            if ( $('#goal_metric_id').val() == '6') {
+            if ( $('#goal_metric_id').val() == '5') { // changed
                 if ($('#goal_metric_name').val() != '') {
-                    $('#goal_metric_id').val('5');
+                    $('#goal_metric_id').val('4'); // changed
                     $('#goal_metric_name').show();
                 } else {
-                    $('#goal_metric_id').val('2');
+                    $('#goal_metric_id').val('1');
                     $('#goal_metric_name').hide();
                 } 
             }
@@ -56,7 +56,7 @@ $(document).on('page:load ready', function() {
         $('#metric_check').off();
         $('#metric_check').one('click', function() {
             $('.goal-field-hide').hide();
-            $('#goal_metric_id').val('6');
+            $('#goal_metric_id').val('5'); // changed
             checkClick()
         });
     }
@@ -67,11 +67,13 @@ $(document).on('page:load ready', function() {
         checkClick();
     };
     
+
+    // form 6 to 5 = none // other = from 5 to 4 
     // on change.
     // display field for draft number.
     $('#goal_goal_type_id').change(function() {
             var selectedValue = $(this).val();
-            if (selectedValue != '6') {
+            if (selectedValue != '4') { // changed
                 $('#conditional-draft-number').hide();
             } else {
                 $('#conditional-draft-number').show();
@@ -80,9 +82,9 @@ $(document).on('page:load ready', function() {
     // display field for other metric type.
      $('#goal_metric_id').change(function() {
         var selectedValue = $(this).val();
-        if (selectedValue == '5') {
+        if (selectedValue == '4') { // changed
             $('#goal_metric_name').show();
-        } else if (selectedValue == '6') {
+        } else if (selectedValue == '5') { // changed
             $('#metric_check').prop('checked', false);
             $('.goal-field-hide').hide();
             $('#metric_check').off();
