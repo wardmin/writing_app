@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	has_many :projects, :dependent => :destroy
 	has_many :entries, through: :projects, :dependent => :destroy
 	has_many :goals, through: :projects, :dependent => :destroy
+	acts_as_taggable
 
 	def type_is
 		if genre_id

@@ -5,7 +5,7 @@
 
 <p>
   <strong>Email:</strong>
-  <%= @user.email %> <%= best_in_place @user, :email, :type => :input %>
+  <%= @user.email %> <%# best_in_place @user, :email, :type => :input %>
 </p>
 
 <p>
@@ -14,8 +14,8 @@
 </p>
 
 <p>
-  <strong>Specialty:</strong>
-  <%= @user.type_is %>
+  <strong>Kinds of Writing:</strong>
+  <%= @user.tag_list %>
 </p>
 
 <p>

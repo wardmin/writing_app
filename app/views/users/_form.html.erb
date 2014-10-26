@@ -24,8 +24,8 @@
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :genre_id %>
-    <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name, "#{@user.genre_id}" ) %>
+    <%= f.label :tag_list, "What kind of writer are you?" %>
+    <%= f.text_field :tag_list %>
   </div>
   <div class="user-field-hide">
     <%= f.label :writing_goal %>

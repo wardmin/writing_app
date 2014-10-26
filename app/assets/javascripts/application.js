@@ -19,5 +19,6 @@
 //= require flipclock
 //= require moment
 //= require jquery.sparkline
+//= require jquery.tagsinput
 //= require home
 //= require_tree .
