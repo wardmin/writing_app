@@ -16,7 +16,9 @@
 }
 
 .edit {
-        @include button(simple, $base-background-color);
+	@include button(simple, $base-background-color);
+
+       	
         //padding-top: 0.5em;
         //margin-right: 0.5em;
         //display: inline-block;
@@ -25,11 +27,13 @@
         // float: right;
 
 
-        @include media($medium-screen) {
-          width: auto;
-          margin-bottom: 0;
-        }
+        // @include media($medium-screen) {
+        //   width: auto;
+        //   margin-bottom: 0;
+        // }
     }
+
+   
 .write-now {
 	@include button(pill, tint($blue, 30%));
 	margin-top: 3px;

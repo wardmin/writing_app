@@ -16,7 +16,7 @@
 		<div class="hero-inner">
 			<div class="hero-copy">
 				<h1>Your Dashboard</h1>
-				<p>You are currently <%= link_to @goal.type_is.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>".</p>	
+				<p>You are currently <%= link_to @goal.type_is_dashboard.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>".</p>	
 			</div>
 	    
 	    	<div class="write-now">

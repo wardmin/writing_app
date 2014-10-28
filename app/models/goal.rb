@@ -16,9 +16,21 @@ class Goal < ActiveRecord::Base
 		end
 	end
 
+	def type_is_dashboard
+		if goal_type
+			if goal_type_id == 4 
+				type_is = "writing the #{draft_number.ordinalize} draft of"
+			else
+				goal_type = GoalType.find_by id: goal_type_id
+				type_is = goal_type.name
+			end
+			type_is
+		end
+	end
+
 	def project_name
-			project = Project.find_by id: project_id
-			project.name
+		project = Project.find_by id: project_id
+		project.name
 	end
 
 	def project
@@ -87,9 +99,7 @@ class Goal < ActiveRecord::Base
 		end
 		array.join(', ')
 	end
-	# def metric_target_delimiter
- 	#  	ApplicationController.helpers.number_with_delimiter(read_attribute(:metric_target))
-	# end
+	
 	# aasm do
 	# 	state :active, :initial => true
 	# 	state :paused

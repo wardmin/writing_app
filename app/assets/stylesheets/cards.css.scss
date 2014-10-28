@@ -29,6 +29,14 @@
     // @include omega(3n);
   }
 
+  table {
+  // width: initial; 
+    @include media($large-screen) {
+      margin: 0 1em;
+      width: 95%;
+    }
+  }
+
   .card-image {
     @extend .card-header;
     overflow: hidden;
@@ -112,7 +120,6 @@
     border-radius: $base-border-radius $base-border-radius 0 0;
     font-weight: bold;
     padding: $base-spacing/3 $gutter/2;
-
     // &.goal {
     //   background-color: $card-header-background;
     // }
@@ -125,6 +132,7 @@
   }
 
   .card-stats {
+    @include outer-container;
     padding: $base-spacing/2 $gutter/2;
     overflow: auto;
 
@@ -172,6 +180,13 @@
     border: 2px solid $project-border;
 
   }
+
+  .left-side { 
+
+    @include media($large-screen) {
+     
+    }
+  }
   // &:hover {
   //   background-color: $card-hover-background;
 
@@ -202,35 +217,157 @@
 }
 
 .entries {
-  border-radius: 5px;
+  // border-radius: 5px;
   padding: .7em .5em .7em .5em;
-  font-size: .8em;
+  // font-size: .8em;
   //border: 1px solid $dark-gray;
+    
+    h5 {
+      color: $dark-gray;
+      padding: 0.5em 0;
 
-  h5 {
-    color: shade($light-gray, 30%);
-    padding-top: 2.5em;
-    padding-bottom: 1em;
+      @include media($large-screen){}
+      padding: 1em 0;
+    }
+
+    p {
+      font-size: 0.75em;
+      // padding-left: .7em;
+      // border-left: 2px solid $light-gray;
+      // font-style: italic;
+      margin: 0;
+    }
+    th,
+    td {
+      padding-left: 0.2em;
+    }
+
+    thead {
+      background-color: tint($light-gray, 50%);
+      font-size: 0.85em;
+
+      @include media($large-screen) {
+          font-size: 1em;
+      }
+      
+    }
+
+    tr {
+      &:hover {
+        background-color: tint($light-gray, 50%);
+      }
+
+    }
+
+    .entry-list-header{
+        background-color: tint($light-gray, 50%);
+        font-size: 0.9em;
+        @include media($large-screen){
+            font-size: 1em;
+        }
+      }
+
+  #entries-view {
+    margin-bottom: 1.5em;  
   }
 
-  p {
-    font-size: .9em;
-    padding-left: .7em;
-    border-left: 2px solid $light-gray;
+  .edit-entry {
+    @include button(simple, $base-background-color);
+    padding: 4px;
+    font-size: 0.7em;
+    text-align: center;
+
+    @include media($large-screen) {
+    }
   }
-  .entry {
-    border-bottom: 1px solid shade($light-gray, 20%);
-    //margin-bottom: .3em;
-    padding-bottom: .8em;
-    padding-top: .4em;
-  }
-  .edit {
-    float: right;
-  }
+  //   .goal-edit {
+  //     // float: left;
+  //     
+  //     padding-left: 5px;
+  // }
+  .calendar-header {
+    @extend th;
+    font-size: 1.2em;
+    border-bottom: none;
+    padding: 0; 
+
+    span {
+        padding: 0 0.3em;
+        }
+   
+
+    // @include media($large-screen){
+        
+    //   }
+   }
+}
+.calendar-entry {
+  $dot-color: red;
+ 
+
+ // float: right;
+  margin: 0.1em;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  background-color: $dot-color;
+  @include linear-gradient(50deg, white, $dot-color);
+
 }
 
-.goal-edit {
-  float: left;
-  font-size: .8em;
-  padding-left: 5px;
+.day {
+  font-weight: 600;
+  color: gray;
 }
+
+.entry-date {
+   $number-color: tomato;
+    font-weight: 900;
+    color: $number-color; 
+    // @include background(linear-gradient(white, $light-gray) );  
+  }
+
+.calendar-entries{
+  float: right;
+  margin-right: 40%;
+  margin-top: 5%;
+  display: inline-flex;
+ 
+
+
+  // @include media($large-screen) {
+  
+  // }
+}
+
+.calendar-header {
+  // margin: 0 1em;
+  margin-left: 0px;
+}
+.old-month {
+  font-weight: 200; 
+  color: SkyBlue;
+}
+
+.card {
+
+}
+.goal-stat-section{
+  
+
+  @include media($large-screen) {
+   float: right;
+    margin-left: 0;
+    text-align: center; 
+    width: 60%;
+
+  } 
+
+  .legend {
+    font-size: 0.7em;
+
+  }
+  
+}
+
+

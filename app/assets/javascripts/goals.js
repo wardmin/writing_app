@@ -94,6 +94,17 @@ $(document).on('page:load ready', function() {
         }
      });
 
-
+    // BUTTON GROUP - CAL / LIST VIEW
+    // Makes the button group work as the user expects.
+    // i.e. when they click the surrounding area they are 
+    // aslo clicking the button.
+    $('.button-group-item').on('click', function() { 
+        var self = $(this);
+        self.children()[0].click();
+    });
+    $('.button-group-item').children().on('click', function(){
+        var self = $(this);
+        self.parent()[0].click();
+    })
    
 });

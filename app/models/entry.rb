@@ -33,4 +33,8 @@ class Entry < ActiveRecord::Base
 		ChronicDuration.output(read_attribute(:duration), format: :long, :units => 2)
 	end
 
+	def duration_chrono
+		ChronicDuration.output(read_attribute(:duration), :format => :chrono)
+	end
+
 end

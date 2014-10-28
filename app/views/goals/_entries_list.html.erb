@@ -1,12 +1,34 @@
-<ul>
-	<% @goal.entries.order("created_at desc").each do |entry| %>
-		<div class="entry">
-			<span class="edit"><%= link_to 'View', entry_path(entry) %></span> 
-			<li> <%= link_to entry.created_at.strftime("%b %e"), entry_path(entry) %> &nbsp;<em>&nbsp; <%= entry.duration_long %></em> <br>
+<table>
+	<tr class="entry-list-header" >
+		<th>Date</th>
+		<th>Duration</th>
+		<% if @goal.metric_id != 5 %>
+			<th><%= @goal.metric_type_is.capitalize %> </th>
+		<% end %>
+		<th>Journal</th>
+	</tr>
+		<% @goal.entries.order("created_at desc").each do |entry| %>
+		<tr>
+			<td>
+				<span class="edit-entry"><%= link_to entry.created_at.strftime("%b %e"), entry_path(entry) %> </span> 
+			</td>
+			<td>
+				<p><%= entry.duration %></p> 
+			</td>
+			<% if @goal.metric_id != 5 %>
+				<td>
+					<p><%= entry.amount_done %></p>
+				</td>
+			<% end %>
+
+			<td>
 				<% if entry.journal %>
-					<p><%= entry.journal.truncate(90) %></p>
+					<p><em><%= entry.journal.truncate(35) %></em></p>
 				<% end %>
-			</li>
-			</div>
+			</td>
+			<!-- <td>
+				<%# link_to 'View', entry_path(entry) %>
+			</td> -->
+		</tr>
 	<% end %>
-</ul>
+</table>

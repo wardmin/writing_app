@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
 					latest_goal = most_recent_goal
 				end
 			end
-			latest_goal = goals.order('created_at').last
+			# latest_goal = goals.order('created_at').last
 		end
 		latest_goal
 	end

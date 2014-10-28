@@ -36,10 +36,10 @@
    <%# f.select :aasm_state,  options_for_select(aasm_states_array) %>
   </div>
 
-
-      <div class="metric-check">
-      <%= check_box_tag(:metric_check) %> <%= label_tag(:metric_check, "Track metrics") %> 
-      </div>
+      <%= label_tag(:metric_check, "Track metrics") %> 
+      <label class="metric-check">
+      <%= check_box_tag(:metric_check) %> <div class="checkbox"></div>
+      </label>
   
       <div class="goal-field-hide"> 
           <div class="goal-settings">

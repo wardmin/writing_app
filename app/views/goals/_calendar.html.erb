@@ -1,9 +1,12 @@
-<%= month_calendar events: @goal.entries do |date, entries| %>
-	<%= date.strftime("%e") %>
+<%= month_calendar events: @goal.entries, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, entries| %>
 
-  	<% entries.each do |entry| %>
-	    <div class="calendar-entry">
-	      <%= link_to "e", entry_path(entry) %>
-	    </div>
-	<% end %>
+
+	<%= date.strftime("%e") %>
+		<div class="calendar-entries">
+		  	<% entries.each do |entry| %>
+			    <div class="calendar-entry">
+			      <%= link_to "", entry_path(entry) %>
+			    </div>
+			<% end %>
+		</div>
 <% end %>

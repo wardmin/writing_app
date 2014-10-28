@@ -29,11 +29,14 @@
 
 				<div class="card-copy">
 				Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
-				Description: <%= @goal.name %> <br>
+				<% if !@goal.name.empty? %>
+					Description: <%= @goal.name %> <br>
+				<% end %>
 				Your last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
 				</div>
 
 				<div class="card-stats">
+					<div class="left-side">
 						<ul>
 							<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
 							<% if @goal.entries %>
@@ -50,30 +53,32 @@
 								<% end %>
 							<% end %>
 						</ul>
- 					<% if @goal.metric_id == nil || @goal.metric_id == 6 %>
- 					<% else %>
-						<div class="progress-bar-indication">
-  							<span class="meter" style="width: <%= @goal.progress %>%">
-    							<p><%= @goal.progress %>%</p>
-  							</span>
-  							<span class="legend">
+					</div>
+					<div class="goal-stat-section">
+	 					<% if @goal.metric_id == nil || @goal.metric_id == 5 %>
+	 					<% else %>
+							<div class="progress-bar-indication">
+	  							<span class="meter" style="width: <%= @goal.progress %>%">
+	    							<p><%= @goal.progress %>%</p>
+	  							</span>
+							</div>
+							<span class="legend">
   								<% if @goal.progress >= 100 %>
   									Goal Target of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> met!
   								<% else %>
   									<%= number_with_delimiter(@goal.metrics_progress) %> of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> written...
 								<% end %>
-
   							</span>
-						</div>
-					<% end %>
+						<% end %>
+					</div>
 				</div>
 
-				<div class="small-write">
-					<span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></span>
-					<div class="goal-edit"><span class="edit"><%= link_to 'Edit', edit_goal_path(@goal) %></span></div>
-				</div>
 				<div class="entries">
-					<h5>Writing Entries </h5>
+					<div class="small-write">
+						<span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></span>
+						<div class="goal-edit"><span class="edit"><%= link_to 'Edit', edit_goal_path(@goal) %></span></div>
+					</div>
+						<h5>Writing Entries </h5>
 
 
 						<div class="button-group">
@@ -86,15 +91,13 @@
 						    <span class="button-group-item"><%= link_to "Calendar", calendar_goal_path, :remote => true %></span>
 						  </label>
 						</div>
+						
 						<div id="entries-view">
 							<%= render 'entries_list' %>
 						</div>
 					
+					</div>
 				</div>
-				
-			
-
-			</div>
 	</div>
 </article>
 

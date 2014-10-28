@@ -1,3 +1,7 @@
 $('#entries-view').html("<%= escape_javascript(render :partial => 'calendar', :goal => @goal) %>");
- $('.calendar-entry').parent().css( "background-color", "tomato" );
- $('.prev-month, .next-month').css( "background-color", "lavender");
+ $('.calendar-entry').parent().parent().addClass('entry-date');
+ $('.calendar-entry').on('click', function() {
+ 	var self = $(this);
+ 	self.children()[0].click();
+ });
+ $('.prev-month, .next-month').addClass('old-month');
