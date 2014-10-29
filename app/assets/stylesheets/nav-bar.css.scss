@@ -37,6 +37,7 @@ header.navigation {
       max-height: $navigation-height;
       padding: .8em 0;
     }
+
   }
 
   // Mobile view
@@ -67,7 +68,7 @@ header.navigation {
     z-index: 9999999;
     float: none;
     @include media ($horizontal-bar-mode) {
-      float: left;
+      // float: left;
     }
   }
 
@@ -119,6 +120,14 @@ header.navigation {
 
       &:hover {
         color: $navigation-color-hover;
+      }
+    }
+
+    & a.inverted-secret {
+      display: inline-block;
+
+      @include media ($horizontal-bar-mode) {
+        display: none;
       }
     }
   }
@@ -278,6 +287,14 @@ header.navigation {
 
     &:hover {
       background: lighten($navigation-nav-button-background, 10);
+    }
+
+    &.secret {
+      display: none;
+
+      @include media ($horizontal-bar-mode) {
+        display: inline;
+      }
     }
   }
 

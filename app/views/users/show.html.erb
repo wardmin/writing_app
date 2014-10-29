@@ -23,6 +23,7 @@
           <strong>Kinds of Writing:</strong>
           <%= @user.tag_list %>
         </p>
+         <%= link_to 'Edit My Profile', edit_user_path(@user) %> 
       </div>
     </li>
     <li class="tab-header-and-content">
@@ -68,11 +69,7 @@
       </div>
     </li>
   </ul>
-
-
-
-  <%= link_to 'My Projects', projects_path(@project) %> |
-  <%= link_to 'Edit My Profile', edit_user_path(@user) %> 
+ 
 
 </article>
 
