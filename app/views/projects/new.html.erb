@@ -1,5 +1,19 @@
-<h1>New project</h1>
-<fieldset>
-	<%= render 'form' %>
-</fieldset>
-<%= link_to 'Back', projects_path %>
+<article class="article">
+	<div class="breadcrumb">
+	  <%= link_to 'Dashboard', home_index_path %>
+	  <%= link_to 'My Projects', projects_path %>
+	  <a href="#" class="current-selection">Project</a>
+  	</div>
+
+
+	<h1 class="main-title">New project</h1>
+	<div class="card project">
+  		<div class="card-image">
+      	</div>
+
+		<div class="card-copy">
+			<fieldset>
+				<%= render 'form' %>
+			</fieldset>
+		</div>
+</article>

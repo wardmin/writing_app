@@ -3,20 +3,20 @@
 		<div class="breadcrumb">
 		  <%= link_to 'Dashboard', home_index_path %>
 		  <%= link_to 'My Projects', projects_path %>
-		  <%= link_to 'Project', project_goals_path(@goal.project) %>
-		  <%= link_to 'Goal', goal_path(@goal), class: "current-selection" %>
+		  <%= link_to 'Project', project_goals_path(@project) %>
+		  <a href="#" class="current-selection">Goal</a>
 		</div>
 
-		<h1 class="main-title">Goal Details</h1>
+		<h1 class="main-title">New Goal</h1>
 
 		<div class="card project">
 	    	<div class="card-image">
-	        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+	        	<h3 class="card-image title"><%= link_to @project.name, project_goals_path(@project) %></h3> 
 	        </div>
 	        <div class="inner-project">
 				<div class="card">
 					<div class="card-image goal">
-						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
+						<h6 class="goal"><%# @goal.type_is.capitalize %></h6> 
 					</div>
 					
 					<%= content_for?(:goals_content) ? yield(:goals_content) : yield %>

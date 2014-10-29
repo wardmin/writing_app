@@ -1,9 +1,11 @@
 class GoalsController < ApplicationController
 	before_action :set_goal, only: [:show, :edit, :update, :destroy, :calendar, :list]
+	
 
 	def index
 		@goals = Project.find(params[:project_id]).goals
 		@project = Project.find(params[:project_id])
+		render layout: "goals_index"
 			if @project.user_id != current_user.id 
 	        	redirect_to home_index_path
 	      	end
@@ -27,6 +29,7 @@ class GoalsController < ApplicationController
 	def new
 		@project = Project.find(params[:project_id])
 		@goal = Goal.new
+		render layout: "goals_new"
 	end
 
 	def create

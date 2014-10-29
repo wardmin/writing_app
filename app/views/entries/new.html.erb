@@ -1,31 +1,6 @@
-<article>
-	<div class="breadcrumb">
-	  <%= link_to 'Dashboard', home_index_path %>
-	  <%= link_to 'My Projects', projects_path %>
-	  <%= link_to 'Project', project_goals_path(@goal.project) %>
-	  <%= link_to 'Goal', goal_path(@goal) %>
-	  <a href="#" class="current-selection">New Entry</a>
-	</div>
+	<div class="clock"></div><div class="secondhand"></div>
 
-	<h1 class="main-title">New Entry</h1>
-	
-	<div class="card project">
-    	<div class="card-image">
-        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
-        </div>
-        <div class="inner-project">
-			<div class="card">
-				<div class="card-image goal">
-						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
-
-				</div>
-
-				<div class="card-header">
-				
-
-				<div class="clock"></div><div class="secondhand"></div>
-
-					<%= form_for [@project, @entry] do |f|  %>
+	<%= form_for [@project, @entry] do |f|  %>
 
 		<div class="duration">
 		    <%= f.label :duration %><br>
@@ -33,17 +8,17 @@
 		</div>
 
 		<p>&nbsp;</p>
-		
-		
+	
+	
 
-		<div class="timer-buttons"><span class="pause"><button name="playpause" type="button">Pause</button></span> |
-					<%= f.hidden_field(:goal_id, :value => @goal.id) %>
-					<%= f.submit  data: { confirm: 'Are you done writing?' }, class: "timer" %> | <div class="button"><%= link_to "Cancel", project_goals_path(@project), data: { confirm: 'Are you sure?' } %></div>
-				<% end %></div>
-
-				</div>
+		<div class="timer-buttons">
+			<span class="pause">
+				<button name="playpause" type="button">Pause</button>
+			</span> |
+			<%= f.hidden_field(:goal_id, :value => @goal.id) %>
+			<%= f.submit  data: { confirm: 'Are you done writing?' }, class: "timer" %> | 
+			<div class="button"><%= link_to "Cancel", project_goals_path(@project), data: { confirm: 'Are you sure?' } %>
 			</div>
 		</div>
-	</div>
-
-</article>
+		
+	<% end %>

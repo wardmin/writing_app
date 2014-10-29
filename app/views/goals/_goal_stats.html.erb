@@ -1,0 +1,17 @@
+<li>
+	<%= ChronicDuration.output(goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span>
+</li>
+<% if goal.entries %>
+	<li><%= goal.entries.length %><span>Entries</span></li>
+<% end %>
+
+<%#  Deadline logic %>
+<% if goal.deadline %>
+	<% if time_left(goal.deadline) > 0 %>
+		<li><%= time_left(goal.deadline) %><span>Days Left</span></li>
+	<% elsif time_left(goal.deadline) == 0 %>
+		<li>Goal<span>Due Today!</span></li>
+	<% elsif time_left(goal.deadline) < 0 %>
+		<li><%= time_left(goal.deadline) * -1 %>d<span>Overdue!</span></li>
+	<% end %>
+<% end %>

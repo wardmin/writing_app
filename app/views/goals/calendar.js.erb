@@ -1,5 +1,5 @@
 $('#entries-view').html("<%= escape_javascript(render :partial => 'calendar', :goal => @goal) %>");
- $('.calendar-entry').parent().parent().addClass('entry-date');
+ $('.calendar-entry').parent().parent().addClass('entry-date tooltip-item');
  $('.calendar-entry').on('click', function() {
  	var self = $(this);
  	self.children()[0].click();

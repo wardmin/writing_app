@@ -15,6 +15,7 @@
 //= require turbolinks
 // require jquery.purr
 //= require bitters-nav
+//= require accordion-tabs
 //= require best_in_place
 //= require flipclock
 //= require moment

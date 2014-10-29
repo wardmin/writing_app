@@ -1,109 +1,64 @@
-<article class="article">
-	<div class="breadcrumb">
-	  <%= link_to 'Dashboard', home_index_path %>
-	  <%= link_to 'My Projects', projects_path %>
-	  <%= link_to 'Project', project_goals_path(@goal.project) %>
-	  <%= link_to 'Goal', goal_path(@goal), class: "current-selection" %>
+	<div class="card-header">
+
+		<% if @goal.deadline %>
+			<p>Deadline: <%= @goal.deadline.strftime("%A, %b %d") %> </p>
+		<% end %>
+		
 	</div>
 
-	<h1 class="main-title">Goal Details</h1>
-
-	<div class="card project">
-    	<div class="card-image">
-        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
-        </div>
-        <div class="inner-project">
-			<div class="card">
-				<div class="card-image goal">
-						<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
-
-				</div>
-
-				<div class="card-header">
-
-					<% if @goal.deadline %>
-						<p>Deadline: <%= @goal.deadline.strftime("%A, %b %d") %> </p>
-					<% end %>
-					
-				</div>
-
-				<div class="card-copy">
-				Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
-				<% if !@goal.name.empty? %>
-					Description: <%= @goal.name %> <br>
-				<% end %>
-				Your last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
-				</div>
-
-				<div class="card-stats">
-					<div class="left-side">
-						<ul>
-							<li><%= ChronicDuration.output(@goal.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
-							<% if @goal.entries %>
-								<li><%= @goal.entries.length %><span>Entries</span></li>
-							<% end %>
-							<!-- Deadline logic -->
-							<% if @goal.deadline %>
-								<% if time_left(@goal.deadline) > 0 %>
-									<li><%= time_left(@goal.deadline) %><span>Days Left</span></li>
-								<% elsif time_left(@goal.deadline) == 0 %>
-									<li>Goal<span>Due Today!</span></li>
-								<% elsif time_left(@goal.deadline) < 0 %>
-									<li><%= time_left(@goal.deadline) * -1 %>d<span>Overdue!</span></li>
-								<% end %>
-							<% end %>
-						</ul>
-					</div>
-					<div class="goal-stat-section">
-	 					<% if @goal.metric_id == nil || @goal.metric_id == 5 %>
-	 					<% else %>
-							<div class="progress-bar-indication">
-	  							<span class="meter" style="width: <%= @goal.progress %>%">
-	    							<p><%= @goal.progress %>%</p>
-	  							</span>
-							</div>
-							<span class="legend">
-  								<% if @goal.progress >= 100 %>
-  									Goal Target of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> met!
-  								<% else %>
-  									<%= number_with_delimiter(@goal.metrics_progress) %> of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> written...
-								<% end %>
-  							</span>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="entries">
-					<div class="small-write">
-						<span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></span>
-						<div class="goal-edit"><span class="edit"><%= link_to 'Edit', edit_goal_path(@goal) %></span></div>
-					</div>
-						<h5>Writing Entries </h5>
-
-
-						<div class="button-group">
-						  <label>
-						    <input type="radio" name="button-group" value="list" checked>
-						    <span class="button-group-item"><%= link_to "List", list_goal_path, :remote => true %></span>
-						  </label>
-						  <label>
-						    <input type="radio" name="button-group" value="other-item">
-						    <span class="button-group-item"><%= link_to "Calendar", calendar_goal_path, :remote => true %></span>
-						  </label>
-						</div>
-						
-						<div id="entries-view">
-							<%= render 'entries_list' %>
-						</div>
-					
-					</div>
-				</div>
+	<div class="card-copy">
+	Started: <%= @goal.created_at.strftime("%A, %b %d") %> <br>
+	<% if !@goal.name.empty? %>
+		Description: <%= @goal.name %> <br>
+	<% end %>
+	Your last 7 days: <span class="inlinesparkline"><%= @goal.spark_line %></span>
 	</div>
-</article>
 
-<section class="stats">
-		<div class="quotes">
-			<h3>“There is nothing to writing. All you do is sit down at a typewriter and bleed.” </h3>
-			<p>&ndash; Ernest Hemingway</p>
+	<div class="card-stats">
+		<div class="left-side">
+			<ul>
+				<%= render :partial => "goal_stats", locals: {goal: @goal} %>
+			</ul>
 		</div>
-</section>
+		<div class="goal-stat-section">
+				<% if @goal.metric_id == nil || @goal.metric_id == 5 %>
+				<% else %>
+				<div class="progress-bar-indication">
+						<span class="meter" style="width: <%= @goal.progress %>%">
+						<p><%= @goal.progress %>%</p>
+						</span>
+				</div>
+				<span class="legend">
+						<% if @goal.progress >= 100 %>
+							Goal Target of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> met!
+						<% else %>
+							<%= number_with_delimiter(@goal.metrics_progress) %> of <%= number_with_delimiter(@goal.metric_target) %> <%= @goal.metric_type_is %> written...
+					<% end %>
+					</span>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="entries">
+		<div class="small-write">
+			<span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => @goal.project_id, :goal_id => @goal) %></span>
+			<div class="goal-edit"><span class="edit"><%= link_to 'Edit', edit_goal_path(@goal) %></span></div>
+		</div>
+			<h5>Writing Entries </h5>
+
+
+			<div class="button-group">
+			  <label>
+			    <input type="radio" name="button-group" value="list" checked>
+			    <span class="button-group-item"><%= link_to "List", list_goal_path, :remote => true %></span>
+			  </label>
+			  <label>
+			    <input type="radio" name="button-group" value="other-item">
+			    <span class="button-group-item"><%= link_to "Calendar", calendar_goal_path, :remote => true %></span>
+			  </label>
+			</div>
+			
+			<div id="entries-view">
+				<%= render 'entries_list' %>
+			</div>
+	

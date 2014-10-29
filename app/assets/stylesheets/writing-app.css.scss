@@ -125,12 +125,12 @@
 	text-align: center;
 }
 
-fieldset {
-	 @include media($large-screen) {
-		@include span-columns(8);
+// fieldset {
+// 	 @include media($large-screen) {
+// 		@include span-columns(8);
 	
-	}
-}
+// 	}
+// }
 
 .user-field-hide {
 	
@@ -152,11 +152,21 @@ fieldset {
 	}
 
 }
+
 .goal-field-hide,
 .goal-field {
-	
+
+	fieldset{
+		border-radius: 6px;
+		margin-top: 1em;
+		background-color: $light-gray;
+		@include animation-name(scale, slide);
+		padding: 15px 24px;
+
+	}
 	.goal-settings {
 		display: inline;
+		line-height: 3em;
 
 		input {
 			width: 5em;

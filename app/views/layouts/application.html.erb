@@ -44,7 +44,7 @@
 
 
       <div id="content">
-        <%= yield %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
       </div>  
 
 

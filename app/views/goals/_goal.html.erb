@@ -1,37 +1,25 @@
+<div class="card">
+  <div class="card-image goal">
+      <h6 class="goal">Goal: <%= link_to goal.type_is.capitalize, goal_path(goal) %></h6> 
+  </div>
 
-Delete this template please. 
+  <div class="card-header">
+    
+  </div>
 
-<%= form_for [@project, @goal] do |f| %>
-	<% if @goal.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(goal.errors.count, "error") %> prohibited this product from being saved:</h2>
+    <div class="card-copy">
+      <% if goal.deadline %>
+      <p>Deadline: <%= goal.deadline.strftime("%A, %b %d") %> </p>
+    <% end %>
+  </div>
 
-      <ul>
-      <% @goal.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-      <div class="field">
-        <%= f.label :goal_type %>
-        <%= f.select :goal_type_id, options_from_collection_for_select(GoalType.all, :id, :name, 1) %>
-      </div>
-      <div class="field">
-        <%= f.label :description %> 
-        <%= f.text_field :name %> 
-      </div>
-      <div class="field">
-        <%= f.label :amount %>
-        <%= f.number_field :amount %>
-        <%= f.label :metric %>
-        <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, 1) %>
-      </div>
-      <div class="field">
-        <%= f.label :deadline %> 
-        <%= f.date_field :deadline%>
-      </div>
-      <%= f.hidden_field(:project_id, :value => @project.id) %>
-      <%= f.submit %>
-<% end %>
+  <div class="card-stats">
+    <ul>
+      <%= render :partial => "goal_stats", locals: {goal: goal} %>
+    </ul>
+    <ul class="edit-button">
+      <li><span class="edit"><%= link_to 'View', goal_path(goal) %></span></li>
+      <li ><span class="write-now"><%= link_to "Write Now!", new_project_entry_path(:project_id => goal.project_id, :goal_id => goal) %></span></li>
+    </ul>
+  </div>
+</div>

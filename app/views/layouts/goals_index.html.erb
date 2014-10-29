@@ -1,0 +1,38 @@
+<% content_for :content do %>
+
+	<article class="article">
+		<div class="breadcrumb">
+		  <%= link_to 'Dashboard', home_index_path %>
+		  <%= link_to 'My Projects', projects_path %>
+		   <%= link_to 'Project', project_goals_path(@project), class: "current-selection" %>
+		</div>
+
+		<h1 class="main-title">Project Details</h1>
+		
+		<div class="card project">
+	    	<div class="card-image">
+	        	<h3 class="card-image title"><%= @project.name %></h3> 
+	        </div>
+
+	        <div class="card-header">
+	            <%= @project.type_is.capitalize %>
+	        </div>
+
+			<%= content_for?(:goals_index_content) ? yield(:goals_index_content) : yield %>
+
+
+
+			<p>&nbsp;</p>
+		</div>
+
+	</article>
+
+	<section class="stats">
+		<div class="quotes">
+			<h3>&ldquo;There is no greater agony than bearing an untold story inside you.&rdquo; </h3>
+			<p>&ndash; Maya Angelou</p>
+		</div>
+	</section>
+<% end %>
+
+<%= render template: "layouts/application" %>
