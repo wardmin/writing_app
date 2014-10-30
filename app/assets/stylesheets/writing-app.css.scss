@@ -77,6 +77,44 @@
 	}
 }
 
+.sign-up-container{
+	$hero-image: "http://i.imgur.com/8I9wUUd.jpg";
+	@include background-image(url($hero-image));
+}
+
+.sign-up-hero {
+	
+	// $hero-background-top: darken($base-accent-color, 90); 
+ // 	$hero-background-bottom: adjust-hue($hero-background-top, -70);
+ // 	$hero-color: $blue;
+ //  	$gradient-angle: 10deg;
+	
+	text-align: center;
+
+
+	h1 {
+		margin-top: 1em;
+		background: none;
+	}
+
+	h4 {
+		color: shade($blue, 20%);
+		margin-bottom: 2em;
+		text-shadow: 2px 2px rgba(255,255,255,0.4);
+		font-size: $base-font-size * 1.1;
+
+		@include media($large-screen) {
+			font-size: $base-font-size * 1.6;
+		}
+	}
+
+}
+
+.sign-up-logo {
+	margin: 2em;
+	max-height: 175px
+}
+
 .home {
 	
 }
@@ -92,7 +130,26 @@
 	  @include media($large-screen) {
 		@include span-columns(4);
 	}
+
+
 }
+.sign-up-side {
+		margin: 1em 0;
+
+		fieldset {
+			border-radius: 6px;
+			background-color: rgba(255,255,255,0.7);
+
+			h2 {
+				padding-bottom: 0.6em;
+			}
+		}
+
+		.devise-links {
+			margin-top: 1em;
+			font-size: 0.8em;
+		}
+	}
 
 .notice {
 	@extend %flash-alert;

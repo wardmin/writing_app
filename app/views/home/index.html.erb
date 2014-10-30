@@ -22,23 +22,7 @@
 	    	<div class="write-now">
 		<%= link_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %>
 			</div> <br>
-
 		</div>
-	</div>
-
-	
-	<div class="dashboard-links">
-		<%= link_to 'My Projects', projects_path, class: "dashboard-projects" %>
-		
-		<% if current_user.entries %>
-			<% if current_user.am_writing? == true %>
-				<p><%= link_to "You've been writing!", user_path(current_user) %></p>
-				<%= image_tag("happy-emoji.png", width: '50') %> <br>
-			<% else %>
-				<br> <%= image_tag("sad-emoji.png", width: '50') %> <br>
-				<p><%= link_to "You haven't been writing.", user_path(current_user) %></p>
-			<% end %>
-		<% end %>
 	</div>
 </article>
 
