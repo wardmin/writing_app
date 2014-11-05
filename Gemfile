@@ -36,6 +36,9 @@ gem 'bourbon'
 gem 'neat'
 gem 'bitters'
 
+# Heroku stuff
+gem 'rails_12factor'
+
 # In-place form editing
 gem 'best_in_place'
 
