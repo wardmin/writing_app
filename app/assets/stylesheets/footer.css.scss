@@ -1,10 +1,12 @@
 // Uncomment this for a sticky footer.
 
 .wrapper-for-content-outside-of-footer {
+  $gradient-color: white;
   min-height: 100%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -4em;
+  @include texture(180deg, lighten($gradient-color, 1), darken($gradient-color, 10), 85, 0); 
 }
 
 html, body {

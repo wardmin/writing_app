@@ -23,7 +23,7 @@
     <% elsif time_left(project.deadline) == 0 %>
       <li>Project<span>Due Today!</span></li>
     <% elsif time_left(project.deadline) < 0 %>
-      <li><%= time_left(project.deadline) * -1 %>d<span>Overdue!</span></li>
+      <li class="overdue"><%= time_left(project.deadline) * -1 %>d<span>Overdue!</span></li>
     <% end %>
   <% end %>
 </ul>

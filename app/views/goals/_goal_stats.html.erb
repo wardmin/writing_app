@@ -12,6 +12,6 @@
 	<% elsif time_left(goal.deadline) == 0 %>
 		<li>Goal<span>Due Today!</span></li>
 	<% elsif time_left(goal.deadline) < 0 %>
-		<li><%= time_left(goal.deadline) * -1 %>d<span>Overdue!</span></li>
+		<li class="overdue"><%= time_left(goal.deadline) * -1 %>d<span>Overdue!</span></li>
 	<% end %>
 <% end %>

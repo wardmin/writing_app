@@ -2,8 +2,11 @@
 
 	<div class="options">
 		<div class="field">
-		    <%= f.label :amount_of, "Amount of #{@entry.goal.metric_type_is} written" %> 
-		    <%= f.number_field :amount_done %>
+			<% if @goal.metric_id == nil || @goal.metric_id == 5 %>
+			<% else %>
+			    <%= f.label :amount_of, "Amount of #{@entry.goal.metric_type_is} written" %> 
+			    <%= f.number_field :amount_done %>
+			<% end %>
 		</div>
 
 		<div class="field">
@@ -15,7 +18,7 @@
 
 	<div class="field">
 	    <%= f.label :journal %>
-	    <%= f.text_area(:journal, cols: 40, rows: 10) %>
+	    <%= f.text_area(:journal, cols: 40, rows: 10, :required => true) %>
 	</div>
 	<%= f.submit "Done"%>
 

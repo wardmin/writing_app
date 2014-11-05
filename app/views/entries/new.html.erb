@@ -1,4 +1,6 @@
-	<div class="clock"></div><div class="secondhand"></div>
+	<div class="mask" >
+		<div class="clock"></div>
+	</div>
 
 	<%= form_for [@project, @entry] do |f|  %>
 
@@ -17,7 +19,7 @@
 			</span> |
 			<%= f.hidden_field(:goal_id, :value => @goal.id) %>
 			<%= f.submit  data: { confirm: 'Are you done writing?' }, class: "timer" %> | 
-			<div class="button"><%= link_to "Cancel", project_goals_path(@project), data: { confirm: 'Are you sure?' } %>
+			<div class="entry-button"><%= link_to "Cancel", project_goals_path(@project), data: { confirm: 'Are you sure?' } %>
 			</div>
 		</div>
 		

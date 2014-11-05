@@ -4,72 +4,93 @@
 
   <ul class="accordion-tabs">
     <li class="tab-header-and-content">
-      <a href="#" class="is-active tab-link">Profile</a>
+      <a href="#" class="is-active tab-link">Settings</a>
       <div class="tab-content">
-        Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices. Pellentesque ac sapien ac purus gravida ullamcorper. Duis rhoncus sodales lacus, vitae adipiscing tellus pharetra sed. Praesent bibendum lacus quis metus condimentum ac accumsan orci vulputate. Aenean fringilla massa vitae metus facilisis congue. Morbi placerat eros ac sapien semper pulvinar. Vestibulum facilisis, ligula a molestie venenatis, metus justo ullamcorper ipsum, congue aliquet dolor tortor eu neque. Sed imperdiet, nibh ut vestibulum tempor, n
-        <p><strong>Name:</strong>
-            <%= best_in_place @user, :name %>
-        </p>
-        <p>
-          <strong>Email:</strong>
-          <%= @user.email %> <%# best_in_place @user, :email, :type => :input %>
-
-        </p>
-        <p>
-          <strong>Location:</strong>
-          <%= @user.location %>
-        </p>
-        <p>
-          <strong>Kinds of Writing:</strong>
-          <%= @user.tag_list %>
-        </p>
-         <%= link_to 'Edit My Profile', edit_user_path(@user) %> 
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices. </span>
+        <fieldset class="user-tabs">
+        <h3><% if @user.am_writing? == true %>
+              You are writing!
+            <% else %>
+              You need to write more.
+            <% end%></h3>  <p>This is the heart of the writetrack system. You tell us how much you want to write, per day, per week, per month and whether or you want to track the hours you spend or the times you write, and we will help you meet your goal.</p> <p><% if @user.am_writing? == true %>
+              Currently, you are reaching your goal.
+            <% else %>
+              Currently, you are not meeting your stated goal.
+            <% end%></p>
+            <fieldset>
+            <div id="settings-test">
+           
+            I want to write<strong> <%= @user.desired_amount %> </strong>
+            <%= @user.hours_or_times %> per <strong> <%= @user.desired_timeframe %></strong>.
+            
+          </p> 
+          <%= link_to 'Edit My Settings', settings_user_path(@user), :remote => true %> 
+          </div>
+          </fieldset>
+         
+         </fieldset>
       </div>
     </li>
     <li class="tab-header-and-content">
-      <a href="#" class="tab-link">Settings</a>
+      <a href="#" class="tab-link">Profile</a>
       <div class="tab-content">
-        <p>
-         <strong>
-          I want to write</strong> <strong> <%= @user.desired_amount %> </strong>
-          <%= @user.hours_or_times %> per <strong> <%= @user.desired_timeframe %></strong>.
-          <% if @user.am_writing? == true %>
-            I am writing!
-          <% else %>
-            I need to write more.
-          <% end%>   
-    
-        Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices. Pellentesque ac sapien ac purus gravida ullamcorper. Duis rhoncus sodales lacus, vitae adipiscing tellus pharetra sed. Praesent bibendum lacus quis metus condimentum ac accumsan orci vulputate. Aenean fringilla massa vitae metus facilisis congue. Morbi placerat eros ac sapien semper pulvinar. Vestibulum facilisis, ligula a molestie venenatis, metus justo ullamcorper ipsum, congue aliquet dolor tortor eu neque. Sed imperdiet, nibh ut vestibulum tempor, nibh dui volutpat lacus, vel gravida magna justo sit amet quam. Quisque tincidunt ligula at nisl imperdiet sagittis. Morbi rutrum tempor arcu, non ultrices sem semper a. Aliquam quis sem mi.</p>
+     
+        <fieldset class="user-tabs">
+
+           <div id="user-profile">
+          <%= render 'profile' %>
+           </div>
+        </fieldset>
       </div>
     </li>
     <li class="tab-header-and-content">
       <a href="#" class="tab-link">Deadlines</a>
-      <div class="tab-content">
-        <p>Donec mattis mauris gravida metus laoreet non rutrum sem viverra. Aenean nibh libero, viverra vel vestibulum in, porttitor ut sapien. Phasellus tempor lorem id justo ornare tincidunt. Nulla faucibus, purus eu placerat fermentum, velit mi iaculis nunc, bibendum tincidunt ipsum justo eu mauris. Nulla facilisi. Vestibulum vel lectus ac purus tempus suscipit nec sit amet eros. Nullam fringilla, enim eu lobortis dapibus, quam magna tincidunt nibh, sit amet imperdiet dolor justo congue turpis.
-
-        <p>Upcoming Deadlines
-        
-                Projects
-        
-                <% if @user.projects %>
+        <div class="tab-content">
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices.</span>
+         
+        <fieldset class="user-tabs">
+          <h4>Upcoming Project Deadlines</h4>
+          
+          <div id="deadline-view">
+            <%= render partial: 'calendar', locals: { projects: @user.projects }%>
+          </div>
                 
-                    <% @user.deadlines.each do |project| %>
-        
-                    <%= project.name  %> | <%= project.deadline %>
-                    <% end %>
                 
-                <% end %></p></p>    
+        </fieldset>    
       </div>
     </li>
     <li class="tab-header-and-content">
       <a href="#" class="tab-link">Stats</a>
       <div class="tab-content">
-        <p>You have spent <%= @user.total_time_writing_this_week %> writing this week. </p>
-        <p>Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus dui urna, mollis vel suscipit in, pharetra at ligula. Pellentesque a est vel est fermentum pellentesque sed sit amet dolor. Nunc in dapibus nibh. Aliquam erat volutpat. Phasellus vel dui sed nibh iaculis convallis id sit amet urna. Proin nec tellus quis justo consequat accumsan. Vivamus turpis enim, auctor eget placerat eget, aliquam ut sapien.</p>
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices.</span>
+        <fieldset class="user-tabs">
+          <div class="charter">
+           <canvas id="myChart" width="150" height="150"></canvas>
+          </div>
+            <p>You spent <%= @user.total_time_writing_this_week %> writing this week. </p>
+        </fieldset>
       </div>
     </li>
   </ul>
- 
+
+<script>
+   var data = {
+    labels: ["Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(242,0,0,0.8)",
+            strokeColor: "rgba(155,0,0,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [<%= @user.spark_line %>]
+        }
+    ]
+};
+var ctx = $("#myChart").get(0).getContext("2d");
+var myNewChart = new Chart(ctx);
+var myBarChart = new Chart(ctx).Bar(data);
+</script>
 
 </article>
 

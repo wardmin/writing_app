@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <div class="wrapper-for-content-outside-of-footer">
+    <div class="wrapper-for-content-outside-of-footer texture">
       <header class="navigation">
         <div class="navigation-wrapper">
           
@@ -40,7 +40,6 @@
     <% flash.each do |key, value| %>
       <%= content_tag :div, value, class: "flash #{key}" %>
     <% end %>
-
 
       <div id="content">
         <%= content_for?(:content) ? yield(:content) : yield %>

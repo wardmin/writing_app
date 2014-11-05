@@ -1,0 +1,12 @@
+<%= month_calendar events: projects, previous_link: events_ajax_previous_link, next_link: events_ajax_next_link do |date, projects| %>
+
+
+	<%= date.strftime("%e") %>
+		<div class="calendar-entries tooltip">
+		  	<% projects.each do |project| %>
+			    <div class="calendar-entry">
+			      <%= project.deadline %>
+			    </div>
+			<% end %>
+		</div>
+<% end %>

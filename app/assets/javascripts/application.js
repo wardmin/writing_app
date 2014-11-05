@@ -17,8 +17,9 @@
 //= require bitters-nav
 //= require accordion-tabs
 //= require best_in_place
-//= require flipclock
-//= require moment
+//= require flipclock.min
+//= require Chart
+//= require Chart.defaults.global
 //= require jquery.sparkline
 //= require jquery.tagsinput
 //= require home

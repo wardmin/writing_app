@@ -6,6 +6,8 @@ class Project < ActiveRecord::Base
 	accepts_nested_attributes_for :goals
 	accepts_nested_attributes_for :entries
 	include AASM
+	extend SimpleCalendar
+  	has_calendar :attribute => :deadline
 
 
 	def type_is

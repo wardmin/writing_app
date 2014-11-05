@@ -1,16 +1,10 @@
 $(document).on('page:load ready', function() {
 	var clock = $('.clock').FlipClock({
-		clockFace: 'WriteTrack'
-	});
-	
-	var writetrack = $('.secondhand').FlipClock( {
-		clockFace: 'SecondHand',
-		autoStart: true
+		
 	});
 
 
-
-	$('.clock, .secondhand').click(function(event){
+	$('.clock').click(function(event){
 		event.preventDefault();
 		// Stops the clock from resetting on click.
 	});
@@ -19,13 +13,12 @@ $(document).on('page:load ready', function() {
 	//  Play / Pause Button toggle functionality.
 	function pause(){
 		$('.pause').one('click', function(){
-			$('.clock, .secondhand').off('mouseenter mouseleave');
+			$('.clock').off('mouseenter mouseleave');
 			$("button[name|='playpause']").text('Resume');
 			showClock();
 			clock.stop(function(){
 				startAgain();
 			});
-			writetrack.stop()
 		});
 	}
 
@@ -37,25 +30,24 @@ $(document).on('page:load ready', function() {
 			clock.start(function(){
 				pause();
 			});
-			writetrack.start();
 		});
 	}
 	$('.pause').on('click', pause() );
 	
 	// Clock fade toggle functionality. 
-	$('.clock, .secondhand')
+	$('.clock')
 		.fadeTo(10000, 0.2, attachHandlers() );
 	
 	function fadeClock() {
-		$('.clock, .secondhand').stop();
-		$('.clock, .secondhand').fadeTo(5000, 0.2 );
+		$('.clock').stop();
+		$('.clock').fadeTo(5000, 0.2 );
 	}
 	function showClock() {
-		$('.clock, .secondhand').stop();
-		$('.clock, .secondhand').fadeTo('slow', 0.9 );
+		$('.clock').stop();
+		$('.clock').fadeTo('slow', 0.9 );
 	}
 	function attachHandlers() {
-		$('.clock, .secondhand')
+		$('.clock')
 		.mouseenter(function() {
 			showClock();
 		})
@@ -69,4 +61,11 @@ $(document).on('page:load ready', function() {
 		var time = clock.getTime();
 		$('#entry_duration').attr('value', time);
 	})
+
+	// Vanishing the hours until needed 
+	$('.hours').nextUntil("span").hide();
+	$('.hours').hide();
+	$('.minutes > .bottom').hide();
+	$('.minutes > .top').hide();
+
 });

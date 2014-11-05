@@ -146,6 +146,10 @@
       line-height: 1.1em;
       padding: 0 .5em 0 .5em;
 
+      &.overdue {
+        color: tomato;
+      }
+
       &:first-child {
         padding-left: 0;
       }
@@ -162,6 +166,7 @@
       }
     }
   }
+
   .edit-button {
     //@extend .card-stats;
     // overflow: visible;

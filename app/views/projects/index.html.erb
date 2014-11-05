@@ -10,7 +10,7 @@
 
     <%= render @projects %>
     
-  <% if @projects.archived %>
+  <% if !@projects.archived.empty? %>
     <%= link_to 'Archived Projects', projects_archive_path %>
   <% end %>
   

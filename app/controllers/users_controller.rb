@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :profile, :calendar]
   # before_filter :require_no_authentication, only: :create
   respond_to :html, :json
   # GET /users
@@ -46,6 +46,26 @@ class UsersController < ApplicationController
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def calendar
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def settings
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def profile
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
