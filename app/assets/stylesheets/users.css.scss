@@ -1,3 +1,30 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.tab-content {
+	.invisible {
+		color: lighten($light-gray, 10);
+	}
+}
+
+.user-tabs {
+
+	
+		background-color: white;
+
+}
+
+.charter {
+
+	width: 250px;
+	height: 325px;
+	overflow: auto;
+	
+	@include media($large-screen){
+	width: 450px;
+	height: 325px;
+	overflow: none;
+	}
+}
+
+// .myChart {
+// 	width: 400px;
+// 	height: 400px; 
+// }

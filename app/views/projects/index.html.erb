@@ -8,42 +8,9 @@
 
   <div class="project-button"><%= link_to 'New Project', new_project_path %></div>
 
-      <% @projects.active.each do |project| %>
-
-        <div class="card project">
-          <div class="card-image">
-              <h3 class="card-image title"><%= link_to project.name, project_goals_path(project) %></h3> 
-          </div>
-
-          <div class="card-header">
-            <%= project.type_is.capitalize %>
-          </div>
-
-          <div class="card-copy">
-            <% if project.deadline %>
-              <p>Deadline: <%= project.deadline.strftime("%A, %b %d") %> </p>
-            <% end %>
-          </div>
-
-          <div class="card-stats">
-            <ul>
-              <li><%= ChronicDuration.output(project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span></li>
-              <% if project.entries %>
-                <li><%= project.goals.length %><span>Goals</span></li>
-              <% end %>
-              <% if project.deadline %>
-                <li><%= time_left(project.deadline) %><span>Days Left</span></li>
-              <% end %>
-            </ul>
-
-            <ul class="edit-button">
-              <li ><span class="edit"><%= link_to 'View', project_goals_path(project) %></span></li>
-            </ul>
-          </div>
-        </div>
-        
-      <% end %>
-  <% if @projects.archived %>
+    <%= render @projects %>
+    
+  <% if !@projects.archived.empty? %>
     <%= link_to 'Archived Projects', projects_archive_path %>
   <% end %>
   

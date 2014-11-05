@@ -1,0 +1,29 @@
+<ul>
+  <% if project.total_time_spent == 0 %>
+  	<li>0<span>Time Spent</span></li>
+  <% else %>
+  	<li>
+  		<%= ChronicDuration.output(project.total_time_spent, :format => :short, :units => 2) %><span>Time Spent</span>
+  	</li>
+  <% end %>
+
+  <% if project.entries %>
+    <li>
+    	<%= project.goals.length %><span>Goals</span>
+    </li>
+  <% end %>
+
+  <% if project.entries %>
+       <li><%= project.entries.length %><span>Entries</span></li>
+  <% end %>
+
+  <% if project.deadline %>
+    <% if time_left(project.deadline) > 0 %>
+      <li><%= time_left(project.deadline) %><span>Days Left</span></li>
+    <% elsif time_left(project.deadline) == 0 %>
+      <li>Project<span>Due Today!</span></li>
+    <% elsif time_left(project.deadline) < 0 %>
+      <li class="overdue"><%= time_left(project.deadline) * -1 %>d<span>Overdue!</span></li>
+    <% end %>
+  <% end %>
+</ul>

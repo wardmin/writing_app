@@ -1,3 +1,34 @@
-// Place all the styles related to the entries controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.mask {
+	width: 335px;
+	height: 113px;
+	margin-left: auto;
+    margin-right: auto;
+	padding: 0;
+	overflow: auto;
+	zoom: 90%;
+	
+
+	@include media($large-screen){
+		zoom: 160%;
+		width: 600px;
+		margin-left: -250px;
+	}
+}
+
+.flip-clock-wrapper { 
+		margin: 1.3em;
+}
+
+.card-header {
+	overflow: hidden;
+}
+
+.entry-button {
+	@extend button;
+
+	a { 
+		color: white;
+	}
+
+
+}

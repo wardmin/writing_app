@@ -1,0 +1,24 @@
+<div class="card project">
+  <div class="card-image">
+      <h3 class="card-image title"><%= link_to project.name, project_goals_path(project) %></h3> 
+  </div>
+
+  <div class="card-header">
+    <%= project.type_is.capitalize %>
+  </div>
+
+  <div class="card-copy">
+    <% if project.deadline %>
+      <p>Deadline: <%= project.deadline.strftime("%A, %b %d") %> </p>
+    <% end %>
+  </div>
+
+  <div class="card-stats">
+   
+   <%= render :partial => "project_stats", :locals => { :project => project } %>
+
+    <ul class="edit-button">
+      <li ><span class="edit"><%= link_to 'View', project_goals_path(project) %></span></li>
+    </ul>
+  </div>
+</div> 

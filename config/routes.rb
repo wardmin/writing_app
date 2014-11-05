@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   get 'home/index'
   get 'projects/archive'
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :projects, shallow: true do
+    member do
+        get :calendar
+      end
     resources :goals do
       member do
         get :calendar
@@ -11,7 +14,13 @@ Rails.application.routes.draw do
     end
     resources :entries
   end
-  resources :users, only: [:show, :edit, :update]
+
+  resources :users, only: [:show, :edit, :update] do 
+    member do
+      get :settings
+      get :profile
+    end
+  end
   
   
   # The priority is based upon order of creation: first created -> highest priority.

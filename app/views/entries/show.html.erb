@@ -1,17 +1,22 @@
-<h4></h4>
-<h4></h4>
+
 <h3>Entry from <%= @entry.created_at.strftime("%A, %b %d") %></h3> 
-<p><strong>>>> <%= @entry.goal.type_is %> "<em><%= @entry.project.name %></em>"</strong></p>
+<p><strong>Time Started:</strong> <%= @entry.made_on %></p>
 
- <%= @entry.amount_done %> <%= @entry.goal.metric_type_is %> written<br>
-
+<% if @entry.amount_done %>
+	<%= @entry.amount_done %> <%= @entry.goal.metric_type_is %> written<br>
+<% end %>
 <% if @entry.duration %>
 	<strong>Total time:</strong> <%= @entry.duration %><br>
-	<% else %>
-	Total Time: No time recorded<br>
+<% else %>
+	<strong>Total Time:</strong> No time recorded<br>
 <% end %>
-Journal: <%= markdown(@entry.journal) %><br>
+<strong>Journal: </strong>
+<fieldset>	
+	<% if @entry.journal %>
+		<%= markdown(@entry.journal) %>
+	<% end %>
+</fieldset>
 
-Time Started: <%= @entry.made_on %><br>
 
-<p><%= link_to 'To Project', project_goals_path(@entry.project) %> | <%= link_to 'To Goal', goal_path(@entry.goal_id) %> | <%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>
+
+<p><%= link_to 'Edit', edit_entry_path %> | <%= link_to 'Delete', @entry, method: :delete, data: {confirm: 'Are you sure?'}  %></p>

@@ -1,0 +1,34 @@
+<% content_for :content do %>
+	<article class="article">
+		<% if @goal == nil %>
+			<% @goal = @entry.goal %>
+		<% end %>
+
+		<%= render "breadcrumb" %>
+		
+
+		<h1 class="main-title">Journal Entry</h1>
+		
+		<div class="card project">
+	    	<div class="card-image">
+	        	<h3 class="card-image title"><%= @goal.project.name %></h3> 
+	        </div>
+	        <div class="inner-project">
+				<div class="card">
+					<div class="card-image goal">
+							<h6 class="goal"><%= @goal.type_is.capitalize %></h6> 
+
+					</div>
+
+					<div class="card-header">
+
+					<%= content_for?(:entries_content) ? yield(:entries_content) : yield %>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+<% end %>
+
+<%= render template: "layouts/application" %>

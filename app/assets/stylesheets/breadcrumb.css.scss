@@ -31,6 +31,15 @@
       padding-left: $breadcrumb-height/2;
       border-top-left-radius: $base-border-radius;
       border-bottom-left-radius: $base-border-radius;
+      
+      &.shorty {
+        width: 40px;
+
+        @include media($large-screen) {
+          width: auto; 
+          }
+        } 
+      
     }
 
     &:last-child {

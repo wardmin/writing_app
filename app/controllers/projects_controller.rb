@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :calendar]
+  layout "projects_edit", only: [:edit]
+  
 
   # GET /projects
   # GET /projects.json
@@ -39,6 +41,12 @@ class ProjectsController < ApplicationController
         format.html { render :new }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def calendar
+    respond_to do |format|
+      format.js
     end
   end
 

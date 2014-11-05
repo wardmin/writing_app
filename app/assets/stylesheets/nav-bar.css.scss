@@ -39,6 +39,19 @@ header.navigation {
     }
   }
 
+  img.secret {
+      max-height: $navigation-height;
+      padding: .8em 0;
+      margin-left: -31px;
+      margin-right: 35px;
+      float: left;  
+      display: none;
+
+      @include media ($horizontal-bar-mode) {
+        display: inline;
+      }
+  }
+
   // Mobile view
 
   .navigation-menu-button {
@@ -67,7 +80,7 @@ header.navigation {
     z-index: 9999999;
     float: none;
     @include media ($horizontal-bar-mode) {
-      float: left;
+      // float: left;
     }
   }
 
@@ -119,6 +132,14 @@ header.navigation {
 
       &:hover {
         color: $navigation-color-hover;
+      }
+    }
+
+    & a.inverted-secret {
+      display: inline-block;
+
+      @include media ($horizontal-bar-mode) {
+        display: none;
       }
     }
   }
@@ -279,6 +300,14 @@ header.navigation {
     &:hover {
       background: lighten($navigation-nav-button-background, 10);
     }
+
+    &.secret {
+      display: none;
+
+      @include media ($horizontal-bar-mode) {
+        display: inline;
+      }
+    }
   }
 
   // Search bar
@@ -344,4 +373,5 @@ header.navigation {
   }
 }
 
+ 
 

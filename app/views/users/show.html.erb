@@ -1,51 +1,102 @@
-<p>
-  <strong>Name:</strong>
- <%= best_in_place @user, :name %>
-</p>
+<article class="article">
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %> <%# best_in_place @user, :email, :type => :input %>
-</p>
+  <p>&nbsp;</p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @user.location %>
-</p>
-
-<p>
-  <strong>Kinds of Writing:</strong>
-  <%= @user.tag_list %>
-</p>
-
-<p>
-  I want to write <strong> <%= @user.desired_amount %> </strong>
-  <%= @user.hours_or_times %> per <strong> <%= @user.desired_timeframe %></strong>.
-</p>
-
-<% if @user.am_writing? == true %>
-  <p>I am writing!</p>
-<% else %>
-  <p>I need to write more.</p>
-<% end%>
-
-<h4>Upcoming Deadlines</h4>
-
-<h6>Projects</h6>
-
-  <% if @user.projects %>
-    <ul>
-      <% @user.deadlines.each do |project| %>
-
-        <li><%= project.name  %> | <%= project.deadline %></li>
-      <% end %>
-    </ul>
-
+  <ul class="accordion-tabs">
+    <li class="tab-header-and-content">
+      <a href="#" class="is-active tab-link">Settings</a>
+      <div class="tab-content">
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices. </span>
+        <fieldset class="user-tabs">
+        <h3><% if @user.am_writing? == true %>
+              You are writing!
+            <% else %>
+              You need to write more.
+            <% end%></h3>  <p>This is the heart of the writetrack system. You tell us how much you want to write, per day, per week, per month and whether or you want to track the hours you spend or the times you write, and we will help you meet your goal.</p> <p><% if @user.am_writing? == true %>
+              Currently, you are reaching your goal.
+            <% else %>
+              Currently, you are not meeting your stated goal.
+            <% end%></p>
+            <fieldset>
+            <div id="settings-test">
+           
+            I want to write<strong> <%= @user.desired_amount %> </strong>
+            <%= @user.hours_or_times %> per <strong> <%= @user.desired_timeframe %></strong>.
+            
+          </p> 
+          <%= link_to 'Edit My Settings', settings_user_path(@user), :remote => true %> 
+          </div>
+          </fieldset>
+         
+         </fieldset>
+      </div>
+    </li>
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link">Profile</a>
+      <div class="tab-content">
      
-  <% end %>
+        <fieldset class="user-tabs">
 
+           <div id="user-profile">
+          <%= render 'profile' %>
+           </div>
+        </fieldset>
+      </div>
+    </li>
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link">Deadlines</a>
+        <div class="tab-content">
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices.</span>
+         
+        <fieldset class="user-tabs">
+          <h4>Upcoming Project Deadlines</h4>
+          
+          <div id="deadline-view">
+            <%= render partial: 'calendar', locals: { projects: @user.projects }%>
+          </div>
+                
+                
+        </fieldset>    
+      </div>
+    </li>
+    <li class="tab-header-and-content">
+      <a href="#" class="tab-link">Stats</a>
+      <div class="tab-content">
+        <span class="invisible">Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis ultrices.</span>
+        <fieldset class="user-tabs">
+          <div class="charter">
+           <canvas id="myChart" width="150" height="150"></canvas>
+          </div>
+            <p>You spent <%= @user.total_time_writing_this_week %> writing this week. </p>
+        </fieldset>
+      </div>
+    </li>
+  </ul>
 
-<p>You have spent <%= @user.total_time_writing_this_week %> writing this week. </p>
-<%= link_to 'My Projects', projects_path(@project) %> |
-<%= link_to 'Edit My Profile', edit_user_path(@user) %> |
-<%= link_to 'Back', user_path %>
+<script>
+   var data = {
+    labels: ["Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+    datasets: [
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(242,0,0,0.8)",
+            strokeColor: "rgba(155,0,0,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [<%= @user.spark_line %>]
+        }
+    ]
+};
+var ctx = $("#myChart").get(0).getContext("2d");
+var myNewChart = new Chart(ctx);
+var myBarChart = new Chart(ctx).Bar(data);
+</script>
+
+</article>
+
+<section class="stats">
+      <div class="quotes">
+        <h3>“You can't wait for inspiration. You have to go after it with a club.”  </h3>
+        <p>&ndash; Jack London</p>
+      </div>
+  </section>

@@ -1,0 +1,27 @@
+<% content_for :content do %>
+	<article class="article">
+		<div class="breadcrumb">
+		  <%= link_to 'Dashboard', home_index_path %>
+		  <%= link_to 'My Projects', projects_path %>
+		   <%= link_to 'Project', project_goals_path(@project), class: "current-selection" %>
+		</div>
+
+		<h1 class="main-title">Edit project</h1>
+		<div class="card project">
+  			<div class="card-image">
+      			
+  		</div>
+
+ 
+
+  		<div class="card-copy">
+  
+
+  			<%= content_for?(:projects_content) ? yield(:projects_content) : yield %>
+
+		</div>
+		</div>
+	</article>
+<% end %>
+
+<%= render template: "layouts/application" %>

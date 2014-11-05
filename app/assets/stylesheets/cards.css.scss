@@ -24,10 +24,10 @@
   box-shadow: 0 2px 4px darken($base-background-color, 10);
   position: relative;
 
-  @include media($large-screen) {
-    // @include span-columns(4);  
-    // @include omega(3n);
-  }
+  // @include media($large-screen) {
+  //   // @include span-columns(4);  
+  //   // @include omega(3n);
+  // }
 
   table {
   // width: initial; 
@@ -118,7 +118,7 @@
     @include transition (all 0.2s ease-in-out);
     border-bottom: $card-border;
     border-radius: $base-border-radius $base-border-radius 0 0;
-    font-weight: bold;
+    // font-weight: bold;
     padding: $base-spacing/3 $gutter/2;
     // &.goal {
     //   background-color: $card-header-background;
@@ -133,7 +133,7 @@
 
   .card-stats {
     @include outer-container;
-    padding: $base-spacing/2 $gutter/2;
+    padding: $base-spacing/2 $gutter/4;
     overflow: auto;
 
     ul li {
@@ -145,6 +145,10 @@
       border-right: 1px solid transparentize($base-font-color, .8);
       line-height: 1.1em;
       padding: 0 .5em 0 .5em;
+
+      &.overdue {
+        color: tomato;
+      }
 
       &:first-child {
         padding-left: 0;
@@ -162,6 +166,7 @@
       }
     }
   }
+
   .edit-button {
     //@extend .card-stats;
     // overflow: visible;
@@ -178,6 +183,7 @@
   
   &.project {
     border: 2px solid $project-border;
+    border-radius: $base-border-radius+2 $base-border-radius+2 0 0;
 
   }
 
@@ -359,7 +365,7 @@
    float: right;
     margin-left: 0;
     text-align: center; 
-    width: 60%;
+    width: 55%;
 
   } 
 

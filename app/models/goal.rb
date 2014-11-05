@@ -3,6 +3,8 @@ class Goal < ActiveRecord::Base
 	belongs_to :projects
 	belongs_to :goal_type
 	# include AASM
+	extend SimpleCalendar
+  	has_calendar :attribute => :deadline
 
 	def type_is
 		if goal_type

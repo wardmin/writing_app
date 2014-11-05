@@ -1,0 +1,7 @@
+<div class="breadcrumb">
+  <%= link_to 'Dashboard', home_index_path, class: "shorty" %>
+  <%= link_to 'My Projects', projects_path %>
+  <%= link_to 'Project', project_goals_path(@goal.project) %>
+  <%= link_to 'Goal', goal_path(@goal) %>
+  <a href="#" class="current-selection">Entry</a>
+</div>

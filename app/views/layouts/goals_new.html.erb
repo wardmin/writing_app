@@ -1,0 +1,36 @@
+<% content_for :content do %>
+	<article class="article">
+		<div class="breadcrumb">
+		  <%= link_to 'Dashboard', home_index_path %>
+		  <%= link_to 'My Projects', projects_path %>
+		  <%= link_to 'Project', project_goals_path(@project) %>
+		  <a href="#" class="current-selection">Goal</a>
+		</div>
+
+		<h1 class="main-title">New Goal</h1>
+
+		<div class="card project">
+	    	<div class="card-image">
+	        	<h3 class="card-image title"><%= link_to @project.name, project_goals_path(@project) %></h3> 
+	        </div>
+	        <div class="inner-project">
+				<div class="card">
+					<div class="card-image goal">
+						<h6 class="goal"><%# @goal.type_is.capitalize %></h6> 
+					</div>
+					
+					<%= content_for?(:goals_content) ? yield(:goals_content) : yield %>
+
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<section class="stats">
+			<div class="quotes">
+				<h3>“There is nothing to writing. All you do is sit down at a typewriter and bleed.” </h3>
+				<p>&ndash; Ernest Hemingway</p>
+			</div>
+	</section>
+<% end %>
+<%= render template: "layouts/application" %>

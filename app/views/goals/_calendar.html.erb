@@ -2,7 +2,7 @@
 
 
 	<%= date.strftime("%e") %>
-		<div class="calendar-entries">
+		<div class="calendar-entries tooltip">
 		  	<% entries.each do |entry| %>
 			    <div class="calendar-entry">
 			      <%= link_to "", entry_path(entry) %>

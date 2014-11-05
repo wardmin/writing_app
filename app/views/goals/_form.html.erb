@@ -40,14 +40,17 @@
       <label class="metric-check">
       <%= check_box_tag(:metric_check) %> <div class="checkbox"></div>
       </label>
-  
-      <div class="goal-field-hide"> 
-          <div class="goal-settings">
-              To achieve this goal, I will write
-              <%= f.number_field :metric_target %>
-              <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, "#{@goal.metric_id}") %> <%= f.text_field :metric_name  %> 
-          </div>
+      
+      <div class="goal-field-hide">
+        <fieldset> 
+            <div class="goal-settings">
+                To achieve this goal, <br> I will write
+                <%= f.number_field :metric_target %>
+                <%= f.select :metric_id, options_from_collection_for_select(Metric.all, :id, :name, "#{@goal.metric_id}") %> <%= f.text_field :metric_name  %> 
+            </div>
+          </fieldset>
       </div>
+      
   
   <% if @project == nil %>
       <%= f.hidden_field(:project_id, :value => @goal.project.id) %>

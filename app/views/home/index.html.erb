@@ -15,30 +15,29 @@
 	<% end %>
 		<div class="hero-inner">
 			<div class="hero-copy">
-				<h1>Your Dashboard</h1>
+
+			<% if current_user.entries %>
+				<% if current_user.am_writing? == true %>
+					<h1>You are on the Write Track!</h1>
+					<span>P.S. Looks like you've been writing. Congrats!</span>
+				<% else %>
+					<h1>You need to get on the Write Track!</h1>
+					P.S. Looks like you're a litte behind on the writing...
+				<% end %>
+				<% end %>
+
+
+
+
+				<br>
+				<br>
 				<p>You are currently <%= link_to @goal.type_is_dashboard.downcase, goal_path(@goal) %> "<em><%= link_to @project.name, project_goals_path(@project) %></em>".</p>	
 			</div>
 	    
 	    	<div class="write-now">
 		<%= link_to "Write Now!", new_project_entry_path(:project_id => @project.id, :goal_id => @goal) %>
 			</div> <br>
-
 		</div>
-	</div>
-
-	
-	<div class="dashboard-links">
-		<%= link_to 'My Projects', projects_path, class: "dashboard-projects" %>
-		
-		<% if current_user.entries %>
-			<% if current_user.am_writing? == true %>
-				<p><%= link_to "You've been writing!", user_path(current_user) %></p>
-				<%= image_tag("happy-emoji.png", width: '50') %> <br>
-			<% else %>
-				<br> <%= image_tag("sad-emoji.png", width: '50') %> <br>
-				<p><%= link_to "You haven't been writing.", user_path(current_user) %></p>
-			<% end %>
-		<% end %>
 	</div>
 </article>
 

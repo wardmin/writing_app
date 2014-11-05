@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :settings, :profile, :calendar]
+  # before_filter :require_no_authentication, only: :create
   respond_to :html, :json
   # GET /users
   # GET /users.json
@@ -39,12 +40,32 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, :flash => { success: 'User was successfully created.'} }
+        format.html { redirect_to sign_in @user, :flash => { success: 'Your account has been successfully created. Please check your email to verify your account.'} }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def calendar
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def settings
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def profile
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

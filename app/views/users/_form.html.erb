@@ -27,13 +27,9 @@
     <%= f.label :tag_list, "What kind of writer are you?" %>
     <%= f.text_field :tag_list %>
   </div>
-  <div class="user-field-hide">
-    <%= f.label :writing_goal %>
-    <div class="user-writing-settings">
-    I want to write <%= f.number_field :desired_amount %> <%= f.select :track_hours, options_for_select([['times', false], ['hours', true]], "#{@user.track_hours}") %> per <%= f.select :desired_interval, options_for_select([['day', 1], ['week', 7], ['month', 30]], "#{@user.desired_interval}")  %>
-    </div>
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>
+  <%= link_to 'Back', profile_user_path(@user), :remote => true %>
 <% end %>
