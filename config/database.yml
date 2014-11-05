@@ -35,5 +35,8 @@ test:
 
 production:
   adapter: postgresql
-  database: writing_app
-  host: localhost
+  database: d7netpf44ii24a
+  pool: 5
+  host: ec2-54-225-136-187.compute-1.amazonaws.com
+  username: wyylhwofsmcbky
+  password: wjtgW9-qyiJkKtqRM9phMjo2A6
