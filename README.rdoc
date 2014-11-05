@@ -1,28 +1,9 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is called WriteTrack and is a writing project management software that aims to help writers maximize their productivity and reach their writing goals. 
 
-Things you may want to cover:
+### What it is not.
 
-* Ruby version
+Write Track is not a program to do your writing in. It will track the time you spend on your project and other metrics that are relevant to the writing project that you are doing.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Write Track is a work in progress. If you have tips, suggestions or would like to get on the beta test list please contact me.  
