@@ -1,0 +1,38 @@
+<article class="article sign-up-hero">
+  <%= render "devise/shared/hero_text" %>
+</article>
+
+<section class="stats sign-up-side">
+	
+		<fieldset>
+			<h2>Log in</h2>
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			  <div><%= f.label :email %>
+			  <%= f.email_field :email, autofocus: true %></div>
+
+			  <div><%= f.label :password %>
+			    <%= f.password_field :password, autocomplete: "off" %></div>
+
+			  <% if devise_mapping.rememberable? -%>
+			 <%= f.label :remember_me %>
+			  <label class="metric-check">
+			    <%= f.check_box :remember_me %> <div class="checkbox"></div>
+				<p>&nbsp;</p>
+			  </label>
+			  <% end -%>
+
+			  <div><%= f.submit "Log in" %></div>
+			<% end %>
+
+			<div class="devise-links">
+				<%= render "devise/shared/links" %>
+			</div>
+		</fieldset>
+
+		<script>
+   $(document).on('page:load ready', function() {
+      $('.wrapper-for-content-outside-of-footer').addClass('sign-up-container');
+     
+    });
+    </script>
+</section>

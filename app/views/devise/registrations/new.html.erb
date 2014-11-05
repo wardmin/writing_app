@@ -1,0 +1,47 @@
+
+<article class="article sign-up-hero">
+  <%= render "devise/shared/hero_text" %>
+</article>
+      
+
+<section class="stats sign-up-side">
+        
+     
+      <fieldset>
+         <h2>Sign up</h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+            </div>
+
+            <div><%= f.label :email %>
+            <%= f.email_field :email, autofocus: true %></div>
+            
+            <div><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+              <%= f.password_field :password, autocomplete: "off" %></div>
+
+            <div><%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+
+            <div><%= f.submit "Sign up" %></div>
+          <% end %>
+
+          <div class="devise-links">
+
+            <%= render "devise/shared/links" %>
+          </div>
+
+      </fieldset>
+<script>
+   $(document).on('page:load ready', function() {
+      $('.wrapper-for-content-outside-of-footer').addClass('sign-up-container');
+      
+    });
+    </script>
+  </section>
+
+
+    
