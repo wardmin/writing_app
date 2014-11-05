@@ -1,4 +1,4 @@
-== README
+## README
 
 This application is called WriteTrack and is a writing project management software that aims to help writers maximize their productivity and reach their writing goals. 
 
