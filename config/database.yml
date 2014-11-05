@@ -36,5 +36,6 @@ test:
 
 production:
   adapter: postgresql
-  database: writing_app
+  host: localhost
+  database: DATABASE_URL
   pool: 5
