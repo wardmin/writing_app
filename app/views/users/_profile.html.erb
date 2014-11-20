@@ -1,5 +1,6 @@
 
 <%= image_tag @user.avatar.url(:thumb) %>
+
 <p><strong>Name:</strong>
               <%= @user.name %>
           </p>
@@ -17,3 +18,5 @@
             <%= @user.tag_list %>
           </p>
            <%= link_to 'Edit My Profile', edit_user_path(@user), :remote => true %> 
+
+        
