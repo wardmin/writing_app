@@ -45,6 +45,11 @@ gem 'best_in_place'
 # Calendar generator
 gem 'simple_calendar', '~> 1.1.0'
 
+# image uploading and S3 trail account. 
+gem 'paperclip', '~> 4.2'
+gem 'aws-s3'
+gem 'aws-sdk', '~> 1.59.0'
+
 # Tags for user writing types 
 gem 'acts-as-taggable-on', '~> 3.4'
 

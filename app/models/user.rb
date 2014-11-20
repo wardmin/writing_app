@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 	has_many :entries, through: :projects, :dependent => :destroy
 	has_many :goals, through: :projects, :dependent => :destroy
 	acts_as_taggable
+	has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :storage => :s3, :s3_credentials => "config/s3.yml", :path => "/:style/:id/:filename"
+  	validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 	def type_is
 		if genre_id

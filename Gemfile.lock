@@ -31,6 +31,15 @@ GEM
     acts-as-taggable-on (3.4.2)
       activerecord (>= 3.2, < 5)
     arel (5.0.1.20140414130214)
+    aws-s3 (0.6.3)
+      builder
+      mime-types
+      xml-simple
+    aws-sdk (1.59.0)
+      aws-sdk-v1 (= 1.59.0)
+    aws-sdk-v1 (1.59.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
     best_in_place (0.2.3)
       rails (>= 3.0.0)
@@ -50,6 +59,10 @@ GEM
     builder (3.2.2)
     chronic_duration (0.10.6)
       numerizer (~> 0.1.1)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     cocoon (1.2.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -102,13 +115,21 @@ GEM
       thin
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.1)
     minitest (5.4.2)
     multi_json (1.10.1)
     neat (1.5.1)
       bourbon (>= 3.1)
       sass (~> 3.2.19)
+    nokogiri (1.6.4.1)
+      mini_portile (~> 0.6.0)
     numerizer (0.1.1)
     orm_adapter (0.5.0)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.17.1)
     polyglot (0.3.5)
     pry (0.10.1)
@@ -220,6 +241,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    xml-simple (1.1.4)
 
 PLATFORMS
   ruby
@@ -227,6 +249,8 @@ PLATFORMS
 DEPENDENCIES
   aasm
   acts-as-taggable-on (~> 3.4)
+  aws-s3
+  aws-sdk (~> 1.59.0)
   best_in_place
   better_errors
   binding_of_caller
@@ -242,6 +266,7 @@ DEPENDENCIES
   jquery-rails
   mailcatcher
   neat
+  paperclip (~> 4.2)
   pg
   pry-rails
   quiet_assets
