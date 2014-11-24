@@ -22,6 +22,7 @@
 			  <% end -%>
 
 			  <div><%= f.submit "Log in" %></div>
+			  <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
 			<% end %>
 
 			<div class="devise-links">
@@ -30,9 +31,8 @@
 		</fieldset>
 
 		<script>
-   $(document).on('page:load ready', function() {
-      $('.wrapper-for-content-outside-of-footer').addClass('sign-up-container');
-     
-    });
-    </script>
+   			$(document).on('page:load ready', function() {
+     			 $('.wrapper-for-content-outside-of-footer').addClass('sign-up-container');
+	    	});
+	    </script>
 </section>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
   get 'projects/archive'
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :users, :controllers => { :registrations => "registrations", :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :projects, shallow: true do
     member do
         get :calendar
@@ -20,8 +20,12 @@ Rails.application.routes.draw do
       get :settings
       get :profile
     end
+    devise_scope :user do
+      get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+    end
   end
   
+ 
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

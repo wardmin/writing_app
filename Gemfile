@@ -50,6 +50,11 @@ gem 'paperclip', '~> 4.2'
 gem 'aws-s3'
 gem 'aws-sdk', '~> 1.59.0'
 
+# Oauth 
+gem 'figaro', '~> 1.0.0'
+gem 'omniauth-twitter'
+
+
 # Tags for user writing types 
 gem 'acts-as-taggable-on', '~> 3.4'
 
