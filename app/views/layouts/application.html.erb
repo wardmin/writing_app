@@ -6,6 +6,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <%= favicon_link_tag 'apple-touch-icon-iphone.png', rel: 'apple-touch-icon', type: 'image/png' %>
+    <%= favicon_link_tag 'apple-touch-icon-ipad.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '76x76' %>
+    <%= favicon_link_tag 'touch-icon-iphone-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '120x120' %>
+    <%= favicon_link_tag 'touch-icon-ipad-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
   </head>
 
   <body>
